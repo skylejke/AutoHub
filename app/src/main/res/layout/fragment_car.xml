@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/photo_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lightPink"
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/back_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/keyboard_backspace"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/fav_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/favorite_border"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/car_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="asd"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/medium_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/back_icon" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="asd"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/big_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/car_info" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/price" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/characteristics_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20sp"
+            android:background="@drawable/rounded_background"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/photo_container">
+
+            <TextView
+                android:id="@+id/characteristics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="@string/characteristics_ru"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/medium_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/year_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="@string/year_of_issue_ru"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/characteristics" />
+
+            <TextView
+                android:id="@+id/year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="asd"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/year_title" />
+
+            <TextView
+                android:id="@+id/mileage_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="@string/mileage_ru"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/year_title" />
+
+            <TextView
+                android:id="@+id/mileage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="asd"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/mileage_title" />
+
+            <TextView
+                android:id="@+id/body_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="@string/body_ru"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mileage_title" />
+
+            <TextView
+                android:id="@+id/body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="asd"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/body_title" />
+
+            <TextView
+                android:id="@+id/color_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="@string/color_ru"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/body_title" />
+
+            <TextView
+                android:id="@+id/color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="asd"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/color_title" />
+
+            <TextView
+                android:id="@+id/engine_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="@string/engine_ru"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/color_title" />
+
+            <TextView
+                android:id="@+id/engine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="asd"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/engine_title" />
+
+            <TextView
+                android:id="@+id/transmission_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="@string/transmission_ru"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/engine_title" />
+
+            <TextView
+                android:id="@+id/transmission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="asd"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/transmission_title" />
+
+            <TextView
+                android:id="@+id/drive_unit_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="@string/drive_unit_ru"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/transmission_title" />
+
+            <TextView
+                android:id="@+id/drive_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="asd"
+                android:textColor="@color/darkBlue"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/drive_unit_title" />
+
+            <Button
+                android:id="@+id/buy_now_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:backgroundTint="@color/darkBlue"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="@string/buy_now_ru"
+                android:textColor="@color/lightPink"
+                android:textSize="@dimen/big_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/drive_unit_title" />
+
+            <LinearLayout
+                android:id="@+id/buttons_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buy_now_btn">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="75sp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/green"
+                    android:fontFamily="@font/roboto_mono_bold"
+                    android:text="@string/call_ru"
+                    android:textColor="@color/lightPink"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="75sp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/darkYellow"
+                    android:fontFamily="@font/roboto_mono_bold"
+                    android:text="@string/sign_up_for_test_drive_ru"
+                    android:textColor="@color/lightPink"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

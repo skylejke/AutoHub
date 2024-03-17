@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">AutoHub</string>
+    <string name="sign_in_ru">Вход</string>
+    <string name="phone_number_ru">Номер телефона</string>
+    <string name="password_ru">Пароль</string>
+    <string name="or_ru">или</string>
+    <string name="sign_up_ru">Регистрация</string>
+    <string name="user_name_ru">Имя пользователя</string>
+    <string name="confirm_password_ru">Подтвердите пароль</string>
+    <string name="brand_ru">Марка</string>
+    <string name="year_of_issue_ru">Год выпуска</string>
+    <string name="mileage_ru">Пробег</string>
+    <string name="characteristics_ru">Характеристики</string>
+    <string name="body_ru">Кузов</string>
+    <string name="color_ru">Цвет</string>
+    <string name="engine_ru">Двигатель</string>
+    <string name="transmission_ru">КПП</string>
+    <string name="drive_unit_ru">Привод</string>
+    <string name="buy_now_ru">Купить сейчас</string>
+    <string name="call_ru">Позвонить</string>
+    <string name="sign_up_for_test_drive_ru">Записаться на тест-драйв</string>
+    <string name="brands_ru">Марки</string>
+    <string name="favourite_ru">Избранное</string>
+    <string name="filters_ru">Фильтры</string>
+    <string name="price_ru">Цена</string>
+    <string name="engine_capacity_ru">Объем двигателя</string>
+    <string name="engine_power_ru">Мощность двигателя</string>
+    <string name="profile_ru">Профиль</string>
+    <string name="about_ru">О себе</string>
+    <string name="notifications_ru">Уведомления</string>
+    <string name="darkTheme_ru">Темная тема</string>
+    <string name="clearSearchHistory_ru">Очистить историю поиска</string>
+    <string name="aboutApp_ru">О приложении</string>
+    <string name="home_ru">Главная</string>
+</resources>
