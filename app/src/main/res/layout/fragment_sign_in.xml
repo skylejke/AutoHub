@@ -7,12 +7,8 @@
 
     <TextView
         android:id="@+id/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_mono_bold"
+        style="@style/LogoTextViewStyle"
         android:text="@string/app_name"
-        android:textColor="@color/darkBlue"
-        android:textSize="@dimen/app_name_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -62,14 +58,11 @@
 
     <Button
         android:id="@+id/sign_in_btn"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
+        style="@style/ButtonStyle"
         android:layout_marginTop="70sp"
         android:backgroundTint="@color/darkBlue"
-        android:fontFamily="@font/roboto_mono_bold"
         android:text="@string/sign_in_ru"
         android:textColor="@color/pink"
-        android:textSize="@dimen/big_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password_et" />
@@ -124,14 +117,11 @@
 
     <Button
         android:id="@+id/sign_up_btn"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
+        style="@style/ButtonStyle"
         android:layout_marginTop="30sp"
         android:backgroundTint="@color/pink"
-        android:fontFamily="@font/roboto_mono_bold"
         android:text="@string/sign_up_ru"
         android:textColor="@color/darkBlue"
-        android:textSize="@dimen/big_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/or_container" />

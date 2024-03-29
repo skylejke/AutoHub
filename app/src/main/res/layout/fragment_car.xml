@@ -40,25 +40,17 @@
 
             <TextView
                 android:id="@+id/car_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MediumTextViewStyle"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/roboto_mono_bold"
                 android:text="asd"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/medium_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/back_icon" />
 
             <TextView
                 android:id="@+id/price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/BigTextViewStyle"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/roboto_mono_bold"
                 android:text="asd"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/big_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/car_info" />
 
@@ -86,186 +78,116 @@
 
             <TextView
                 android:id="@+id/characteristics"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/MediumTextViewStyle"
                 android:text="@string/characteristics_ru"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/medium_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/year_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="@string/year_of_issue_ru"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/characteristics" />
 
             <TextView
                 android:id="@+id/year"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="asd"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/year_title" />
 
             <TextView
                 android:id="@+id/mileage_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="@string/mileage_ru"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/year_title" />
 
             <TextView
                 android:id="@+id/mileage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="asd"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/mileage_title" />
 
             <TextView
                 android:id="@+id/body_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="@string/body_ru"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mileage_title" />
 
             <TextView
                 android:id="@+id/body"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="asd"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/body_title" />
 
             <TextView
                 android:id="@+id/color_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="@string/color_ru"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/body_title" />
 
             <TextView
                 android:id="@+id/color"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="asd"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/color_title" />
 
             <TextView
                 android:id="@+id/engine_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="@string/engine_ru"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/color_title" />
 
             <TextView
                 android:id="@+id/engine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="asd"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/engine_title" />
 
             <TextView
                 android:id="@+id/transmission_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="@string/transmission_ru"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/engine_title" />
 
             <TextView
                 android:id="@+id/transmission"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="asd"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/transmission_title" />
 
             <TextView
                 android:id="@+id/drive_unit_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="@string/drive_unit_ru"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/transmission_title" />
 
             <TextView
                 android:id="@+id/drive_unit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_mono_bold"
+                style="@style/CharacteristicsTextViewStyle"
                 android:text="asd"
-                android:textColor="@color/darkBlue"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/drive_unit_title" />
 
             <Button
                 android:id="@+id/buy_now_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/ButtonStyle"
                 android:layout_marginTop="20sp"
                 android:backgroundTint="@color/darkBlue"
-                android:fontFamily="@font/roboto_mono_bold"
                 android:text="@string/buy_now_ru"
                 android:textColor="@color/lightPink"
-                android:textSize="@dimen/big_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/drive_unit_title" />
 
@@ -280,28 +202,19 @@
                 app:layout_constraintTop_toBottomOf="@id/buy_now_btn">
 
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_height="75sp"
-                    android:layout_gravity="center_vertical"
+                    style="@style/SmallButtonStyle"
                     android:layout_marginHorizontal="8dp"
-                    android:layout_weight="1"
                     android:backgroundTint="@color/green"
-                    android:fontFamily="@font/roboto_mono_bold"
                     android:text="@string/call_ru"
-                    android:textColor="@color/lightPink"
-                    android:textSize="16sp" />
+                    android:textColor="@color/lightPink" />
 
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_height="75sp"
+                    style="@style/SmallButtonStyle"
                     android:layout_gravity="center_vertical"
                     android:layout_marginHorizontal="8dp"
-                    android:layout_weight="1"
                     android:backgroundTint="@color/darkYellow"
-                    android:fontFamily="@font/roboto_mono_bold"
                     android:text="@string/sign_up_for_test_drive_ru"
-                    android:textColor="@color/lightPink"
-                    android:textSize="16sp" />
+                    android:textColor="@color/lightPink" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <ImageButton
         android:id="@+id/back_icon"
@@ -18,13 +19,9 @@
 
     <TextView
         android:id="@+id/filters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_mono_bold"
-        android:padding="16dp"
+        style="@style/BigTextViewStyle"
+        android:layout_marginTop="10dp"
         android:text="@string/filters_ru"
-        android:textColor="@color/darkBlue"
-        android:textSize="@dimen/big_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,13 +38,9 @@
 
         <TextView
             android:id="@+id/brand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/MediumTextViewStyle"
             android:layout_marginStart="40dp"
-            android:fontFamily="@font/roboto_mono_bold"
             android:text="@string/brand_ru"
-            android:textColor="@color/darkBlue"
-            android:textSize="@dimen/medium_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,104 +63,76 @@
 
         <EditText
             android:id="@+id/year_of_issue_ru_et"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:fontFamily="@font/roboto_mono_medium"
+            style="@style/EditTextStyle"
             android:hint="@string/year_of_issue_ru"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:textColor="@color/darkBlue"
-            android:textColorHint="@color/darkBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/mileage_et"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+            style="@style/EditTextStyle"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto_mono_medium"
             android:hint="@string/mileage_ru"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:textColor="@color/darkBlue"
-            android:textColorHint="@color/darkBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/year_of_issue_ru_et" />
 
         <EditText
             android:id="@+id/price_et"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+            style="@style/EditTextStyle"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto_mono_medium"
             android:hint="@string/price_ru"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:textColor="@color/darkBlue"
-            android:textColorHint="@color/darkBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mileage_et" />
 
         <EditText
             android:id="@+id/transmission_et"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+            style="@style/EditTextStyle"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto_mono_medium"
             android:hint="@string/transmission_ru"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:textColor="@color/darkBlue"
-            android:textColorHint="@color/darkBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/price_et" />
 
         <EditText
             android:id="@+id/engine_et"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+            style="@style/EditTextStyle"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto_mono_medium"
             android:hint="@string/engine_ru"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:textColor="@color/darkBlue"
-            android:textColorHint="@color/darkBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/transmission_et" />
 
         <EditText
             android:id="@+id/engine_capacity_ru"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+            style="@style/EditTextStyle"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto_mono_medium"
             android:hint="@string/engine_capacity_ru"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:textColor="@color/darkBlue"
-            android:textColorHint="@color/darkBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/engine_et" />
 
         <EditText
             android:id="@+id/engine_power_et"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+            style="@style/EditTextStyle"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto_mono_medium"
             android:hint="@string/engine_power_ru"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:textColor="@color/darkBlue"
-            android:textColorHint="@color/darkBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/engine_capacity_ru" />
@@ -175,30 +140,22 @@
 
         <EditText
             android:id="@+id/drive_unit_et"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+            style="@style/EditTextStyle"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto_mono_medium"
             android:hint="@string/drive_unit_ru"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:textColor="@color/darkBlue"
-            android:textColorHint="@color/darkBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/engine_power_et" />
 
         <EditText
             android:id="@+id/color_et"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+            style="@style/EditTextStyle"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto_mono_medium"
             android:hint="@string/color_ru"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:textColor="@color/darkBlue"
-            android:textColorHint="@color/darkBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/drive_unit_et" />
