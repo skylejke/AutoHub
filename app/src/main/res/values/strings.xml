@@ -32,4 +32,6 @@
     <string name="clearSearchHistory_ru">Очистить историю поиска</string>
     <string name="aboutApp_ru">О приложении</string>
     <string name="home_ru">Главная</string>
+    <string name="cancel_ru">Отменить</string>
+    <string name="search_ads_ru">Поиск по объявлениям</string>
 </resources>
