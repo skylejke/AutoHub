@@ -1,9 +1,17 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.AutoHub" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/pink</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:textColor">@color/darkBlue</item>
+        <item name="backgroundTint">@color/darkBlue</item>
+        <item name="android:colorBackground">@color/lightPink</item>
     </style>
 
-    <style name="Theme.AutoHub" parent="Base.Theme.AutoHub" />
+    <style name="Theme.AutoHub" parent="Base.Theme.AutoHub" >
+
+
+
+    </style>
 </resources>

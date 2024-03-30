@@ -24,7 +24,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:background="@color/pink"
         app:itemIconTint="@menu/bottom_navigation_color_selector"
         app:itemTextColor="@menu/bottom_navigation_color_selector"
         app:layout_constraintBottom_toBottomOf="parent"

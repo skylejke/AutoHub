@@ -1,8 +1,10 @@
 package com.example.autohub
 
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -12,6 +14,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        // Получаем SharedPreferences
+        val sharedPreferences = getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE)
+        // Получаем сохраненное состояние темы (по умолчанию - светлая тема)
+        val isDarkThemeEnabled = sharedPreferences.getBoolean("isDarkThemeEnabled", false)
+        // Применяем выбранную тему
+        applyTheme(isDarkThemeEnabled)
     }
 
     override fun onStart() {
@@ -21,4 +29,12 @@ class MainActivity : AppCompatActivity() {
         setupWithNavController(bottomNavigationView, navController)
     }
 
+    private fun applyTheme(isDarkThemeEnabled: Boolean) {
+        val mode = if (isDarkThemeEnabled) {
+            AppCompatDelegate.MODE_NIGHT_YES
+        } else {
+            AppCompatDelegate.MODE_NIGHT_NO
+        }
+        AppCompatDelegate.setDefaultNightMode(mode)
+    }
 }

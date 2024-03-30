@@ -4,7 +4,6 @@
     <style name="CharacteristicsTextViewStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/darkBlue</item>
         <item name="android:textSize">@dimen/small_text_size</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:fontFamily">@font/roboto_mono_bold</item>
@@ -13,7 +12,6 @@
     <style name="TitleTextViewStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/darkBlue</item>
         <item name="android:textSize">@dimen/title_text_size</item>
         <item name="android:fontFamily">@font/roboto_mono_bold</item>
     </style>
@@ -21,7 +19,6 @@
     <style name="LogoTextViewStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/darkBlue</item>
         <item name="android:textSize">@dimen/app_name_size</item>
         <item name="android:fontFamily">@font/roboto_mono_bold</item>
         <item name="android:text">@string/app_name</item>
@@ -30,7 +27,6 @@
     <style name="BigTextViewStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/darkBlue</item>
         <item name="android:textSize">@dimen/big_text_size</item>
         <item name="android:fontFamily">@font/roboto_mono_bold</item>
     </style>
@@ -38,7 +34,6 @@
     <style name="MediumTextViewStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/darkBlue</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
         <item name="android:fontFamily">@font/roboto_mono_bold</item>
     </style>
@@ -46,7 +41,6 @@
     <style name="SmallTextViewStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/darkBlue</item>
         <item name="android:textSize">@dimen/small_text_size</item>
         <item name="android:fontFamily">@font/roboto_mono_bold</item>
     </style>
@@ -72,8 +66,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:fontFamily">@font/roboto_mono_medium</item>
-        <item name="android:textColor">@color/darkBlue</item>
-        <item name="android:textColorHint">@color/darkBlue</item>
     </style>
+
+
 
 </resources>

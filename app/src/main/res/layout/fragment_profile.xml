@@ -1,182 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/profile"
-        style="@style/TitleTextViewStyle"
-        android:text="@string/profile_ru"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/profile_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile">
+        android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/profile_image"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:src="@drawable/default_profile_picture"
+        <TextView
+            android:id="@+id/profile"
+            style="@style/TitleTextViewStyle"
+            android:text="@string/profile_ru"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/edit_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/mode_edit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/username"
-            style="@style/SmallTextViewStyle"
-            android:layout_marginTop="10dp"
-            android:text="username"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profile_image" />
-
-        <TextView
-            android:id="@+id/phone"
-            style="@style/SmallTextViewStyle"
-            android:layout_marginTop="10dp"
-            android:text="phone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/username" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/about_container"
+            android:id="@+id/profile_container"
             android:layout_width="match_parent"
-            android:layout_height="175dp"
-            android:layout_marginTop="30sp"
-            android:background="@drawable/rounded_background"
-            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/phone">
+            app:layout_constraintTop_toBottomOf="@id/profile">
 
-            <TextView
-                android:id="@+id/about"
-                style="@style/SmallTextViewStyle"
-                android:text="@string/about_ru"
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/default_profile_picture"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:id="@+id/edit_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/mode_edit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
             <TextView
+                android:id="@+id/username"
                 style="@style/SmallTextViewStyle"
                 android:layout_marginTop="10dp"
-                android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                android:text="username"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/about" />
+                app:layout_constraintTop_toBottomOf="@id/profile_image" />
+
+            <TextView
+                android:id="@+id/phone"
+                style="@style/SmallTextViewStyle"
+                android:layout_marginTop="10dp"
+                android:text="phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/username" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/about_container"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_marginTop="30sp"
+                android:background="@drawable/rounded_background_light"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phone">
+
+                <TextView
+                    android:id="@+id/about"
+                    style="@style/SmallTextViewStyle"
+                    android:text="@string/about_ru"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/SmallTextViewStyle"
+                    android:layout_marginTop="10dp"
+                    android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/about" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settings_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:background="@drawable/rounded_background_light"
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_container">
 
+            <TextView
+                android:id="@+id/notifications"
+                style="@style/MediumTextViewStyle"
+                android:text="@string/notifications_ru"
+                app:layout_constraintBottom_toBottomOf="@id/notifications_switch"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/notifications_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/darkBlue"
+                app:layout_constraintTop_toBottomOf="@id/notifications_switch" />
+
+            <TextView
+                android:id="@+id/darkTheme"
+                style="@style/MediumTextViewStyle"
+                android:text="@string/darkTheme_ru"
+                app:layout_constraintBottom_toBottomOf="@id/darkTheme_switch"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/line1" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/darkTheme_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line1" />
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/darkBlue"
+                app:layout_constraintTop_toBottomOf="@id/darkTheme_switch" />
+
+            <TextView
+                android:id="@+id/clearSearchHistory"
+                style="@style/MediumTextViewStyle"
+                android:layout_marginTop="20dp"
+                android:text="@string/clearSearchHistory_ru"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line2" />
+
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/darkBlue"
+                app:layout_constraintTop_toBottomOf="@id/clearSearchHistory" />
+
+            <TextView
+                android:id="@+id/aboutApp"
+                style="@style/MediumTextViewStyle"
+                android:layout_marginTop="20dp"
+                android:text="@string/aboutApp_ru"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line3" />
+
+            <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/darkBlue"
+                app:layout_constraintTop_toBottomOf="@id/aboutApp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settings_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
-        android:background="@drawable/rounded_background"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_container">
-
-        <TextView
-            android:id="@+id/notifications"
-            style="@style/MediumTextViewStyle"
-            android:text="@string/notifications_ru"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/notifications_switch"  />
-        
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/notifications_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/darkBlue"
-            app:layout_constraintTop_toBottomOf="@id/notifications_switch" />
-
-        <TextView
-            android:id="@+id/darkTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_mono_bold"
-            android:text="@string/darkTheme_ru"
-            android:textColor="@color/darkBlue"
-            android:textSize="@dimen/medium_text_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/line1"
-            app:layout_constraintBottom_toBottomOf="@id/darkTheme_switch" />
-
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/darkTheme_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line1"/>
-
-        <View
-            android:id="@+id/line2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/darkBlue"
-            app:layout_constraintTop_toBottomOf="@id/darkTheme_switch" />
-
-        <TextView
-            android:id="@+id/clearSearchHistory"
-            style="@style/MediumTextViewStyle"
-            android:layout_marginTop="20dp"
-            android:text="@string/clearSearchHistory_ru"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line2" />
-
-        <View
-            android:id="@+id/line3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/darkBlue"
-            app:layout_constraintTop_toBottomOf="@id/clearSearchHistory" />
-
-        <TextView
-            android:id="@+id/aboutApp"
-            style="@style/MediumTextViewStyle"
-            android:layout_marginTop="20dp"
-            android:text="@string/aboutApp_ru"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line3" />
-
-        <View
-            android:id="@+id/line4"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/darkBlue"
-            app:layout_constraintTop_toBottomOf="@id/aboutApp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
