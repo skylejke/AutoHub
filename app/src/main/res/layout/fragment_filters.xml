@@ -31,18 +31,29 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="30sp"
-        android:background="@drawable/rounded_background_light"
+        android:background="@drawable/rounded_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filters">
 
+        <ImageButton
+            android:id="@+id/car_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/directions_car"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
         <TextView
             android:id="@+id/brand"
             style="@style/MediumTextViewStyle"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="20dp"
             android:text="@string/brand_ru"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/car_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -53,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40sp"
-        android:background="@drawable/rounded_background_light"
+        android:background="@drawable/rounded_background"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
