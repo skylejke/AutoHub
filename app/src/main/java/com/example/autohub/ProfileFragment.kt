@@ -22,19 +22,12 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val themeSwitch = view.findViewById<SwitchCompat>(R.id.darkTheme_switch)
-        // Получаем SharedPreferences
         val sharedPreferences =
             requireActivity().getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE)
-        // Получаем сохраненное состояние темы (по умолчанию - светлая тема)
         val isDarkThemeEnabled = sharedPreferences.getBoolean("isDarkThemeEnabled", false)
-        // Устанавливаем состояние переключателя в соответствии с сохраненным значением
         themeSwitch.isChecked = isDarkThemeEnabled
-        // Устанавливаем слушатель для изменения состояния переключателя
         themeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            // Сохраняем состояние переключателя в SharedPreferences
             sharedPreferences.edit().putBoolean("isDarkThemeEnabled", isChecked).apply()
-
-            // Применяем выбранную тему
             applyTheme(isChecked)
         }
     }

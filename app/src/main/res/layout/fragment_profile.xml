@@ -34,7 +34,8 @@
                 android:src="@drawable/default_profile_picture"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/edit_icon"
@@ -49,7 +50,7 @@
                 android:id="@+id/username"
                 style="@style/SmallTextViewStyle"
                 android:layout_marginTop="10dp"
-                android:text="username"
+                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_image" />
@@ -58,7 +59,7 @@
                 android:id="@+id/phone"
                 style="@style/SmallTextViewStyle"
                 android:layout_marginTop="10dp"
-                android:text="phone"
+                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/username" />
@@ -83,7 +84,7 @@
                 <TextView
                     style="@style/SmallTextViewStyle"
                     android:layout_marginTop="10dp"
-                    android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                    android:text="@string/default_text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/about" />
             </androidx.constraintlayout.widget.ConstraintLayout>

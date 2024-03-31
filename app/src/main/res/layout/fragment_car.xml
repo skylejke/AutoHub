@@ -15,7 +15,7 @@
             android:id="@+id/photo_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/lightPink"
+            android:background="@drawable/rounded_background_light"
             android:padding="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -42,7 +42,7 @@
                 android:id="@+id/car_info"
                 style="@style/MediumTextViewStyle"
                 android:layout_marginTop="20dp"
-                android:text="asd"
+                android:text="@string/default_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/back_icon" />
 
@@ -50,7 +50,7 @@
                 android:id="@+id/price"
                 style="@style/BigTextViewStyle"
                 android:layout_marginTop="20dp"
-                android:text="asd"
+                android:text="@string/default_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/car_info" />
 
@@ -93,7 +93,7 @@
             <TextView
                 android:id="@+id/year"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="asd"
+                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/year_title" />
 
@@ -107,7 +107,7 @@
             <TextView
                 android:id="@+id/mileage"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="asd"
+                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/mileage_title" />
 
@@ -121,7 +121,7 @@
             <TextView
                 android:id="@+id/body"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="asd"
+                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/body_title" />
 
@@ -135,7 +135,7 @@
             <TextView
                 android:id="@+id/color"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="asd"
+                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/color_title" />
 
@@ -149,7 +149,7 @@
             <TextView
                 android:id="@+id/engine"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="asd"
+                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/engine_title" />
 
@@ -163,7 +163,7 @@
             <TextView
                 android:id="@+id/transmission"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="asd"
+                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/transmission_title" />
 
@@ -177,7 +177,7 @@
             <TextView
                 android:id="@+id/drive_unit"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="asd"
+                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/drive_unit_title" />
 
