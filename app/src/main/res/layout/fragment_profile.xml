@@ -3,6 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -50,19 +51,21 @@
                 android:id="@+id/username"
                 style="@style/SmallTextViewStyle"
                 android:layout_marginTop="10dp"
-                android:text="@string/default_text"
+                android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profile_image" />
+                app:layout_constraintTop_toBottomOf="@id/profile_image"
+                tools:text="AlexanderPravin1996" />
 
             <TextView
                 android:id="@+id/phone"
                 style="@style/SmallTextViewStyle"
                 android:layout_marginTop="10dp"
-                android:text="@string/default_text"
+                android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/username" />
+                app:layout_constraintTop_toBottomOf="@id/username"
+                tools:text="8 (800) 555-35-35" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/about_container"
@@ -84,9 +87,10 @@
                 <TextView
                     style="@style/SmallTextViewStyle"
                     android:layout_marginTop="10dp"
-                    android:text="@string/default_text"
+                    android:maxLines="6"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/about" />
+                    app:layout_constraintTop_toBottomOf="@id/about"
+                    tools:text="Интересуюсь японскими автомобилями 90-ых, мечтаю о Nissan Skyline R34." />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

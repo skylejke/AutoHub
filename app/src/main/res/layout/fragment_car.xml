@@ -42,17 +42,19 @@
                 android:id="@+id/car_info"
                 style="@style/MediumTextViewStyle"
                 android:layout_marginTop="20dp"
-                android:text="@string/default_text"
+                android:maxLines="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/back_icon" />
+                app:layout_constraintTop_toBottomOf="@id/back_icon"
+                tools:text="Audi RS 6, 2023" />
 
             <TextView
                 android:id="@+id/price"
                 style="@style/BigTextViewStyle"
                 android:layout_marginTop="20dp"
-                android:text="@string/default_text"
+                android:maxLines="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/car_info" />
+                app:layout_constraintTop_toBottomOf="@id/car_info"
+                tools:text="22 000 000 ₽" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -93,9 +95,10 @@
             <TextView
                 android:id="@+id/year"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="@string/default_text"
+                android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/year_title" />
+                app:layout_constraintTop_toTopOf="@id/year_title"
+                tools:text="2023" />
 
             <TextView
                 android:id="@+id/mileage_title"
@@ -107,9 +110,10 @@
             <TextView
                 android:id="@+id/mileage"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="@string/default_text"
+                android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/mileage_title" />
+                app:layout_constraintTop_toTopOf="@id/mileage_title"
+                tools:text="143 км." />
 
             <TextView
                 android:id="@+id/body_title"
@@ -121,9 +125,9 @@
             <TextView
                 android:id="@+id/body"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/body_title" />
+                app:layout_constraintTop_toTopOf="@id/body_title"
+                tools:text="Универсал 5 дв." />
 
             <TextView
                 android:id="@+id/color_title"
@@ -135,9 +139,9 @@
             <TextView
                 android:id="@+id/color"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/color_title" />
+                app:layout_constraintTop_toTopOf="@id/color_title"
+                tools:text="Серый" />
 
             <TextView
                 android:id="@+id/engine_title"
@@ -149,9 +153,9 @@
             <TextView
                 android:id="@+id/engine"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/engine_title" />
+                app:layout_constraintTop_toTopOf="@id/engine_title"
+                tools:text="4.0 л / 630 л.с. /Бензин" />
 
             <TextView
                 android:id="@+id/transmission_title"
@@ -163,9 +167,9 @@
             <TextView
                 android:id="@+id/transmission"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/transmission_title" />
+                app:layout_constraintTop_toTopOf="@id/transmission_title"
+                tools:text="Автоматическая" />
 
             <TextView
                 android:id="@+id/drive_unit_title"
@@ -177,9 +181,9 @@
             <TextView
                 android:id="@+id/drive_unit"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="@string/default_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/drive_unit_title" />
+                app:layout_constraintTop_toTopOf="@id/drive_unit_title"
+                tools:text="Полный" />
 
             <Button
                 android:id="@+id/buy_now_btn"
