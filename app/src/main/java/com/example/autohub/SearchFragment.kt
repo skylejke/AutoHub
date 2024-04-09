@@ -7,32 +7,37 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.example.autohub.databinding.FragmentSearchBinding
 
 
 class SearchFragment : Fragment() {
 
+    private var _binding: FragmentSearchBinding? = null
+
+    private val binding get() = _binding!!
+
     private lateinit var searchEditText: EditText
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+    ): View {
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val backButton = view.findViewById<ImageButton>(R.id.back_icon)
-        val cancelButton = view.findViewById<TextView>(R.id.cancel_button)
-        searchEditText = view.findViewById(R.id.search_et)
+        val backButton = binding.backIcon
+        val cancelButton = binding.cancelButton
+        searchEditText = binding.searchEt
 
-        searchEditText.addTextChangedListener {  text: CharSequence? ->
+        searchEditText.addTextChangedListener { text: CharSequence? ->
             cancelButton.visibility = if (!text.isNullOrEmpty()) {
                 View.VISIBLE
             } else {
@@ -68,6 +73,11 @@ class SearchFragment : Fragment() {
                 SEARCH_EDIT_TEXT_DEFAULT
             )
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

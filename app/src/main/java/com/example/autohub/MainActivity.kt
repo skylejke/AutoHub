@@ -7,24 +7,26 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.autohub.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        // Получаем SharedPreferences
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         val sharedPreferences = getSharedPreferences(THEME_PREFERENCES, Context.MODE_PRIVATE)
-        // Получаем сохраненное состояние темы (по умолчанию - светлая тема)
         val isDarkThemeEnabled = sharedPreferences.getBoolean(DARK_THEME_ENABLED_KEY, false)
-        // Применяем выбранную тему
         applyTheme(isDarkThemeEnabled)
     }
 
     override fun onStart() {
         super.onStart()
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val bottomNavigationView = binding.bottomNavigation
         val navController = findNavController(this, R.id.nav_host_fragment)
         setupWithNavController(bottomNavigationView, navController)
     }
