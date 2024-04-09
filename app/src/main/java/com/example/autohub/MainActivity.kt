@@ -15,9 +15,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // Получаем SharedPreferences
-        val sharedPreferences = getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences(THEME_PREFERENCES, Context.MODE_PRIVATE)
         // Получаем сохраненное состояние темы (по умолчанию - светлая тема)
-        val isDarkThemeEnabled = sharedPreferences.getBoolean("isDarkThemeEnabled", false)
+        val isDarkThemeEnabled = sharedPreferences.getBoolean(DARK_THEME_ENABLED_KEY, false)
         // Применяем выбранную тему
         applyTheme(isDarkThemeEnabled)
     }
@@ -29,12 +29,19 @@ class MainActivity : AppCompatActivity() {
         setupWithNavController(bottomNavigationView, navController)
     }
 
-    private fun applyTheme(isDarkThemeEnabled: Boolean) {
-        val mode = if (isDarkThemeEnabled) {
-            AppCompatDelegate.MODE_NIGHT_YES
-        } else {
-            AppCompatDelegate.MODE_NIGHT_NO
+    companion object {
+        const val THEME_PREFERENCES = "ThemePrefs"
+
+        const val DARK_THEME_ENABLED_KEY = "isDarkThemeEnabled"
+
+        fun applyTheme(isDarkThemeEnabled: Boolean) {
+            val mode = if (isDarkThemeEnabled) {
+                AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                AppCompatDelegate.MODE_NIGHT_NO
+            }
+            AppCompatDelegate.setDefaultNightMode(mode)
         }
-        AppCompatDelegate.setDefaultNightMode(mode)
     }
+
 }

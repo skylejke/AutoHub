@@ -2,8 +2,6 @@ package com.example.autohub
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 
@@ -33,27 +32,22 @@ class SearchFragment : Fragment() {
         val cancelButton = view.findViewById<TextView>(R.id.cancel_button)
         searchEditText = view.findViewById(R.id.search_et)
 
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        searchEditText.addTextChangedListener {  text: CharSequence? ->
+            cancelButton.visibility = if (!text.isNullOrEmpty()) {
+                View.VISIBLE
+            } else {
+                View.GONE
             }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                cancelButton.visibility = if (s?.isNotEmpty() == true) {
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-            }
-        })
+        }
 
         cancelButton.setOnClickListener {
             val imm =
-                requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
-            searchEditText.text.clear()
+                requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+
+            imm?.let { inputManager ->
+                inputManager.hideSoftInputFromWindow(view.windowToken, 0)
+                searchEditText.text.clear()
+            }
         }
 
         backButton.setOnClickListener {

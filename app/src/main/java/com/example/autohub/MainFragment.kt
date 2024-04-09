@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 
 class MainFragment : Fragment() {
 
@@ -23,7 +23,7 @@ class MainFragment : Fragment() {
         val searchButton = view.findViewById<ImageButton>(R.id.search_button)
 
         searchButton.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_searchFragment)
+            findNavController().navigate(R.id.action_mainFragment_to_searchFragment)
         }
     }
 
