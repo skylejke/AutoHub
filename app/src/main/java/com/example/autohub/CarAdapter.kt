@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
 
-    var carList = emptyList<Car>()
+    private var carList = emptyList<Car>()
 
     class CarViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -33,5 +33,17 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
 
     override fun getItemCount(): Int {
         return carList.size
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setList(list: List<Car>) {
+        carList = list
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearList() {
+        carList = emptyList()
+        notifyDataSetChanged()
     }
 }
