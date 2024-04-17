@@ -6,13 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.databinding.FragmentMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainFragment : Fragment() {
 
@@ -38,15 +38,17 @@ class MainFragment : Fragment() {
 
         carAdapter = CarAdapter()
         binding.carList.adapter = carAdapter
-        binding.carCounter.text = binding.carList.size.toString() + " объявлений"
 
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                RetrofitCarInstance.api.getCars().collect { record ->
-                    carAdapter.setList(record.list)
+                val records =
+                    RetrofitCarInstance.api.getCars("ZrQEPSkKZGFuaWxtZWdhMjAwM0BnbWFpbC5jb20=")
+                withContext(Dispatchers.Main) {
+                    carAdapter.setList(records.list)
+                    binding.carCounter.text = records.list.size.toString() + " объявлений"
                 }
             } catch (e: Exception) {
-                Log.e("Error", e.stackTrace.toString())
+                Log.e("Error", e.message.toString())
             }
 
         }

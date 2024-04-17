@@ -7,7 +7,7 @@ object RetrofitCarInstance {
 
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://auto.dev/api")
+            .baseUrl("https://auto.dev/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
