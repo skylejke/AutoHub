@@ -26,9 +26,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val bottomNavigationView = binding.bottomNavigation
-        val navController = findNavController(this, R.id.nav_host_fragment)
-        setupWithNavController(bottomNavigationView, navController)
+        setupWithNavController(
+            binding.bottomNavigation,
+            findNavController(this, R.id.nav_host_fragment)
+        )
     }
 
     companion object {

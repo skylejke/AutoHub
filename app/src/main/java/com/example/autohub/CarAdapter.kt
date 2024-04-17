@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.autohub.model.Car
 
 class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
 
@@ -26,8 +27,7 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
         holder.itemView.findViewById<TextView>(R.id.car_title).text =
             carInfo.make + " " + carInfo.model + " " + carInfo.year
         holder.itemView.findViewById<TextView>(R.id.car_characteristics).text =
-            carInfo.mileage + " " + carInfo.bodyType + " " + carInfo.transmission + " " +
-                    carInfo.engineType + " " + carInfo.driveline
+            carInfo.mileage + " " + carInfo.bodyType
         holder.itemView.findViewById<TextView>(R.id.car_price).text = carInfo.price
     }
 
