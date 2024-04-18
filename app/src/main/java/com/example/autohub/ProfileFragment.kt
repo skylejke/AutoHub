@@ -28,15 +28,13 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val themeSwitch = binding.darkThemeSwitch
-
         val sharedPreferences =
             requireActivity().getSharedPreferences(THEME_PREFERENCES, Context.MODE_PRIVATE)
         val isDarkThemeEnabled = sharedPreferences.getBoolean(DARK_THEME_ENABLED_KEY, false)
 
-        themeSwitch.isChecked = isDarkThemeEnabled
+        binding.darkThemeSwitch.isChecked = isDarkThemeEnabled
 
-        themeSwitch.setOnCheckedChangeListener { _, isChecked ->
+        binding.darkThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean(DARK_THEME_ENABLED_KEY, isChecked).apply()
             MainActivity.applyTheme(isChecked)
         }

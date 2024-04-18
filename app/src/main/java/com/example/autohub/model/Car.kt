@@ -13,12 +13,16 @@ data class Car(
     val make: String,
     @SerializedName("mileage")
     val mileage: String,
+    @SerializedName("mileageUnformatted")
+    val mileageUnformatted: Int,
     @SerializedName("model")
     val model: String,
     @SerializedName("photoUrls")
     val photoUrls: List<String>,
     @SerializedName("price")
     val price: String,
+    @SerializedName("priceUnformatted")
+    val priceUnformatted: Int,
     @SerializedName("primaryPhotoUrl")
     val primaryPhotoUrl: String,
     @SerializedName("year")

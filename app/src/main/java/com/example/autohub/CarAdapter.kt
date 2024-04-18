@@ -4,16 +4,28 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.autohub.databinding.CarListItemBinding
 import com.example.autohub.model.Car
 
 class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
 
     private var carList = emptyList<Car>()
 
-    class CarViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class CarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val binding = CarListItemBinding.bind(view)
+
+        @SuppressLint("SetTextI18n")
+        fun bind(car: Car) = with(binding) {
+            carTitle.text = car.make + " " + car.model + " " + car.year
+            carCharacteristics.text = car.mileage + ", " + car.bodyType
+            carPrice.text = car.price
+            Glide.with(root)
+                .load(car.primaryPhotoUrl)
+                .into(carPhoto)
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
         val view =
@@ -21,18 +33,8 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
         return CarViewHolder(view)
     }
 
-
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-        val carInfo = carList[position]
-        holder.itemView.findViewById<TextView>(R.id.car_title).text =
-            carInfo.make + " " + carInfo.model + " " + carInfo.year
-        holder.itemView.findViewById<TextView>(R.id.car_characteristics).text =
-            carInfo.mileage + ", " + carInfo.bodyType
-        holder.itemView.findViewById<TextView>(R.id.car_price).text = carInfo.price
-        Glide.with(holder.itemView)
-            .load(carInfo.primaryPhotoUrl)
-            .into(holder.itemView.findViewById(R.id.car_photo))
+        holder.bind(carList[position])
     }
 
     override fun getItemCount(): Int {
@@ -45,9 +47,9 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
         notifyDataSetChanged()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun clearList() {
-        carList = emptyList()
-        notifyDataSetChanged()
-    }
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun clearList() {
+//        carList = emptyList()
+//        notifyDataSetChanged()
+//    }
 }
