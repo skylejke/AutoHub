@@ -19,7 +19,7 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
         @SuppressLint("SetTextI18n")
         fun bind(car: Car) = with(binding) {
             carTitle.text = car.make + " " + car.model + " " + car.year
-            carCharacteristics.text = car.mileage + ", " + car.bodyType
+            carCharacteristics.text = car.mileage + ", " + car.bodyType + ", " + car.condition
             carPrice.text = car.price
             Glide.with(root)
                 .load(car.primaryPhotoUrl)

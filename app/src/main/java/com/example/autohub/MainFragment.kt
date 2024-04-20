@@ -42,15 +42,14 @@ class MainFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val records =
-                    RetrofitCarInstance.api.getCars("ZrQEPSkKZGFuaWxtZWdhMjAwM0BnbWFpbC5jb20=")
+                    RetrofitCarInstance.api.getCars()
                 withContext(Dispatchers.Main) {
                     carAdapter.setList(records.list)
                     binding.carCounter.text = records.list.size.toString() + " объявлений"
                 }
             } catch (e: Exception) {
-                Log.e("Error", e.message.toString())
+                Log.e("Error", e.stackTraceToString())
             }
-
         }
 
         binding.searchButton.setOnClickListener {

@@ -6,11 +6,11 @@ import retrofit2.http.Query
 
 interface CarApi {
 
-//    @GET("listings")
-//    suspend fun searchCars(
-//        @Query("query") query: String
-//    ): Response<List<Record>>
+    @GET("listings")
+    suspend fun searchCarsByMake(
+        @Query("make") make: String
+    ): Records
 
     @GET("listings")
-    suspend fun getCars(@Query("apikey") apiKey: String): Records
+    suspend fun getCars(): Records
 }

@@ -2,15 +2,21 @@ package com.example.autohub
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.example.autohub.databinding.FragmentSearchBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class SearchFragment : Fragment() {
@@ -20,6 +26,8 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var searchEditText: EditText
+
+    private lateinit var carAdapter: CarAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,13 +45,42 @@ class SearchFragment : Fragment() {
         val cancelButton = binding.cancelButton
         searchEditText = binding.searchEt
 
-        searchEditText.addTextChangedListener { text: CharSequence? ->
-            cancelButton.visibility = if (!text.isNullOrEmpty()) {
-                View.VISIBLE
-            } else {
-                View.GONE
+        carAdapter = CarAdapter()
+        binding.searchCarList.adapter = carAdapter
+
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                text: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
             }
-        }
+
+            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+                cancelButton.visibility = if (text?.isNotEmpty() == true) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+            }
+
+            override fun afterTextChanged(text: Editable?) {
+                binding.searchButton.setOnClickListener {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        try {
+                            val records =
+                                RetrofitCarInstance.api.searchCarsByMake(text.toString())
+                            withContext(Dispatchers.Main) {
+                                carAdapter.setList(records.list)
+                            }
+                        } catch (e: Exception) {
+                            Log.e("Error", e.stackTraceToString())
+                        }
+                    }
+                }
+            }
+        })
 
         cancelButton.setOnClickListener {
             val imm =

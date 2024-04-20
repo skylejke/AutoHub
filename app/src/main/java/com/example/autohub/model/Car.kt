@@ -9,6 +9,8 @@ data class Car(
     val condition: String,
     @SerializedName("displayColor")
     val displayColor: String,
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("make")
     val make: String,
     @SerializedName("mileage")
@@ -25,6 +27,8 @@ data class Car(
     val priceUnformatted: Int,
     @SerializedName("primaryPhotoUrl")
     val primaryPhotoUrl: String,
+    @SerializedName("vin")
+    val vin: String,
     @SerializedName("year")
     val year: Int
 )
