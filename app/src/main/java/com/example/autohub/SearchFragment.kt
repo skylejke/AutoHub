@@ -4,19 +4,15 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.autohub.databinding.FragmentSearchBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class SearchFragment : Fragment() {
@@ -26,8 +22,6 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var searchEditText: EditText
-
-    private lateinit var carAdapter: CarAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,12 +35,10 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val backButton = binding.backIcon
+        val bundle = Bundle()
+
         val cancelButton = binding.cancelButton
         searchEditText = binding.searchEt
-
-        carAdapter = CarAdapter()
-        binding.searchCarList.adapter = carAdapter
 
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
@@ -67,17 +59,11 @@ class SearchFragment : Fragment() {
 
             override fun afterTextChanged(text: Editable?) {
                 binding.searchButton.setOnClickListener {
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        try {
-                            val records =
-                                RetrofitCarInstance.api.searchCarsByMake(text.toString())
-                            withContext(Dispatchers.Main) {
-                                carAdapter.setList(records.list)
-                            }
-                        } catch (e: Exception) {
-                            Log.e("Error", e.stackTraceToString())
-                        }
-                    }
+
+                    bundle.putString("QUERY", text.toString())
+                    findNavController().navigate(R.id.action_searchFragment_to_searchResultsFragment, bundle)
+
+
                 }
             }
         })
@@ -92,7 +78,7 @@ class SearchFragment : Fragment() {
             }
         }
 
-        backButton.setOnClickListener {
+        binding.backIcon.setOnClickListener {
             Navigation.findNavController(view).popBackStack()
         }
     }

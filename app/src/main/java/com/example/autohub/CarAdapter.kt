@@ -47,9 +47,9 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
         notifyDataSetChanged()
     }
 
-//    @SuppressLint("NotifyDataSetChanged")
-//    fun clearList() {
-//        carList = emptyList()
-//        notifyDataSetChanged()
-//    }
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearList() {
+        carList = emptyList()
+        notifyDataSetChanged()
+    }
 }
