@@ -53,6 +53,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        style="@style/MediumTextViewStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/search_history_ru" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_history_list"

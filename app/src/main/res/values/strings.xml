@@ -41,6 +41,7 @@
     <string name="no_connection_ru">Отсуствует соединение с интернетом</string>
     <string name="try_again_ru">Повторить</string>
     <string name="no_data_ru">Ничего не найдено</string>
+    <string name="search_history_ru">История поиска</string>
 
     <string-array name="makes">
         <item>Abarth</item>

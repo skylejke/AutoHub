@@ -38,6 +38,10 @@ class ProfileFragment : Fragment() {
             sharedPreferences.edit().putBoolean(DARK_THEME_ENABLED_KEY, isChecked).apply()
             (binding.root.context.applicationContext as App).applyTheme(isChecked)
         }
+
+        binding.clearSearchHistory.setOnClickListener {
+
+        }
     }
 
     override fun onDestroyView() {
