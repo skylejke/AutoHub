@@ -10,11 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.databinding.FragmentMainBinding
+import com.example.autohub.model.Records
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), ScreenSwitchable {
 
     private var _binding: FragmentMainBinding? = null
 
@@ -39,16 +42,15 @@ class MainFragment : Fragment() {
         carAdapter = CarAdapter()
         binding.carList.adapter = carAdapter
 
+        showProgressBar()
         lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                val records =
-                    RetrofitCarInstance.api.getCars()
-                withContext(Dispatchers.Main) {
-                    carAdapter.setList(records.list)
-                    binding.carCounter.text = records.list.size.toString() + " объявлений"
-                }
-            } catch (e: Exception) {
-                Log.e("Error", e.stackTraceToString())
+            makeRequest()
+        }
+
+        binding.noConnectionPlaceHolder.retryButton.setOnClickListener {
+            showProgressBar()
+            lifecycleScope.launch(Dispatchers.IO) {
+                makeRequest()
             }
         }
 
@@ -60,6 +62,64 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private suspend fun makeRequest() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response: Response<Records> = RetrofitCarInstance.api.getCars()
+                if (response.isSuccessful) {
+                    val cars: Records? = response.body()
+                    val carsList = cars?.list ?: emptyList()
+                    if (carsList.isEmpty()) {
+                        withContext(Dispatchers.Main) {
+                            hideError()
+                            showNoData()
+                        }
+                        return@launch
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            hideError()
+                            showData()
+                            carAdapter.setList(carsList)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e("Exception on", e.stackTraceToString())
+                    showError()
+                }
+            } finally {
+                withContext(Dispatchers.Main) {
+                    hideProgressBar()
+                }
+            }
+        }
+    }
+
+    override fun showError() {
+        binding.noConnectionPlaceHolder.root.visibility = View.VISIBLE
+    }
+
+    override fun showNoData() {
+        binding.noDataPlaceHolder.root.visibility = View.VISIBLE
+    }
+
+    override fun hideError() {
+        binding.noConnectionPlaceHolder.root.visibility = View.GONE
+    }
+
+    override fun showData() {
+        binding.noDataPlaceHolder.root.visibility = View.GONE
+    }
+
+    override fun showProgressBar() {
+        binding.progressBarPlaceHolder.root.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        binding.progressBarPlaceHolder.root.visibility = View.GONE
     }
 
 }

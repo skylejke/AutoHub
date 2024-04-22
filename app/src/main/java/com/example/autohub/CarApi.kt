@@ -13,5 +13,5 @@ interface CarApi {
     ): Response<Records>
 
     @GET("listings")
-    suspend fun getCars(): Records
+    suspend fun getCars(): Response<Records>
 }
