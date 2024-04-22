@@ -79,6 +79,8 @@ class SearchFragment : Fragment() {
                 } else {
                     View.GONE
                 }
+
+
             }
 
             override fun afterTextChanged(text: Editable?) {

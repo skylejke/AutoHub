@@ -10,4 +10,8 @@ interface ScreenSwitchable {
 
     fun showData()
 
+    fun showProgressBar()
+
+    fun hideProgressBar()
+
 }

@@ -47,12 +47,14 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
             carAdapter.clearList()
             showNoData()
         } else {
+            showProgressBar()
             lifecycleScope.launch(Dispatchers.IO) {
                 makeRequest(query)
             }
         }
 
         binding.noConnectionPlaceHolder.retryButton.setOnClickListener {
+            showProgressBar()
             lifecycleScope.launch(Dispatchers.IO) {
                 makeRequest(query)
             }
@@ -90,6 +92,10 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
                     Log.e("Exception on", e.stackTraceToString())
                     showError()
                 }
+            } finally {
+                withContext(Dispatchers.Main) {
+                    hideProgressBar()
+                }
             }
         }
     }
@@ -108,5 +114,13 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
 
     override fun showData() {
         binding.noDataPlaceHolder.root.visibility = View.GONE
+    }
+
+    override fun showProgressBar() {
+        binding.progressBarPlaceHolder.root.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        binding.progressBarPlaceHolder.root.visibility = View.GONE
     }
 }
