@@ -116,6 +116,11 @@ class SearchFragment : Fragment() {
             }
         }
 
+        binding.clearSearchHistoryButton.setOnClickListener {
+            sharedPrefs.edit().clear().apply()
+            searchHistoryAdapter.clearList()
+        }
+
         binding.backIcon.setOnClickListener {
             Navigation.findNavController(view).popBackStack()
         }

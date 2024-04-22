@@ -31,16 +31,11 @@ class ProfileFragment : Fragment() {
         val sharedPreferences = requireActivity().getSharedPreferences(THEME_PREFERENCES, Context.MODE_PRIVATE)
         val isDarkThemeEnabled = sharedPreferences.getBoolean(DARK_THEME_ENABLED_KEY, false)
 
-        // Устанавливаем состояние свитча в соответствии с сохраненным значением
         binding.darkThemeSwitch.isChecked = isDarkThemeEnabled
 
         binding.darkThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean(DARK_THEME_ENABLED_KEY, isChecked).apply()
             (binding.root.context.applicationContext as App).applyTheme(isChecked)
-        }
-
-        binding.clearSearchHistory.setOnClickListener {
-
         }
     }
 
