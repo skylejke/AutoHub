@@ -106,6 +106,17 @@ class SearchFragment : Fragment() {
             }
         })
 
+
+        searchHistoryAdapter.clickable = object : SearchHistoryAdapter.Clickable {
+            override fun onItemClick(searchHistory: SearchHistory) {
+                bundle.putString("QUERY", searchHistory.query)
+                findNavController().navigate(
+                    R.id.action_searchFragment_to_searchResultsFragment,
+                    bundle
+                )
+            }
+        }
+        
         binding.cancelButton.setOnClickListener {
             val imm =
                 requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
@@ -151,3 +162,6 @@ class SearchFragment : Fragment() {
         const val SEARCH_EDIT_TEXT_DEFAULT = ""
     }
 }
+
+
+

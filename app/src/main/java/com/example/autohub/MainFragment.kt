@@ -64,6 +64,7 @@ class MainFragment : Fragment(), ScreenSwitchable {
         _binding = null
     }
 
+    @SuppressLint("SetTextI18n")
     private suspend fun makeRequest() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -75,6 +76,7 @@ class MainFragment : Fragment(), ScreenSwitchable {
                         withContext(Dispatchers.Main) {
                             hideError()
                             showNoData()
+                            binding.carCounter.text = carsList.size.toString() + " объявлений"
                         }
                         return@launch
                     } else {
@@ -82,6 +84,7 @@ class MainFragment : Fragment(), ScreenSwitchable {
                             hideError()
                             showData()
                             carAdapter.setList(carsList)
+                            binding.carCounter.text = carsList.size.toString() + " объявлений"
                         }
                     }
                 }

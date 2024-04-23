@@ -12,6 +12,13 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.SearchHis
 
     private var searchHistoryList = emptyList<SearchHistory>()
 
+
+    lateinit var clickable: Clickable
+
+    interface Clickable {
+        fun onItemClick(searchHistory: SearchHistory)
+    }
+
     class SearchHistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = SearchHistoryListItemBinding.bind(view)
 
@@ -32,6 +39,9 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.SearchHis
 
     override fun onBindViewHolder(holder: SearchHistoryViewHolder, position: Int) {
         holder.bind(searchHistoryList[position])
+        holder.itemView.setOnClickListener {
+            clickable.onItemClick(searchHistoryList[position])
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
