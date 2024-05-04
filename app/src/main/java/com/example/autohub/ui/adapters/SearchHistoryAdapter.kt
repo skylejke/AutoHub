@@ -1,12 +1,13 @@
-package com.example.autohub
+package com.example.autohub.ui.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.autohub.R
 import com.example.autohub.databinding.SearchHistoryListItemBinding
-import com.example.autohub.model.SearchHistory
+import com.example.autohub.data.storage.model.SearchHistory
 
 class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.SearchHistoryViewHolder>() {
 

@@ -1,4 +1,4 @@
-package com.example.autohub
+package com.example.autohub.ui
 
 interface ScreenSwitchable {
 

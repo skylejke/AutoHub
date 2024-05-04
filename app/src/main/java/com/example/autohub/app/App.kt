@@ -1,10 +1,10 @@
-package com.example.autohub
+package com.example.autohub.app
 
 import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import com.example.autohub.MainActivity.Companion.DARK_THEME_ENABLED_KEY
-import com.example.autohub.MainActivity.Companion.THEME_PREFERENCES
+import com.example.autohub.ui.MainActivity.Companion.DARK_THEME_ENABLED_KEY
+import com.example.autohub.ui.MainActivity.Companion.THEME_PREFERENCES
 
 class App : Application() {
 

@@ -1,4 +1,4 @@
-package com.example.autohub
+package com.example.autohub.ui.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,18 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.autohub.R
 import com.example.autohub.databinding.CarListItemBinding
-import com.example.autohub.model.Car
+import com.example.autohub.domain.model.CarDomain
 
 class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
 
-    private var carList = emptyList<Car>()
+    private var carList = emptyList<CarDomain>()
 
     class CarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = CarListItemBinding.bind(view)
 
         @SuppressLint("SetTextI18n")
-        fun bind(car: Car) = with(binding) {
+        fun bind(car: CarDomain) = with(binding) {
             carTitle.text = car.make + " " + car.model + " " + car.year
             carCharacteristics.text = car.mileage + ", " + car.bodyType + ", " + car.condition
             carPrice.text = car.price
@@ -42,7 +43,7 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: List<Car>) {
+    fun setList(list: List<CarDomain>) {
         carList = list
         notifyDataSetChanged()
     }

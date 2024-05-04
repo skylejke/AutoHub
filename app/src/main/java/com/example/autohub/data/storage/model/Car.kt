@@ -1,4 +1,4 @@
-package com.example.autohub.model
+package com.example.autohub.data.storage.model
 
 import com.google.gson.annotations.SerializedName
 

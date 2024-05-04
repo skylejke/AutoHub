@@ -1,10 +1,11 @@
-package com.example.autohub
+package com.example.autohub.ui
 
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.example.autohub.R
 import com.example.autohub.databinding.ActivityMainBinding
 
 

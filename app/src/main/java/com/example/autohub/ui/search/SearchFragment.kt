@@ -1,4 +1,4 @@
-package com.example.autohub
+package com.example.autohub.ui.search
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -13,17 +13,17 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.example.autohub.MainActivity.Companion.SEARCH_HISTORY_KEY
-import com.example.autohub.MainActivity.Companion.SEARCH_HISTORY_PREFERENCES
+import com.example.autohub.R
+import com.example.autohub.data.storage.model.SearchHistory
 import com.example.autohub.databinding.FragmentSearchBinding
-import com.example.autohub.model.SearchHistory
+import com.example.autohub.ui.MainActivity.Companion.SEARCH_HISTORY_KEY
+import com.example.autohub.ui.MainActivity.Companion.SEARCH_HISTORY_PREFERENCES
+import com.example.autohub.ui.adapters.SearchHistoryAdapter
 
 
 class SearchFragment : Fragment() {
 
-    private var _binding: FragmentSearchBinding? = null
-
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentSearchBinding
 
     private lateinit var searchEditText: EditText
 
@@ -38,7 +38,7 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        binding = FragmentSearchBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -116,7 +116,7 @@ class SearchFragment : Fragment() {
                 )
             }
         }
-        
+
         binding.cancelButton.setOnClickListener {
             val imm =
                 requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
@@ -150,11 +150,6 @@ class SearchFragment : Fragment() {
                 SEARCH_EDIT_TEXT_DEFAULT
             )
         )
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     companion object {
