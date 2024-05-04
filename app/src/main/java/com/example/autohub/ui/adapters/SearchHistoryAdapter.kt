@@ -1,17 +1,42 @@
 package com.example.autohub.ui.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.autohub.R
-import com.example.autohub.databinding.SearchHistoryListItemBinding
 import com.example.autohub.data.storage.model.SearchHistory
+import com.example.autohub.databinding.SearchHistoryListItemBinding
 
 class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.SearchHistoryViewHolder>() {
 
-    private var searchHistoryList = emptyList<SearchHistory>()
+    var searchHistoryList = emptyList<SearchHistory>()
+        set(value) {
+            val callback = object : DiffUtil.Callback() {
+                override fun getOldListSize(): Int {
+                    return field.size
+                }
+
+                override fun getNewListSize(): Int {
+                    return value.size
+                }
+
+                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                    return field[oldItemPosition] == value[newItemPosition]
+                }
+
+                override fun areContentsTheSame(
+                    oldItemPosition: Int,
+                    newItemPosition: Int
+                ): Boolean {
+                    return field[oldItemPosition] == value[newItemPosition]
+                }
+            }
+            val difResult = DiffUtil.calculateDiff(callback)
+            difResult.dispatchUpdatesTo(this)
+            field = value
+        }
 
 
     lateinit var clickable: Clickable
@@ -43,17 +68,5 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.SearchHis
         holder.itemView.setOnClickListener {
             clickable.onItemClick(searchHistoryList[position])
         }
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: List<SearchHistory>) {
-        searchHistoryList = list
-        notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun clearList() {
-        searchHistoryList = emptyList()
-        notifyDataSetChanged()
     }
 }

@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentSearchResultsBinding
+import com.example.autohub.domain.model.CarDomain
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
 import kotlinx.coroutines.launch
@@ -41,11 +43,9 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
         binding.searchResultsList.adapter = carAdapter
 
         searchResultsViewModel.carsLiveData.observe(viewLifecycleOwner) { records ->
-            if (records.list.isEmpty()) {
-                carAdapter.clearList()
-            } else {
+            carAdapter.carList = records.list
+            if (records.list.isNotEmpty()) {
                 hideProgressBar()
-                carAdapter.setList(records.list)
             }
         }
 
@@ -53,10 +53,17 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
 
         if (query.isEmpty() || query !in resources.getStringArray(R.array.makes)) {
             showNoData()
-            carAdapter.clearList()
+            carAdapter.carList = emptyList()
         } else {
             lifecycleScope.launch {
                 searchResultsViewModel.get(query)
+            }
+        }
+
+        carAdapter.carClickbale = object : CarAdapter.CarClickbale {
+            override fun onCarClick(carDomain: CarDomain) {
+                val args = SearchResultsFragmentDirections.actionSearchResultsFragmentToCarFragment(carDomain)
+                findNavController().navigate(args)
             }
         }
 

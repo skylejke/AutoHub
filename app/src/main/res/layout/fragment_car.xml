@@ -56,15 +56,27 @@
                 app:layout_constraintTop_toBottomOf="@id/car_info"
                 tools:text="22 000 000 ₽" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
+            <!--            <androidx.recyclerview.widget.RecyclerView-->
+            <!--                android:id="@+id/recyclerView"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/price" />-->
+
+            <ImageView
+                android:id="@+id/car_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:padding="5dp"
+                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/price" />
+                app:layout_constraintTop_toBottomOf="@id/price"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/e63s" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -97,7 +109,7 @@
                 style="@style/CharacteristicsTextViewStyle"
                 android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/year_title"
+                app:layout_constraintTop_toBottomOf="@id/characteristics"
                 tools:text="2023" />
 
             <TextView
@@ -112,7 +124,7 @@
                 style="@style/CharacteristicsTextViewStyle"
                 android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/mileage_title"
+                app:layout_constraintTop_toBottomOf="@id/year_title"
                 tools:text="143 км." />
 
             <TextView
@@ -126,7 +138,7 @@
                 android:id="@+id/body"
                 style="@style/CharacteristicsTextViewStyle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/body_title"
+                app:layout_constraintTop_toBottomOf="@id/mileage_title"
                 tools:text="Универсал 5 дв." />
 
             <TextView
@@ -140,7 +152,7 @@
                 android:id="@+id/color"
                 style="@style/CharacteristicsTextViewStyle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/color_title"
+                app:layout_constraintTop_toBottomOf="@id/body_title"
                 tools:text="Серый" />
 
             <TextView
@@ -154,7 +166,7 @@
                 android:id="@+id/engine"
                 style="@style/CharacteristicsTextViewStyle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/engine_title"
+                app:layout_constraintTop_toBottomOf="@id/color_title"
                 tools:text="4.0 л / 630 л.с. /Бензин" />
 
             <TextView
@@ -168,7 +180,7 @@
                 android:id="@+id/transmission"
                 style="@style/CharacteristicsTextViewStyle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/transmission_title"
+                app:layout_constraintTop_toBottomOf="@id/engine_title"
                 tools:text="Автоматическая" />
 
             <TextView
@@ -182,7 +194,7 @@
                 android:id="@+id/drive_unit"
                 style="@style/CharacteristicsTextViewStyle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/drive_unit_title"
+                app:layout_constraintTop_toBottomOf="@id/transmission_title"
                 tools:text="Полный" />
 
             <Button

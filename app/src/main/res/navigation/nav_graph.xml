@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_carFragment"
+            app:destination="@id/carFragment" />
     </fragment>
 
     <fragment
@@ -34,19 +37,30 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_searchResultsFragment"
-            app:destination="@id/searchResultsFragment">
-        </action>
+            app:destination="@id/searchResultsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/searchResultsFragment"
         android:name="com.example.autohub.ui.search.SearchResultsFragment"
         android:label="fragment_search_results"
-        tools:layout="@layout/fragment_search_results" >
+        tools:layout="@layout/fragment_search_results">
         <argument
             android:name="query"
-            app:argType="string"
-            android:defaultValue='' />
+            android:defaultValue=''
+            app:argType="string" />
+        <action
+            android:id="@+id/action_searchResultsFragment_to_carFragment"
+            app:destination="@id/carFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/carFragment"
+        android:name="com.example.autohub.ui.CarFragment"
+        android:label="CarFragment"
+        tools:layout="@layout/fragment_car">
+        <argument
+            android:name="car"
+            app:argType="com.example.autohub.domain.model.CarDomain" />
+    </fragment>
 </navigation>

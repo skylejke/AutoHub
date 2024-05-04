@@ -57,7 +57,7 @@ class SearchFragment : Fragment() {
 
         if (!searchHistoryPrefs.isNullOrEmpty()) {
             searchHistoryList = searchHistoryPrefs.map { SearchHistory(it) }.toMutableList()
-            searchHistoryAdapter.setList(searchHistoryList)
+            searchHistoryAdapter.searchHistoryList = searchHistoryList
         } else {
             searchHistoryList = mutableListOf()
         }
@@ -129,7 +129,7 @@ class SearchFragment : Fragment() {
 
         binding.clearSearchHistoryButton.setOnClickListener {
             sharedPrefs.edit().clear().apply()
-            searchHistoryAdapter.clearList()
+            searchHistoryAdapter.searchHistoryList = emptyList()
         }
 
         binding.backIcon.setOnClickListener {

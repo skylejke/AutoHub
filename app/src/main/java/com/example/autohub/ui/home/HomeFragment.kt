@@ -1,6 +1,5 @@
 package com.example.autohub.ui.home
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentHomeBinding
+import com.example.autohub.domain.model.CarDomain
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
 import kotlinx.coroutines.launch
@@ -32,7 +32,6 @@ class HomeFragment : Fragment(), ScreenSwitchable {
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -40,18 +39,24 @@ class HomeFragment : Fragment(), ScreenSwitchable {
         binding.carList.adapter = carAdapter
 
         homeViewModel.carsLiveData.observe(viewLifecycleOwner) { records ->
-            if (records.list.isEmpty()) {
-                carAdapter.clearList()
-                binding.carCounter.text = "0 объявлений"
+            carAdapter.carList = records.list
+            binding.carCounter.text = if (records.list.isEmpty()) {
+                "0 объявлений"
             } else {
                 hideProgressBar()
-                carAdapter.setList(records.list)
-                binding.carCounter.text = "${records.list.size} объявлений"
+                "${records.list.size} объявлений"
             }
         }
 
         lifecycleScope.launch {
             homeViewModel.get()
+        }
+
+        carAdapter.carClickbale = object : CarAdapter.CarClickbale {
+            override fun onCarClick(carDomain: CarDomain) {
+                val args = HomeFragmentDirections.actionMainFragmentToCarFragment(carDomain)
+                findNavController().navigate(args)
+            }
         }
 
         binding.noConnectionPlaceHolder.retryButton.setOnClickListener {

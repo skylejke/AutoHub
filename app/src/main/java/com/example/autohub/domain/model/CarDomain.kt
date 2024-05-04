@@ -1,5 +1,9 @@
 package com.example.autohub.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class CarDomain(
     val bodyType: String,
     val condition: String,
@@ -15,4 +19,4 @@ data class CarDomain(
     val primaryPhotoUrl: String,
     val vin: String,
     val year: Int
-)
+) : Parcelable  

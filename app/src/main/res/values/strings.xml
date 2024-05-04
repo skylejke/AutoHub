@@ -42,6 +42,7 @@
     <string name="try_again_ru">Повторить</string>
     <string name="no_data_ru">Ничего не найдено</string>
     <string name="search_history_ru">История поиска</string>
+    <string name="car_info">%1$s %2$s, %3$d</string>
 
     <string-array name="makes">
         <item>Acura</item>
