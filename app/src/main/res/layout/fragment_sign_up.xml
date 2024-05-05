@@ -27,26 +27,15 @@
         app:layout_constraintTop_toBottomOf="@id/app_name" />
 
     <EditText
-        android:id="@+id/username_et"
+        android:id="@+id/email_et"
         style="@style/EditTextStyle"
         android:layout_marginTop="50sp"
-        android:hint="@string/user_name_ru"
+        android:hint="@string/email"
         android:importantForAutofill="no"
-        android:inputType="phone"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sign_in" />
-
-    <EditText
-        android:id="@+id/phone_et"
-        style="@style/EditTextStyle"
-        android:layout_marginTop="30sp"
-        android:hint="@string/phone_number_ru"
-        android:importantForAutofill="no"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username_et" />
 
     <EditText
         android:id="@+id/password_et"
@@ -57,29 +46,26 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phone_et" />
+        app:layout_constraintTop_toBottomOf="@id/email_et" />
 
-    <EditText
-        android:id="@+id/confirm_password_et"
-        style="@style/EditTextStyle"
-        android:layout_marginTop="30sp"
-        android:hint="@string/confirm_password_ru"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/dont_logout_ru"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password_et" />
 
     <Button
         android:id="@+id/sign_up_btn"
         style="@style/ButtonStyle"
-        android:layout_marginTop="30sp"
+        android:layout_marginTop="100dp"
         android:backgroundTint="@color/pink"
         android:text="@string/sign_up_ru"
         android:textColor="@color/darkBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/confirm_password_et" />
+        app:layout_constraintTop_toBottomOf="@id/password_et" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -2,6 +2,7 @@ package com.example.autohub.ui
 
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -25,6 +26,14 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigation,
             findNavController(this, R.id.nav_host_fragment)
         )
+    }
+
+    fun hideBottomNavigation() {
+        binding.bottomNavigation.visibility = View.GONE
+    }
+
+    fun showBottomNavigation() {
+        binding.bottomNavigation.visibility = View.VISIBLE
     }
 
     companion object {

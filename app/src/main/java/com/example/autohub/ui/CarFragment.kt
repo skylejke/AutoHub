@@ -29,12 +29,14 @@ class CarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.carInfo.text = getString(R.string.car_info, args.car.make, args.car.model, args.car.year)
+        binding.carInfo.text =
+            getString(R.string.car_info, args.car.make, args.car.model, args.car.year)
         binding.year.text = args.car.year.toString()
         binding.body.text = args.car.bodyType
         binding.mileage.text = args.car.mileage
         binding.price.text = args.car.price
         binding.color.text = args.car.displayColor
+        binding.vin.text = args.car.vin
         Glide.with(requireContext())
             .load(args.car.primaryPhotoUrl)
             .into(binding.carPhoto)

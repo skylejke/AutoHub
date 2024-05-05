@@ -1,6 +1,6 @@
 package com.example.autohub.ui.adapters
 
-import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,13 +47,12 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
         fun onCarClick(carDomain: CarDomain)
     }
 
-    class CarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class CarViewHolder(view: View, private val context: Context) : RecyclerView.ViewHolder(view) {
         private val binding = CarListItemBinding.bind(view)
 
-        @SuppressLint("SetTextI18n")
+
         fun bind(car: CarDomain) = with(binding) {
-            carTitle.text = car.make + " " + car.model + " " + car.year
-            carCharacteristics.text = car.mileage + ", " + car.bodyType + ", " + car.condition
+            carTitle.text = context.getString(R.string.car_info, car.make, car.model, car.year)
             carPrice.text = car.price
             Glide.with(root)
                 .load(car.primaryPhotoUrl)
@@ -64,7 +63,7 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.car_list_item, parent, false)
-        return CarViewHolder(view)
+        return CarViewHolder(view, parent.context)
     }
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {

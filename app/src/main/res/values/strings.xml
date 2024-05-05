@@ -43,6 +43,9 @@
     <string name="no_data_ru">Ничего не найдено</string>
     <string name="search_history_ru">История поиска</string>
     <string name="car_info">%1$s %2$s, %3$d</string>
+    <string name="vin">VIN</string>
+    <string name="dont_logout_ru">Не выходить из аккаунта</string>
+    <string name="email">Email</string>
 
     <string-array name="makes">
         <item>Acura</item>

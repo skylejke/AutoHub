@@ -27,14 +27,14 @@
         app:layout_constraintTop_toBottomOf="@id/app_name" />
 
     <EditText
-        android:id="@+id/phone_et"
+        android:id="@+id/email_et"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="48dp"
         android:fontFamily="@font/roboto_mono_medium"
-        android:hint="@string/phone_number_ru"
+        android:hint="@string/email"
         android:importantForAutofill="no"
-        android:inputType="phone"
+        android:inputType="textEmailAddress"
         android:textColor="@color/darkBlue"
         android:textColorHint="@color/darkBlue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,12 +54,20 @@
         android:textColorHint="@color/darkBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phone_et" />
+        app:layout_constraintTop_toBottomOf="@id/email_et" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/dont_logout_ru"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_et" />
 
     <Button
         android:id="@+id/sign_in_btn"
         style="@style/ButtonStyle"
-        android:layout_marginTop="70sp"
+        android:layout_marginTop="100dp"
         android:backgroundTint="@color/darkBlue"
         android:text="@string/sign_in_ru"
         android:textColor="@color/pink"
