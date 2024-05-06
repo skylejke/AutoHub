@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
+import coil.load
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentCarBinding
 
@@ -32,14 +32,12 @@ class CarFragment : Fragment() {
         binding.carInfo.text =
             getString(R.string.car_info, args.car.make, args.car.model, args.car.year)
         binding.year.text = args.car.year.toString()
+        binding.price.text = args.car.price
         binding.body.text = args.car.bodyType
         binding.mileage.text = args.car.mileage
-        binding.price.text = args.car.price
         binding.color.text = args.car.displayColor
         binding.vin.text = args.car.vin
-        Glide.with(requireContext())
-            .load(args.car.primaryPhotoUrl)
-            .into(binding.carPhoto)
+        binding.carPhoto.load(args.car.primaryPhotoUrl)
 
         binding.backIcon.setOnClickListener {
             findNavController().popBackStack()

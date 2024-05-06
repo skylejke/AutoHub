@@ -15,12 +15,9 @@
 
     <TextView
         android:id="@+id/sign_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/BigTextViewStyle"
         android:layout_marginTop="30sp"
-        android:fontFamily="@font/roboto_mono_medium"
         android:text="@string/sign_up_ru"
-        android:textColor="@color/darkBlue"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

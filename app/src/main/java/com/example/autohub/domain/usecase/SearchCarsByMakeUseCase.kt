@@ -1,11 +1,11 @@
 package com.example.autohub.domain.usecase
 
-import com.example.autohub.data.repository.CarRepositoryImpl
-import com.example.autohub.domain.model.RecordsDomain
+import com.example.autohub.domain.model.RecordsVo
+import com.example.autohub.domain.repository.CarRepository
 
-class SearchCarsByMakeUseCase(private val carRepository: CarRepositoryImpl) {
+class SearchCarsByMakeUseCase(private val carRepository: CarRepository) {
 
-    suspend fun execute(make: String): RecordsDomain {
+    suspend fun execute(make: String): RecordsVo {
         return carRepository.searchCarsByMake(make)
     }
 

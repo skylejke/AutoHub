@@ -1,5 +1,6 @@
 package com.example.autohub.data.storage.model
 
-data class SearchHistory(
+@JvmInline
+value class SearchHistory(
     val query: String
 )

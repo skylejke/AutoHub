@@ -9,7 +9,7 @@ import com.example.autohub.R
 import com.example.autohub.data.storage.model.SearchHistory
 import com.example.autohub.databinding.SearchHistoryListItemBinding
 
-class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.SearchHistoryViewHolder>() {
+class SearchHistoryAdapter(private val clickable: Clickable) : RecyclerView.Adapter<SearchHistoryAdapter.SearchHistoryViewHolder>() {
 
     var searchHistoryList = emptyList<SearchHistory>()
         set(value) {
@@ -37,9 +37,6 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.SearchHis
             difResult.dispatchUpdatesTo(this)
             field = value
         }
-
-
-    lateinit var clickable: Clickable
 
     interface Clickable {
         fun onItemClick(searchHistory: SearchHistory)

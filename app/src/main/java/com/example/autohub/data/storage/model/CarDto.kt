@@ -2,7 +2,7 @@ package com.example.autohub.data.storage.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Car(
+data class CarDto(
     @SerializedName("bodyType")
     val bodyType: String,
     @SerializedName("condition")

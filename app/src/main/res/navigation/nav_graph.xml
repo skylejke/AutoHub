@@ -61,7 +61,7 @@
         tools:layout="@layout/fragment_car">
         <argument
             android:name="car"
-            app:argType="com.example.autohub.domain.model.CarDomain" />
+            app:argType="com.example.autohub.domain.model.CarVo" />
     </fragment>
 
     <fragment

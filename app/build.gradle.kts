@@ -61,6 +61,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 
+    implementation("io.coil-kt:coil:1.4.0")
+
     implementation("com.google.firebase:firebase-auth:23.0.0")
 
     implementation("androidx.core:core-ktx:1.13.1")

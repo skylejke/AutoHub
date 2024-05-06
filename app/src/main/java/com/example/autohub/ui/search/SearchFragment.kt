@@ -13,7 +13,6 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.example.autohub.R
 import com.example.autohub.data.storage.model.SearchHistory
 import com.example.autohub.databinding.FragmentSearchBinding
 import com.example.autohub.ui.MainActivity.Companion.SEARCH_HISTORY_KEY
@@ -45,9 +44,14 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bundle = Bundle()
-
-        searchHistoryAdapter = SearchHistoryAdapter()
+        searchHistoryAdapter = SearchHistoryAdapter(object : SearchHistoryAdapter.Clickable {
+            override fun onItemClick(searchHistory: SearchHistory) {
+                val args = SearchFragmentDirections.actionSearchFragmentToSearchResultsFragment(
+                    searchHistory.query
+                )
+                findNavController().navigate(args)
+            }
+        })
         binding.searchHistoryList.adapter = searchHistoryAdapter
 
         sharedPrefs =
@@ -84,11 +88,9 @@ class SearchFragment : Fragment() {
             override fun afterTextChanged(text: Editable?) {
                 binding.searchButton.setOnClickListener {
 
-                    bundle.putString("QUERY", text.toString())
-                    findNavController().navigate(
-                        R.id.action_searchFragment_to_searchResultsFragment,
-                        bundle
-                    )
+                    val args =
+                        SearchFragmentDirections.actionSearchFragmentToSearchResultsFragment(text.toString())
+                    findNavController().navigate(args)
 
                     if (text.toString().isNotEmpty()) {
                         val query = text.toString()
@@ -105,17 +107,6 @@ class SearchFragment : Fragment() {
                 }
             }
         })
-
-
-        searchHistoryAdapter.clickable = object : SearchHistoryAdapter.Clickable {
-            override fun onItemClick(searchHistory: SearchHistory) {
-                bundle.putString("QUERY", searchHistory.query)
-                findNavController().navigate(
-                    R.id.action_searchFragment_to_searchResultsFragment,
-                    bundle
-                )
-            }
-        }
 
         binding.cancelButton.setOnClickListener {
             val imm =
@@ -135,26 +126,6 @@ class SearchFragment : Fragment() {
         binding.backIcon.setOnClickListener {
             Navigation.findNavController(view).popBackStack()
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(SEARCH_EDIT_TEXT, searchEditText.text.toString())
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        searchEditText.setText(
-            savedInstanceState?.getString(
-                SEARCH_EDIT_TEXT,
-                SEARCH_EDIT_TEXT_DEFAULT
-            )
-        )
-    }
-
-    companion object {
-        const val SEARCH_EDIT_TEXT = "SEARCH_EDIT_TEXT"
-        const val SEARCH_EDIT_TEXT_DEFAULT = ""
     }
 }
 

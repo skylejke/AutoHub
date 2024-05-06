@@ -9,9 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentSearchResultsBinding
-import com.example.autohub.domain.model.CarDomain
+import com.example.autohub.domain.model.CarVo
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
 import kotlinx.coroutines.launch
@@ -21,6 +22,8 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
     private lateinit var binding: FragmentSearchResultsBinding
 
     private lateinit var carAdapter: CarAdapter
+
+    private val args: SearchResultsFragmentArgs by navArgs()
 
     private val searchResultsViewModel by viewModels<SearchResultsViewModel> {
         SearchResultsViewModelFactory(
@@ -39,7 +42,14 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        carAdapter = CarAdapter()
+        carAdapter = CarAdapter(object : CarAdapter.CarClickbale {
+            override fun onCarClick(carVo: CarVo) {
+                val args =
+                    SearchResultsFragmentDirections.actionSearchResultsFragmentToCarFragment(carVo)
+                findNavController().navigate(args)
+            }
+        })
+
         binding.searchResultsList.adapter = carAdapter
 
         searchResultsViewModel.carsLiveData.observe(viewLifecycleOwner) { records ->
@@ -49,7 +59,7 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
             }
         }
 
-        val query = arguments?.getString("QUERY").toString()
+        val query = args.query
 
         if (query.isEmpty() || query !in resources.getStringArray(R.array.makes)) {
             showNoData()
@@ -57,13 +67,6 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
         } else {
             lifecycleScope.launch {
                 searchResultsViewModel.get(query)
-            }
-        }
-
-        carAdapter.carClickbale = object : CarAdapter.CarClickbale {
-            override fun onCarClick(carDomain: CarDomain) {
-                val args = SearchResultsFragmentDirections.actionSearchResultsFragmentToCarFragment(carDomain)
-                findNavController().navigate(args)
             }
         }
 

@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentHomeBinding
-import com.example.autohub.domain.model.CarDomain
+import com.example.autohub.domain.model.CarVo
 import com.example.autohub.ui.MainActivity
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
@@ -37,7 +37,13 @@ class HomeFragment : Fragment(), ScreenSwitchable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        carAdapter = CarAdapter()
+        carAdapter = CarAdapter(object : CarAdapter.CarClickbale {
+            override fun onCarClick(carVo: CarVo) {
+                val args = HomeFragmentDirections.actionMainFragmentToCarFragment(carVo)
+                findNavController().navigate(args)
+            }
+        })
+
         binding.carList.adapter = carAdapter
 
         homeViewModel.carsLiveData.observe(viewLifecycleOwner) { records ->
@@ -52,13 +58,6 @@ class HomeFragment : Fragment(), ScreenSwitchable {
 
         lifecycleScope.launch {
             homeViewModel.get()
-        }
-
-        carAdapter.carClickbale = object : CarAdapter.CarClickbale {
-            override fun onCarClick(carDomain: CarDomain) {
-                val args = HomeFragmentDirections.actionMainFragmentToCarFragment(carDomain)
-                findNavController().navigate(args)
-            }
         }
 
         binding.noConnectionPlaceHolder.retryButton.setOnClickListener {

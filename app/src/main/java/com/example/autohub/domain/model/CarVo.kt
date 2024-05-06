@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class CarDomain(
+data class CarVo(
     val bodyType: String,
     val condition: String,
     val displayColor: String,

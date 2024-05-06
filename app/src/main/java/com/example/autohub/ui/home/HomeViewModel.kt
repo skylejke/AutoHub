@@ -3,7 +3,7 @@ package com.example.autohub.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.autohub.domain.model.RecordsDomain
+import com.example.autohub.domain.model.RecordsVo
 import com.example.autohub.domain.usecase.GetCarsUseCase
 import com.example.autohub.ui.ScreenSwitchable
 import kotlinx.coroutines.Dispatchers
@@ -14,15 +14,15 @@ class HomeViewModel(
     private val screenSwitchable: ScreenSwitchable
 ) : ViewModel() {
 
-    private var _carsLiveData = MutableLiveData<RecordsDomain>()
-    val carsLiveData: LiveData<RecordsDomain> = _carsLiveData
+    private val _carsLiveData = MutableLiveData<RecordsVo>()
+    val carsLiveData: LiveData<RecordsVo> = _carsLiveData
 
     suspend fun get() {
         withContext(Dispatchers.Main) {
             screenSwitchable.showProgressBar()
         }
         try {
-            val records: RecordsDomain = getCarsUseCase.execute()
+            val records: RecordsVo = getCarsUseCase.execute()
             _carsLiveData.value = records
             if (records.list.isEmpty()) {
                 withContext(Dispatchers.Main) {
@@ -37,7 +37,7 @@ class HomeViewModel(
             }
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
-                _carsLiveData.value = RecordsDomain(emptyList())
+                _carsLiveData.value = RecordsVo(emptyList())
                 screenSwitchable.showError()
             }
         } finally {
