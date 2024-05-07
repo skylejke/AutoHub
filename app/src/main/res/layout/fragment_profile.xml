@@ -107,8 +107,9 @@
 
             <TextView
                 android:id="@+id/notifications"
-                style="@style/MediumTextViewStyle"
+                style="@style/SmallTextViewStyle"
                 android:text="@string/notifications_ru"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/notifications_switch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -130,8 +131,9 @@
 
             <TextView
                 android:id="@+id/darkTheme"
-                style="@style/MediumTextViewStyle"
+                style="@style/SmallTextViewStyle"
                 android:text="@string/darkTheme_ru"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/darkTheme_switch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/line1" />
@@ -155,9 +157,10 @@
 
             <TextView
                 android:id="@+id/aboutApp"
-                style="@style/MediumTextViewStyle"
-                android:layout_marginTop="20dp"
+                style="@style/SmallTextViewStyle"
+                android:layout_marginTop="10dp"
                 android:text="@string/aboutApp_ru"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line3" />
 
@@ -170,5 +173,18 @@
                 app:layout_constraintTop_toBottomOf="@id/aboutApp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/logoutButton"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/md_theme_light_error"
+            android:text="@string/logout"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settings_container" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

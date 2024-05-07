@@ -46,6 +46,7 @@
     <string name="vin">VIN</string>
     <string name="dont_logout_ru">Не выходить из аккаунта</string>
     <string name="email">Email</string>
+    <string name="logout">Logout</string>
 
     <string-array name="makes">
         <item>Acura</item>

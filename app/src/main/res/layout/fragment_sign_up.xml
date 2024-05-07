@@ -45,18 +45,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_et" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/dont_logout_ru"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_et" />
-
     <Button
         android:id="@+id/sign_up_btn"
         style="@style/ButtonStyle"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@color/pink"
         android:text="@string/sign_up_ru"
         android:textColor="@color/darkBlue"

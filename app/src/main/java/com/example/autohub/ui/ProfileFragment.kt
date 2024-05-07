@@ -6,10 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.autohub.R
 import com.example.autohub.app.App
 import com.example.autohub.databinding.FragmentProfileBinding
 import com.example.autohub.ui.MainActivity.Companion.DARK_THEME_ENABLED_KEY
 import com.example.autohub.ui.MainActivity.Companion.THEME_PREFERENCES
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
 
@@ -36,6 +40,11 @@ class ProfileFragment : Fragment() {
         binding.darkThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean(DARK_THEME_ENABLED_KEY, isChecked).apply()
             (binding.root.context.applicationContext as App).applyTheme(isChecked)
+        }
+
+        binding.logoutButton.setOnClickListener {
+            Firebase.auth.signOut()
+            findNavController().navigate(R.id.action_profileFragment_to_signUpFragment)
         }
     }
 }
