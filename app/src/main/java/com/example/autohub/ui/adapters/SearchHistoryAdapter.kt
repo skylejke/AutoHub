@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.autohub.R
-import com.example.autohub.data.storage.model.SearchHistory
 import com.example.autohub.databinding.SearchHistoryListItemBinding
+import com.example.autohub.domain.model.SearchHistoryVo
 
 class SearchHistoryAdapter(private val clickable: Clickable) : RecyclerView.Adapter<SearchHistoryAdapter.SearchHistoryViewHolder>() {
 
-    var searchHistoryList = emptyList<SearchHistory>()
+    var searchHistoryList = emptyList<SearchHistoryVo>()
         set(value) {
             val callback = object : DiffUtil.Callback() {
                 override fun getOldListSize(): Int {
@@ -39,14 +39,14 @@ class SearchHistoryAdapter(private val clickable: Clickable) : RecyclerView.Adap
         }
 
     interface Clickable {
-        fun onItemClick(searchHistory: SearchHistory)
+        fun onItemClick(searchHistoryVo: SearchHistoryVo)
     }
 
     class SearchHistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = SearchHistoryListItemBinding.bind(view)
 
-        fun bind(searchHistory: SearchHistory) = with(binding) {
-            searchHistoryText.text = searchHistory.query
+        fun bind(searchHistoryVo: SearchHistoryVo) = with(binding) {
+            searchHistoryText.text = searchHistoryVo.query
         }
     }
 

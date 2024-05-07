@@ -1,7 +1,6 @@
 package com.example.autohub.ui.search
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,26 +10,20 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.example.autohub.data.storage.model.SearchHistory
 import com.example.autohub.databinding.FragmentSearchBinding
-import com.example.autohub.ui.MainActivity.Companion.SEARCH_HISTORY_KEY
-import com.example.autohub.ui.MainActivity.Companion.SEARCH_HISTORY_PREFERENCES
+import com.example.autohub.domain.model.SearchHistoryVo
 import com.example.autohub.ui.adapters.SearchHistoryAdapter
-
 
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
-
     private lateinit var searchEditText: EditText
-
     private lateinit var searchHistoryAdapter: SearchHistoryAdapter
 
-    private lateinit var searchHistoryList: MutableList<SearchHistory>
-
-    private lateinit var sharedPrefs: SharedPreferences
+    private val viewModel: SearchViewModel by viewModels<SearchViewModel> { SearchViewModelFactory(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,26 +38,21 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         searchHistoryAdapter = SearchHistoryAdapter(object : SearchHistoryAdapter.Clickable {
-            override fun onItemClick(searchHistory: SearchHistory) {
+            override fun onItemClick(searchHistoryVo: SearchHistoryVo) {
                 val args = SearchFragmentDirections.actionSearchFragmentToSearchResultsFragment(
-                    searchHistory.query
+                    searchHistoryVo.query
                 )
                 findNavController().navigate(args)
             }
         })
+
         binding.searchHistoryList.adapter = searchHistoryAdapter
 
-        sharedPrefs =
-            requireContext().getSharedPreferences(SEARCH_HISTORY_PREFERENCES, Context.MODE_PRIVATE)
-
-        val searchHistoryPrefs = sharedPrefs.getString(SEARCH_HISTORY_KEY, null)?.split(",")
-
-        if (!searchHistoryPrefs.isNullOrEmpty()) {
-            searchHistoryList = searchHistoryPrefs.map { SearchHistory(it) }.toMutableList()
-            searchHistoryAdapter.searchHistoryList = searchHistoryList
-        } else {
-            searchHistoryList = mutableListOf()
+        viewModel.searchHistory.observe(viewLifecycleOwner) { history ->
+            searchHistoryAdapter.searchHistoryList = history
         }
+
+        viewModel.loadSearchHistory()
 
         searchEditText = binding.searchEt
 
@@ -87,23 +75,12 @@ class SearchFragment : Fragment() {
 
             override fun afterTextChanged(text: Editable?) {
                 binding.searchButton.setOnClickListener {
+                    val query = text.toString()
+                    viewModel.updateSearchHistory(query)
 
                     val args =
-                        SearchFragmentDirections.actionSearchFragmentToSearchResultsFragment(text.toString())
+                        SearchFragmentDirections.actionSearchFragmentToSearchResultsFragment(query)
                     findNavController().navigate(args)
-
-                    if (text.toString().isNotEmpty()) {
-                        val query = text.toString()
-                        searchHistoryList.add(0, SearchHistory(query))
-                        if (searchHistoryList.size > 10) {
-                            searchHistoryList.removeAt(searchHistoryList.lastIndex)
-                        }
-
-                        sharedPrefs.edit().putString(
-                            SEARCH_HISTORY_KEY,
-                            searchHistoryList.joinToString(separator = ",") { it.query }
-                        ).apply()
-                    }
                 }
             }
         })
@@ -119,15 +96,12 @@ class SearchFragment : Fragment() {
         }
 
         binding.clearSearchHistoryButton.setOnClickListener {
-            sharedPrefs.edit().clear().apply()
-            searchHistoryAdapter.searchHistoryList = emptyList()
+            viewModel.clearSearchHistory()
         }
 
         binding.backIcon.setOnClickListener {
             Navigation.findNavController(view).popBackStack()
         }
     }
+
 }
-
-
-

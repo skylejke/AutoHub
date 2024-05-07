@@ -40,10 +40,6 @@ class MainActivity : AppCompatActivity() {
         const val THEME_PREFERENCES = "ThemePrefs"
 
         const val DARK_THEME_ENABLED_KEY = "isDarkThemeEnabled"
-
-        const val SEARCH_HISTORY_PREFERENCES = "SearchHistoryPrefs"
-
-        const val SEARCH_HISTORY_KEY = "searchHistory"
     }
 
 }
