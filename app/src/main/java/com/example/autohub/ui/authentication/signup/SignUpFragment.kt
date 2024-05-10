@@ -1,24 +1,27 @@
-package com.example.autohub.ui.authentication
+package com.example.autohub.ui.authentication.signup
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
-import com.example.autohub.databinding.FragmentSignInBinding
+import com.example.autohub.databinding.FragmentSignUpBinding
 import com.example.autohub.ui.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 
-class SignInFragment : Fragment() {
+class SignUpFragment : Fragment() {
 
-
-    private lateinit var binding: FragmentSignInBinding
+    private lateinit var binding: FragmentSignUpBinding
 
     private lateinit var firebaseAuth: FirebaseAuth
+
+    private val signUpViewModel by viewModels<SignUpViewModel> { SignUpViewModelFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,27 +30,28 @@ class SignInFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser != null) {
-            findNavController().navigate(R.id.action_signUpFragment_to_mainFragment)
+
+        signUpViewModel.getCurrentUser().observe(viewLifecycleOwner){user->
+            if (user != null){
+                findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
+            }
         }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).hideBottomNavigation()
-        binding = FragmentSignInBinding.inflate(layoutInflater)
+        binding = FragmentSignUpBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.signInBtn.setOnClickListener {
+
+        binding.signUpBtn.setOnClickListener {
 
             val email = binding.emailEt.text.toString()
             val password = binding.passwordEt.text.toString()
@@ -62,19 +66,22 @@ class SignInFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.action_signInFragment_to_mainFragment)
-                    } else {
-                        Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT).show()
-                    }
+            signUpViewModel.signUpUser(email, password).observe(viewLifecycleOwner) { success ->
+                Log.e("JOPA", success.toString())
+                if (success) {
+                    Toast.makeText(requireContext(), "Account created", Toast.LENGTH_SHORT)
+                        .show()
+                    findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
+
+                } else {
+                    Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT)
+                        .show()
                 }
+            }
         }
 
-        binding.signUpBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+        binding.signInBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
         }
     }
 

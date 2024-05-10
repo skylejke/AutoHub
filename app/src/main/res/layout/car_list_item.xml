@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:background="@drawable/rounded_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +19,7 @@
             android:id="@+id/car_photo"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:padding="5dp"
+            android:padding="10dp"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,18 +29,18 @@
 
         <TextView
             android:id="@+id/car_title"
-            style="@style/BigTextViewStyle"
+            style="@style/MediumTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
+            android:maxLines="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/car_photo"
             tools:text="BMW M8 Competition, 2022" />
 
         <TextView
             android:id="@+id/car_price"
-            style="@style/BigTextViewStyle"
+            style="@style/MediumTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -49,16 +49,16 @@
             app:layout_constraintTop_toBottomOf="@id/car_title"
             tools:text="17 000 000 ₽" />
 
-        <ImageButton
-            android:id="@+id/favourite_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/favorite_border"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/car_title"
-            tools:ignore="ContentDescription" />
+        <!--        <ImageButton-->
+        <!--            android:id="@+id/favourite_button"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginEnd="5dp"-->
+        <!--            android:background="@drawable/favorite_border"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/car_title"-->
+        <!--            tools:ignore="ContentDescription" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

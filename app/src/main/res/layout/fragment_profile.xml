@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/profile"
             style="@style/TitleTextViewStyle"
-            android:text="@string/profile_ru"
+            android:text="@string/profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -79,7 +79,7 @@
                 <TextView
                     android:id="@+id/about"
                     style="@style/SmallTextViewStyle"
-                    android:text="@string/about_ru"
+                    android:text="@string/about"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,7 +108,7 @@
             <TextView
                 android:id="@+id/notifications"
                 style="@style/SmallTextViewStyle"
-                android:text="@string/notifications_ru"
+                android:text="@string/notifications"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/notifications_switch"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +132,7 @@
             <TextView
                 android:id="@+id/darkTheme"
                 style="@style/SmallTextViewStyle"
-                android:text="@string/darkTheme_ru"
+                android:text="@string/darkTheme"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/darkTheme_switch"
                 app:layout_constraintStart_toStartOf="parent"
@@ -159,7 +159,7 @@
                 android:id="@+id/aboutApp"
                 style="@style/SmallTextViewStyle"
                 android:layout_marginTop="10dp"
-                android:text="@string/aboutApp_ru"
+                android:text="@string/aboutApp"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line3" />

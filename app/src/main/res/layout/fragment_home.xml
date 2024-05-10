@@ -61,7 +61,7 @@
             android:id="@+id/brand"
             style="@style/MediumTextViewStyle"
             android:layout_marginStart="10dp"
-            android:text="@string/brand_ru"
+            android:text="@string/brand"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/car_icon"
             app:layout_constraintTop_toTopOf="parent" />
@@ -79,6 +79,15 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/relevent_offers_tv"
+        style="@style/BigTextViewStyle"
+        android:layout_marginTop="10dp"
+        android:text="@string/relevant_offers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_container" />
+
     <ImageButton
         android:id="@+id/sort_icon"
         android:layout_width="wrap_content"
@@ -86,7 +95,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/swap_vert"
         app:layout_constraintEnd_toEndOf="@id/search_container"
-        app:layout_constraintTop_toBottomOf="@id/search_container"
+        app:layout_constraintTop_toBottomOf="@id/relevent_offers_tv"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -115,6 +124,7 @@
         android:id="@+id/carList"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

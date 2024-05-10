@@ -1,4 +1,4 @@
-package com.example.autohub.ui.home
+package com.example.autohub.ui.favourite
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,31 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.autohub.R
-import com.example.autohub.databinding.FragmentHomeBinding
+import com.example.autohub.databinding.FragmentFavouriteBinding
 import com.example.autohub.domain.model.CarVo
-import com.example.autohub.ui.MainActivity
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
-import kotlinx.coroutines.launch
 
-class HomeFragment : Fragment(), ScreenSwitchable {
+class FavouriteFragment : Fragment(), ScreenSwitchable {
 
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentFavouriteBinding
 
     private lateinit var carAdapter: CarAdapter
 
-    private val homeViewModel by viewModels<HomeViewModel> { HomeViewModelFactory(this) }
+    private val favouriteViewModel by viewModels<FavouriteViewModel> { FavouriteViewModelFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as MainActivity).showBottomNavigation()
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentFavouriteBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -39,35 +34,28 @@ class HomeFragment : Fragment(), ScreenSwitchable {
 
         carAdapter = CarAdapter(object : CarAdapter.CarClickbale {
             override fun onCarClick(carVo: CarVo) {
-                val args = HomeFragmentDirections.actionHomeFragmentToCarDetailsFragment(carVo)
+                val args = FavouriteFragmentDirections.actionFavouriteFragmentToCarDetailsFragment(carVo)
                 findNavController().navigate(args)
             }
         })
 
-        binding.carList.adapter = carAdapter
+        binding.favouriteList.adapter = carAdapter
 
-        homeViewModel.carsLiveData.observe(viewLifecycleOwner) { records ->
-            carAdapter.carList = records.list
-            binding.carCounter.text = if (records.list.isEmpty()) {
-                "0 объявлений"
-            } else {
+        favouriteViewModel.carsLiveData.observe(viewLifecycleOwner) {
+            showProgressBar()
+            try {
+                carAdapter.carList = it
+                if (carAdapter.carList.isEmpty()) {
+                    showNoData()
+                } else {
+                    showData()
+                    hideError()
+                }
+            } catch (e: Exception) {
+                showError()
+            } finally {
                 hideProgressBar()
-                "${records.list.size} объявлений"
             }
-        }
-
-        lifecycleScope.launch {
-            homeViewModel.get()
-        }
-
-        binding.noConnectionPlaceHolder.retryButton.setOnClickListener {
-            lifecycleScope.launch {
-                homeViewModel.get()
-            }
-        }
-
-        binding.searchButton.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
     }
 
@@ -76,7 +64,7 @@ class HomeFragment : Fragment(), ScreenSwitchable {
     }
 
     override fun showNoData() {
-        binding.noDataPlaceHolder.root.visibility = View.VISIBLE
+        binding.emptyFavouritePlaceHolder.root.visibility = View.VISIBLE
     }
 
     override fun hideError() {
@@ -84,7 +72,7 @@ class HomeFragment : Fragment(), ScreenSwitchable {
     }
 
     override fun showData() {
-        binding.noDataPlaceHolder.root.visibility = View.GONE
+        binding.emptyFavouritePlaceHolder.root.visibility = View.GONE
     }
 
     override fun showProgressBar() {
@@ -95,5 +83,4 @@ class HomeFragment : Fragment(), ScreenSwitchable {
     override fun hideProgressBar() {
         binding.progressBarPlaceHolder.root.visibility = View.GONE
     }
-
 }

@@ -6,23 +6,27 @@
     app:startDestination="@id/signUpFragment">
 
     <fragment
-        android:id="@+id/mainFragment"
+        android:id="@+id/homeFragment"
         android:name="com.example.autohub.ui.home.HomeFragment"
-        android:label="MainFragment"
+        android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_mainFragment_to_searchFragment"
+            android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_carFragment"
-            app:destination="@id/carFragment" />
+            android:id="@+id/action_homeFragment_to_carDetailsFragment"
+            app:destination="@id/carDetailsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="com.example.autohub.ui.FavouriteFragment"
+        android:name="com.example.autohub.ui.favourite.FavouriteFragment"
         android:label="FavouriteFragment"
-        tools:layout="@layout/fragment_favourite" />
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/action_favouriteFragment_to_carDetailsFragment"
+            app:destination="@id/carDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
@@ -54,14 +58,14 @@
             android:defaultValue=''
             app:argType="string" />
         <action
-            android:id="@+id/action_searchResultsFragment_to_carFragment"
-            app:destination="@id/carFragment" />
+            android:id="@+id/action_searchResultsFragment_to_carDetailsFragment"
+            app:destination="@id/carDetailsFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/carFragment"
-        android:name="com.example.autohub.ui.CarFragment"
-        android:label="CarFragment"
+        android:id="@+id/carDetailsFragment"
+        android:name="com.example.autohub.ui.cardetails.CarDetailsFragment"
+        android:label="CarDetailsFragment"
         tools:layout="@layout/fragment_car">
         <argument
             android:name="car"
@@ -70,27 +74,27 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.autohub.ui.authentication.SignInFragment"
+        android:name="com.example.autohub.ui.authentication.signin.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in" >
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
         <action
-            android:id="@+id/action_signInFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_signInFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.autohub.ui.authentication.SignUpFragment"
+        android:name="com.example.autohub.ui.authentication.signup.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
         <action
-            android:id="@+id/action_signUpFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_signUpFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

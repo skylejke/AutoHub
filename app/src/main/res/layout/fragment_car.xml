@@ -41,6 +41,7 @@
             <TextView
                 android:id="@+id/car_info"
                 style="@style/BigTextViewStyle"
+                android:textSize="22sp"
                 android:layout_marginTop="20dp"
                 android:maxLines="1"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,14 +95,14 @@
             <TextView
                 android:id="@+id/characteristics"
                 style="@style/MediumTextViewStyle"
-                android:text="@string/characteristics_ru"
+                android:text="@string/characteristics"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/year_title"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="@string/year_of_issue_ru"
+                android:text="@string/year_of_issue"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/characteristics" />
 
@@ -116,7 +117,7 @@
             <TextView
                 android:id="@+id/mileage_title"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="@string/mileage_ru"
+                android:text="@string/mileage"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/year_title" />
 
@@ -131,7 +132,7 @@
             <TextView
                 android:id="@+id/body_title"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="@string/body_ru"
+                android:text="@string/body"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mileage_title" />
 
@@ -145,7 +146,7 @@
             <TextView
                 android:id="@+id/color_title"
                 style="@style/CharacteristicsTextViewStyle"
-                android:text="@string/color_ru"
+                android:text="@string/color"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/body_title" />
 
@@ -170,42 +171,42 @@
                 app:layout_constraintTop_toBottomOf="@id/color_title"
                 tools:text="ZPBUA1ZL9KLA00848" />
 
-            <Button
-                android:id="@+id/buy_now_btn"
-                style="@style/ButtonStyle"
-                android:layout_height="70dp"
-                android:layout_marginTop="20sp"
-                android:backgroundTint="@color/buttonColor"
-                android:text="@string/buy_now_ru"
-                android:textColor="@color/boxColor"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/vin_title" />
+<!--            <Button-->
+<!--                android:id="@+id/buy_now_btn"-->
+<!--                style="@style/ButtonStyle"-->
+<!--                android:layout_height="70dp"-->
+<!--                android:layout_marginTop="20sp"-->
+<!--                android:backgroundTint="@color/buttonColor"-->
+<!--                android:text="@string/buy_now_ru"-->
+<!--                android:textColor="@color/boxColor"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/vin_title" />-->
 
-            <LinearLayout
-                android:id="@+id/buttons_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/buy_now_btn">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/buttons_container"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="20sp"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/buy_now_btn">-->
 
-                <Button
-                    style="@style/SmallButtonStyle"
-                    android:layout_marginHorizontal="8dp"
-                    android:backgroundTint="@color/green"
-                    android:text="@string/call_ru"
-                    android:textColor="@color/lightPink" />
+<!--                <Button-->
+<!--                    style="@style/SmallButtonStyle"-->
+<!--                    android:layout_marginHorizontal="8dp"-->
+<!--                    android:backgroundTint="@color/green"-->
+<!--                    android:text="@string/call_ru"-->
+<!--                    android:textColor="@color/lightPink" />-->
 
-                <Button
-                    style="@style/SmallButtonStyle"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:backgroundTint="@color/darkYellow"
-                    android:text="@string/sign_up_for_test_drive_ru"
-                    android:textColor="@color/lightPink" />
-            </LinearLayout>
+<!--                <Button-->
+<!--                    style="@style/SmallButtonStyle"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginHorizontal="8dp"-->
+<!--                    android:backgroundTint="@color/darkYellow"-->
+<!--                    android:text="@string/sign_up_for_test_drive_ru"-->
+<!--                    android:textColor="@color/lightPink" />-->
+<!--            </LinearLayout>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,7 +45,7 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
         carAdapter = CarAdapter(object : CarAdapter.CarClickbale {
             override fun onCarClick(carVo: CarVo) {
                 val args =
-                    SearchResultsFragmentDirections.actionSearchResultsFragmentToCarFragment(carVo)
+                    SearchResultsFragmentDirections.actionSearchResultsFragmentToCarDetailsFragment(carVo)
                 findNavController().navigate(args)
             }
         })
