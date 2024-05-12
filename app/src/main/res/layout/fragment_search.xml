@@ -8,13 +8,6 @@
     android:padding="16dp"
     tools:context=".ui.search.SearchFragment">
 
-    <ImageButton
-        android:id="@+id/back_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/keyboard_backspace"
-        tools:ignore="ContentDescription" />
-
     <EditText
         android:id="@+id/search_et"
         style="@style/EditTextStyle"

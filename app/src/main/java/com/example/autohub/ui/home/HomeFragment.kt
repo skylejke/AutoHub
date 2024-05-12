@@ -66,8 +66,8 @@ class HomeFragment : Fragment(), ScreenSwitchable {
             }
         }
 
-        binding.searchButton.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        binding.settingsButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
         }
     }
 

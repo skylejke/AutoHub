@@ -46,6 +46,7 @@
     <string name="logout">Logout</string>
     <string name="relevant_offers">Relevant offers</string>
     <string name="favourites_list_is_empty">Favourites list is empty</string>
+    <string name="settings">Settings</string>
 
     <string-array name="makes">
         <item>Acura</item>

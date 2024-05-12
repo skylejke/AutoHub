@@ -9,22 +9,22 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
 import com.example.autohub.app.App
-import com.example.autohub.databinding.FragmentProfileBinding
+import com.example.autohub.databinding.FragmentSettingsBinding
 import com.example.autohub.ui.MainActivity.Companion.DARK_THEME_ENABLED_KEY
 import com.example.autohub.ui.MainActivity.Companion.THEME_PREFERENCES
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class ProfileFragment : Fragment() {
+class SettingsFragment : Fragment() {
 
-    private lateinit var binding: FragmentProfileBinding
+    private lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProfileBinding.inflate(layoutInflater)
+        binding = FragmentSettingsBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -44,7 +44,11 @@ class ProfileFragment : Fragment() {
 
         binding.logoutButton.setOnClickListener {
             Firebase.auth.signOut()
-            findNavController().navigate(R.id.action_profileFragment_to_signUpFragment)
+            findNavController().navigate(R.id.action_settingsFragment_to_signUpFragment)
+        }
+
+        binding.backIcon.setOnClickListener{
+            findNavController().popBackStack()
         }
     }
 }
