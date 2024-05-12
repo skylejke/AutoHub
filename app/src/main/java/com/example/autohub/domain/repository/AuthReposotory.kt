@@ -6,4 +6,5 @@ interface AuthReposotory {
     fun signUp(email: String, password: String, callback: (Boolean) -> Unit)
     fun signIn(email: String, password: String, callback: (Boolean) -> Unit)
     fun getCurrentUser() : FirebaseUser?
+    fun signOut()
 }

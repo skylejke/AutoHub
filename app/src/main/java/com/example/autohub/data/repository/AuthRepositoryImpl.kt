@@ -16,4 +16,8 @@ class AuthRepositoryImpl(private val authStorage: AuthStorage) : AuthReposotory 
     override fun getCurrentUser(): FirebaseUser? {
         return authStorage.getCurrentUser()
     }
+
+    override fun signOut() {
+        authStorage.signOut()
+    }
 }

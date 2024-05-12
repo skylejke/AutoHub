@@ -2,6 +2,8 @@ package com.example.autohub.data.storage
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class AuthStorageImpl : AuthStorage {
 
@@ -31,5 +33,9 @@ class AuthStorageImpl : AuthStorage {
 
     override fun getCurrentUser(): FirebaseUser? {
         return firebaseAuth.currentUser
+    }
+
+    override fun signOut() {
+        Firebase.auth.signOut()
     }
 }

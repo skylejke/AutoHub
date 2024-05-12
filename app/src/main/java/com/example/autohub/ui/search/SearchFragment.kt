@@ -11,7 +11,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.databinding.FragmentSearchBinding
 import com.example.autohub.domain.model.SearchHistoryVo
@@ -98,10 +97,5 @@ class SearchFragment : Fragment() {
         binding.clearSearchHistoryButton.setOnClickListener {
             viewModel.clearSearchHistory()
         }
-
-        binding.backIcon.setOnClickListener {
-            Navigation.findNavController(view).popBackStack()
-        }
     }
-
 }
