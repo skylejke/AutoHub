@@ -1,4 +1,4 @@
-package com.example.autohub.ui.search
+package com.example.autohub.ui.search.searchresults
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

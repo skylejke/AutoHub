@@ -1,4 +1,4 @@
-package com.example.autohub.ui.search
+package com.example.autohub.ui.search.search
 
 import android.content.Context
 import android.os.Bundle
@@ -22,7 +22,11 @@ class SearchFragment : Fragment() {
     private lateinit var searchEditText: EditText
     private lateinit var searchHistoryAdapter: SearchHistoryAdapter
 
-    private val viewModel: SearchViewModel by viewModels<SearchViewModel> { SearchViewModelFactory(requireContext()) }
+    private val viewModel: SearchViewModel by viewModels<SearchViewModel> {
+        SearchViewModelFactory(
+            requireContext()
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,6 +79,7 @@ class SearchFragment : Fragment() {
             override fun afterTextChanged(text: Editable?) {
                 binding.searchButton.setOnClickListener {
                     val query = text.toString()
+
                     viewModel.updateSearchHistory(query)
 
                     val args =

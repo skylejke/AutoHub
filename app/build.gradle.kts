@@ -4,6 +4,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
+    id("kotlin-kapt")
 }
 
 android {
@@ -62,6 +63,9 @@ dependencies {
     implementation("io.coil-kt:coil:1.4.0")
 
     implementation("com.google.firebase:firebase-auth:23.0.0")
+
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.6.1")

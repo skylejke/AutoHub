@@ -1,4 +1,4 @@
-package com.example.autohub.ui.search
+package com.example.autohub.ui.search.searchresults
 
 import android.os.Bundle
 import android.view.LayoutInflater

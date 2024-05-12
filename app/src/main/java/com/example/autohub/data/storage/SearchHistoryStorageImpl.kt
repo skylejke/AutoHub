@@ -1,35 +1,56 @@
 package com.example.autohub.data.storage
 
 import android.content.Context
+import com.example.autohub.data.database.DataBase
 import com.example.autohub.data.storage.model.SearchHistoryDto
-
-
-private const val SEARCH_HISTORY_PREFERENCES = "SearchHistoryPrefs"
-private const val SEARCH_HISTORY_KEY = "searchHistory"
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class SearchHistoryStorageImpl(context: Context) : SearchHistoryStorage {
 
-    private val sharedPreferences =
-        context.getSharedPreferences(SEARCH_HISTORY_PREFERENCES, Context.MODE_PRIVATE)
+    private val database = DataBase.getDataBase(context)
 
     override fun loadSearchHistory(): List<SearchHistoryDto> {
-        val searchHistoryPrefs =
-            sharedPreferences.getString(SEARCH_HISTORY_KEY, null)?.split(",")
-        return searchHistoryPrefs?.map { SearchHistoryDto(it) } ?: emptyList()
+        return runBlocking {
+            withContext(Dispatchers.IO) {
+                database.getDao().getSearchHistory()
+            }
+        }
     }
 
     override fun updateSearchHistory(query: String) {
-        val updatedList = loadSearchHistory().toMutableList()
-        updatedList.add(0, SearchHistoryDto(query))
-        if (updatedList.size > 10) {
-            updatedList.removeAt(updatedList.lastIndex)
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                val searchHistoryDto = SearchHistoryDto(null, query)
+
+                val searchHistory = loadSearchHistory()
+                val updatedList = mutableListOf<SearchHistoryDto>()
+
+                updatedList.add(0, searchHistoryDto)
+
+                updatedList.addAll(searchHistory)
+
+                if (updatedList.size > 10) {
+                    updatedList.subList(10, updatedList.size).clear()
+                }
+
+                database.getDao().clearSearchHistory()
+
+                updatedList.forEach { item ->
+                    database.getDao().insertSearchHistoryItem(item)
+                }
+            }
         }
-        sharedPreferences.edit().putString(
-            SEARCH_HISTORY_KEY,
-            updatedList.joinToString(separator = ",") { it.query }).apply()
     }
 
+
     override fun clearSearchHistory() {
-        sharedPreferences.edit().clear().apply()
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                database.getDao().clearSearchHistory()
+            }
+        }
     }
+
 }
