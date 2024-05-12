@@ -1,6 +1,5 @@
 package com.example.autohub.data.storage
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.autohub.data.api.RetrofitCarInstance
@@ -28,7 +27,6 @@ class CarStorageImpl : CarStorage {
             .collection("favourite")
             .addSnapshotListener { value, error ->
                 if (error != null) {
-                    Log.e("JOPA", error.toString())
                     return@addSnapshotListener
                 }
                 favouriteList = value!!.documents.map { it.toObject(CarDto::class.java)!! }

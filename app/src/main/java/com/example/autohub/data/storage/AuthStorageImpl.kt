@@ -29,7 +29,7 @@ class AuthStorageImpl : AuthStorage {
             }
     }
 
-    override fun getCurrentUser(): FirebaseUser {
-        return firebaseAuth.currentUser!!
+    override fun getCurrentUser(): FirebaseUser? {
+        return firebaseAuth.currentUser
     }
 }

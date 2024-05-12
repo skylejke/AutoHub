@@ -5,4 +5,6 @@ import com.example.autohub.domain.model.CarVo
 
 interface CarDetailsRepository {
     fun checkIfCarIsFavoutrite(carVo: CarVo):LiveData<Boolean>
+    fun addToFavourite(id: String, carMap: HashMap<String, Any>)
+    fun deleteFromFavourite(id: String)
 }

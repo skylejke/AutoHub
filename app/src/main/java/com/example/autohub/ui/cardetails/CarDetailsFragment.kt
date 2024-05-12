@@ -1,7 +1,6 @@
 package com.example.autohub.ui.cardetails
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,6 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentCarBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 
 
 class CarDetailsFragment : Fragment() {
@@ -22,8 +19,6 @@ class CarDetailsFragment : Fragment() {
     private lateinit var binding: FragmentCarBinding
 
     private val args: CarDetailsFragmentArgs by navArgs()
-
-    private val dataBase = FirebaseFirestore.getInstance()
 
     private val carDetailsViewModel by viewModels<CarDetailsViewModel> { CarDetailsViewModelFactory() }
 
@@ -69,44 +64,25 @@ class CarDetailsFragment : Fragment() {
 
         var isFavorite = false
 
-        carDetailsViewModel.checkIfCarIsFavoutrite(args.car).observe(viewLifecycleOwner) { isInFavouriteList ->
-            isFavorite = isInFavouriteList
-            Log.e("POPA", isInFavouriteList.toString())
-            if (isFavorite) {
-                binding.favIcon.setBackgroundResource(R.drawable.favorite)
-            } else {
-                binding.favIcon.setBackgroundResource(R.drawable.favorite_border)
+        carDetailsViewModel.checkIfCarIsFavoutrite(args.car)
+            .observe(viewLifecycleOwner) { isInFavouriteList ->
+                isFavorite = isInFavouriteList
+                if (isFavorite) {
+                    binding.favIcon.setBackgroundResource(R.drawable.favorite)
+                } else {
+                    binding.favIcon.setBackgroundResource(R.drawable.favorite_border)
+                }
             }
-        }
-
-//        dataBase.collection("users")
-//            .document(FirebaseAuth.getInstance().currentUser!!.uid)
-//            .collection("favourite")
-//            .addSnapshotListener { value, error ->
-//                if (error != null) {
-//                    return@addSnapshotListener
-//                }
-//                val favouriteList = value!!.documents.map { it.toObject(CarVo::class.java)!! }
-//                if (favouriteList.contains(args.car)) {
-//                    binding.favIcon.setBackgroundResource(R.drawable.favorite)
-//                    isFavorite = true
-//                } else {
-//                    binding.favIcon.setBackgroundResource(R.drawable.favorite_border)
-//                    isFavorite = false
-//                }
-//            }
 
         binding.favIcon.setOnClickListener {
             isFavorite = !isFavorite
             if (isFavorite) {
-                dataBase.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid)
-                    .collection("favourite").document(args.car.id.toString()).set(carMap)
+                carDetailsViewModel.addToFavourite(args.car.id.toString(), carMap)
                 binding.favIcon.setBackgroundResource(R.drawable.favorite)
                 Toast.makeText(requireContext(), "Added car to favourite", Toast.LENGTH_SHORT)
                     .show()
             } else {
-                dataBase.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid)
-                    .collection("favourite").document(args.car.id.toString()).delete()
+                carDetailsViewModel.deleteFromFavourite(args.car.id.toString())
                 binding.favIcon.setBackgroundResource(R.drawable.favorite_border)
                 Toast.makeText(requireContext(), "Removed car from favourite", Toast.LENGTH_SHORT)
                     .show()

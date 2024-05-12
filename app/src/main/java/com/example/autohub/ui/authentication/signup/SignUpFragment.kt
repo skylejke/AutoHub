@@ -1,7 +1,6 @@
 package com.example.autohub.ui.authentication.signup
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,27 +11,18 @@ import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentSignUpBinding
 import com.example.autohub.ui.MainActivity
-import com.google.firebase.auth.FirebaseAuth
 
 
 class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
 
-    private lateinit var firebaseAuth: FirebaseAuth
-
     private val signUpViewModel by viewModels<SignUpViewModel> { SignUpViewModelFactory() }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        firebaseAuth = FirebaseAuth.getInstance()
-    }
 
     override fun onStart() {
         super.onStart()
-
-        signUpViewModel.getCurrentUser().observe(viewLifecycleOwner){user->
-            if (user != null){
+        signUpViewModel.getCurrentUser().observe(viewLifecycleOwner) { user ->
+            if (user != null) {
                 findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
             }
         }
@@ -67,12 +57,10 @@ class SignUpFragment : Fragment() {
             }
 
             signUpViewModel.signUpUser(email, password).observe(viewLifecycleOwner) { success ->
-                Log.e("JOPA", success.toString())
                 if (success) {
                     Toast.makeText(requireContext(), "Account created", Toast.LENGTH_SHORT)
                         .show()
                     findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
-
                 } else {
                     Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT)
                         .show()

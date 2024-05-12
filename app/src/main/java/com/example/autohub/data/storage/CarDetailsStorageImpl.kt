@@ -25,4 +25,14 @@ class CarDetailsStorageImpl : CarDetailsStorage {
             }
         return isFavouriteLiveData
     }
+
+    override fun addToFavourite(id: String, carMap: HashMap<String, Any>) {
+        dataBase.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .collection("favourite").document(id).set(carMap)
+    }
+
+    override fun deleteFromFavourite(id: String) {
+        dataBase.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .collection("favourite").document(id).delete()
+    }
 }

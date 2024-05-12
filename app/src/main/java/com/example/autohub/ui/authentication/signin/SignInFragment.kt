@@ -21,19 +21,6 @@ class SignInFragment : Fragment() {
 
     private val signInViewModel by viewModels<SignInViewModel> { SignInViewModelFactory() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        signInViewModel.getCurrentUser().observe(viewLifecycleOwner) { user ->
-            if (user != null) {
-                findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
-            }
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

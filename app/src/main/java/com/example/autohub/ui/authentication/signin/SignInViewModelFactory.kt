@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.autohub.data.repository.AuthRepositoryImpl
 import com.example.autohub.data.storage.AuthStorageImpl
-import com.example.autohub.domain.usecase.GetCurrentUserUseCase
 import com.example.autohub.domain.usecase.SignInUseCase
 
 @Suppress("UNCHECKED_CAST")
@@ -16,12 +15,7 @@ class SignInViewModelFactory : ViewModelProvider.Factory {
 
     private val signInUseCase by lazy { SignInUseCase(authReposotory) }
 
-    private val getCurrentUserUseCase by lazy { GetCurrentUserUseCase(authReposotory) }
-
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return SignInViewModel(
-            signInUseCase = signInUseCase,
-            getCurrentUserUseCase = getCurrentUserUseCase
-        ) as T
+        return SignInViewModel(signInUseCase = signInUseCase) as T
     }
 }

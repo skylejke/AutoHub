@@ -13,23 +13,12 @@ class CarDetailsRepositoryImpl(private val carDetailsStorage: CarDetailsStorage)
         return carDetailsStorage.checkIfCarIsFavoutrite(mapToStorage(carVo))
     }
 
-    private fun mapToDomain(carDto: CarDto): CarVo {
-        return CarVo(
-            bodyType = carDto.bodyType,
-            condition = carDto.condition,
-            displayColor = carDto.displayColor,
-            id = carDto.id,
-            make = carDto.make,
-            mileage = carDto.mileage,
-            mileageUnformatted = carDto.mileageUnformatted,
-            model = carDto.model,
-            photoUrls = carDto.photoUrls,
-            price = carDto.price,
-            priceUnformatted = carDto.priceUnformatted,
-            primaryPhotoUrl = carDto.primaryPhotoUrl,
-            vin = carDto.vin,
-            year = carDto.year
-        )
+    override fun addToFavourite(id: String, carMap: HashMap<String, Any>) {
+        carDetailsStorage.addToFavourite(id, carMap)
+    }
+
+    override fun deleteFromFavourite(id: String) {
+        carDetailsStorage.deleteFromFavourite(id)
     }
 
     private fun mapToStorage(carVo: CarVo): CarDto {
