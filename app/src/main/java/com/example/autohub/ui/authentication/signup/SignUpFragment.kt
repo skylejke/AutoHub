@@ -6,18 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentSignUpBinding
 import com.example.autohub.ui.MainActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
 
-    private val signUpViewModel by viewModels<SignUpViewModel> { SignUpViewModelFactory() }
+    private val signUpViewModel by viewModel<SignUpViewModel>()
 
     override fun onStart() {
         super.onStart()

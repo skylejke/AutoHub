@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -16,6 +15,8 @@ import com.example.autohub.domain.model.CarVo
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class SearchResultsFragment : Fragment(), ScreenSwitchable {
 
@@ -25,11 +26,7 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
 
     private val args: SearchResultsFragmentArgs by navArgs()
 
-    private val searchResultsViewModel by viewModels<SearchResultsViewModel> {
-        SearchResultsViewModelFactory(
-            this
-        )
-    }
+    private val searchResultsViewModel by viewModel<SearchResultsViewModel> { parametersOf(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +42,9 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
         carAdapter = CarAdapter(object : CarAdapter.CarClickbale {
             override fun onCarClick(carVo: CarVo) {
                 val args =
-                    SearchResultsFragmentDirections.actionSearchResultsFragmentToCarDetailsFragment(carVo)
+                    SearchResultsFragmentDirections.actionSearchResultsFragmentToCarDetailsFragment(
+                        carVo
+                    )
                 findNavController().navigate(args)
             }
         })

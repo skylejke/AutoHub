@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.databinding.FragmentFavouriteBinding
 import com.example.autohub.domain.model.CarVo
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavouriteFragment : Fragment(), ScreenSwitchable {
 
@@ -18,7 +18,7 @@ class FavouriteFragment : Fragment(), ScreenSwitchable {
 
     private lateinit var carAdapter: CarAdapter
 
-    private val favouriteViewModel by viewModels<FavouriteViewModel> { FavouriteViewModelFactory() }
+    private val favouriteViewModel by viewModel<FavouriteViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +34,8 @@ class FavouriteFragment : Fragment(), ScreenSwitchable {
 
         carAdapter = CarAdapter(object : CarAdapter.CarClickbale {
             override fun onCarClick(carVo: CarVo) {
-                val args = FavouriteFragmentDirections.actionFavouriteFragmentToCarDetailsFragment(carVo)
+                val args =
+                    FavouriteFragmentDirections.actionFavouriteFragmentToCarDetailsFragment(carVo)
                 findNavController().navigate(args)
             }
         })

@@ -10,11 +10,11 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.databinding.FragmentSearchBinding
 import com.example.autohub.domain.model.SearchHistoryVo
 import com.example.autohub.ui.adapters.SearchHistoryAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
 
@@ -22,11 +22,7 @@ class SearchFragment : Fragment() {
     private lateinit var searchEditText: EditText
     private lateinit var searchHistoryAdapter: SearchHistoryAdapter
 
-    private val viewModel: SearchViewModel by viewModels<SearchViewModel> {
-        SearchViewModelFactory(
-            requireContext()
-        )
-    }
+    private val viewModel by viewModel<SearchViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

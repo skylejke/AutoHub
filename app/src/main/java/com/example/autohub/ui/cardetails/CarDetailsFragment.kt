@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentCarBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class CarDetailsFragment : Fragment() {
@@ -20,7 +20,7 @@ class CarDetailsFragment : Fragment() {
 
     private val args: CarDetailsFragmentArgs by navArgs()
 
-    private val carDetailsViewModel by viewModels<CarDetailsViewModel> { CarDetailsViewModelFactory() }
+    private val carDetailsViewModel by viewModel<CarDetailsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

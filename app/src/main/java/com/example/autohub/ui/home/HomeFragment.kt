@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
@@ -17,6 +16,8 @@ import com.example.autohub.ui.MainActivity
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class HomeFragment : Fragment(), ScreenSwitchable {
 
@@ -24,7 +25,7 @@ class HomeFragment : Fragment(), ScreenSwitchable {
 
     private lateinit var carAdapter: CarAdapter
 
-    private val homeViewModel by viewModels<HomeViewModel> { HomeViewModelFactory(this) }
+    private val homeViewModel by viewModel<HomeViewModel> { parametersOf(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +50,6 @@ class HomeFragment : Fragment(), ScreenSwitchable {
 
         binding.sortSpinner.adapter = sortAdapter
 
-
         binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -60,12 +60,12 @@ class HomeFragment : Fragment(), ScreenSwitchable {
                 if (view != null) {
                     val selectedSortFilter =
                         when (parent.getItemAtPosition(position).toString()) {
-                            "By mileage min" -> "mileage:asc"
-                            "By price min" -> "price:asc"
-                            "By price max" -> "price:desc"
+                            "mileage min" -> "mileage:asc"
+                            "price min" -> "price:asc"
+                            "price max" -> "price:desc"
                             else -> "-"
                         }
-
+                    showNoData()
                     if (selectedSortFilter == "-") {
                         lifecycleScope.launch {
                             homeViewModel.get()
@@ -98,10 +98,10 @@ class HomeFragment : Fragment(), ScreenSwitchable {
         homeViewModel.carsLiveData.observe(viewLifecycleOwner) { records ->
             carAdapter.carList = records.list
             binding.carCounter.text = if (records.list.isEmpty()) {
-                "0 объявлений"
+                "0 offers"
             } else {
                 hideProgressBar()
-                "${records.list.size} объявлений"
+                "${records.list.size} offers"
             }
         }
 
@@ -125,7 +125,7 @@ class HomeFragment : Fragment(), ScreenSwitchable {
     }
 
     override fun showNoData() {
-        binding.noDataPlaceHolder.root.visibility = View.VISIBLE
+        binding.carList.visibility = View.GONE
     }
 
     override fun hideError() {
@@ -133,7 +133,7 @@ class HomeFragment : Fragment(), ScreenSwitchable {
     }
 
     override fun showData() {
-        binding.noDataPlaceHolder.root.visibility = View.GONE
+        binding.carList.visibility = View.VISIBLE
     }
 
     override fun showProgressBar() {
@@ -144,5 +144,4 @@ class HomeFragment : Fragment(), ScreenSwitchable {
     override fun hideProgressBar() {
         binding.progressBarPlaceHolder.root.visibility = View.GONE
     }
-
 }

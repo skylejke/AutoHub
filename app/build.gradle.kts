@@ -46,10 +46,12 @@ android {
 }
 
 dependencies {
-    implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
+
     val navVersion = "2.7.7"
     val retrofitVersion = "2.9.0"
     val lifecycleVersion = "2.7.0"
+    val roomVersion = "2.6.1"
+    val koinVersion = "3.5.3"
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
@@ -63,9 +65,17 @@ dependencies {
     implementation("io.coil-kt:coil:1.4.0")
 
     implementation("com.google.firebase:firebase-auth:23.0.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
 
-    implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+
+
+    implementation("io.insert-koin:koin-core:$koinVersion")
+    implementation("io.insert-koin:koin-android:$koinVersion")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+    //test
+    testImplementation("io.insert-koin:koin-test:$koinVersion")
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
