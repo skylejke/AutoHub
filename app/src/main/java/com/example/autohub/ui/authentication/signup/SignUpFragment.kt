@@ -71,6 +71,10 @@ class SignUpFragment : Fragment() {
         binding.signInBtn.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
         }
+
+        binding.continueAsAGuestBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
+        }
     }
 
 }

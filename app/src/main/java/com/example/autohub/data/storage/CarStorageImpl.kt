@@ -21,16 +21,26 @@ class CarStorageImpl : CarStorage {
 
     override fun getFavourites(): LiveData<List<CarDto>> {
         val favouritesListLiveData = MutableLiveData<List<CarDto>>()
-        var favouriteList: List<CarDto>
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if (currentUser == null) {
+            favouritesListLiveData.value = emptyList()
+            return favouritesListLiveData
+        }
+
         FirebaseFirestore.getInstance().collection("users")
-            .document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .document(currentUser.uid)
             .collection("favourite")
             .addSnapshotListener { value, error ->
                 if (error != null) {
                     return@addSnapshotListener
                 }
-                favouriteList = value!!.documents.map { it.toObject(CarDto::class.java)!! }
-                favouritesListLiveData.value = favouriteList
+                if (value != null) {
+                    val favouriteList = value.documents.mapNotNull { it.toObject(CarDto::class.java) }
+                    favouritesListLiveData.value = favouriteList
+                } else {
+                    favouritesListLiveData.value = emptyList()
+                }
             }
         return favouritesListLiveData
     }

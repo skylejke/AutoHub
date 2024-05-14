@@ -33,10 +33,10 @@
             style="@style/SmallTextViewStyle"
             android:layout_marginTop="50dp"
             android:maxLines="1"
+            android:text="@string/log_in_to_get_additional_features"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profile"
-            tools:text="AlexanderPravin1996" />
+            app:layout_constraintTop_toBottomOf="@id/profile" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -102,6 +102,19 @@
             android:backgroundTint="@color/md_theme_light_error"
             android:text="@string/logout"
             android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settings_container" />
+
+        <Button
+            android:id="@+id/logInButton"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/md_theme_light_tertiary"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/settings_container" />
 

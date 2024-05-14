@@ -13,7 +13,6 @@ import com.example.autohub.R
 import com.example.autohub.databinding.FragmentCarBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class CarDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentCarBinding
@@ -34,8 +33,7 @@ class CarDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-            carInfo.text =
-                getString(R.string.car_info, args.car.make, args.car.model, args.car.year)
+            carInfo.text = getString(R.string.car_info, args.car.make, args.car.model, args.car.year)
             year.text = args.car.year.toString()
             price.text = args.car.price
             body.text = args.car.bodyType
@@ -64,28 +62,30 @@ class CarDetailsFragment : Fragment() {
 
         var isFavorite = false
 
-        carDetailsViewModel.checkIfCarIsFavoutrite(args.car)
-            .observe(viewLifecycleOwner) { isInFavouriteList ->
-                isFavorite = isInFavouriteList
-                if (isFavorite) {
-                    binding.favIcon.setBackgroundResource(R.drawable.favorite)
-                } else {
-                    binding.favIcon.setBackgroundResource(R.drawable.favorite_border)
-                }
-            }
+
+        carDetailsViewModel.checkIfCarIsFavoutrite(args.car).observe(viewLifecycleOwner) { isInFavouriteList ->
+            isFavorite = isInFavouriteList ?: false
+            binding.favIcon.setBackgroundResource(if (isFavorite) R.drawable.favorite else R.drawable.favorite_border)
+        }
 
         binding.favIcon.setOnClickListener {
-            isFavorite = !isFavorite
-            if (isFavorite) {
-                carDetailsViewModel.addToFavourite(args.car.id.toString(), carMap)
-                binding.favIcon.setBackgroundResource(R.drawable.favorite)
-                Toast.makeText(requireContext(), "Added car to favourite", Toast.LENGTH_SHORT)
-                    .show()
-            } else {
-                carDetailsViewModel.deleteFromFavourite(args.car.id.toString())
-                binding.favIcon.setBackgroundResource(R.drawable.favorite_border)
-                Toast.makeText(requireContext(), "Removed car from favourite", Toast.LENGTH_SHORT)
-                    .show()
+            carDetailsViewModel.getCurrentUser().observe(viewLifecycleOwner) { user ->
+                if (user != null) {
+                    isFavorite = !isFavorite
+                    if (isFavorite) {
+                        carDetailsViewModel.addToFavourite(args.car.id.toString(), carMap)
+                        binding.favIcon.setBackgroundResource(R.drawable.favorite)
+                        Toast.makeText(requireContext(), "Added car to favourite", Toast.LENGTH_SHORT)
+                            .show()
+                    } else {
+                        carDetailsViewModel.deleteFromFavourite(args.car.id.toString())
+                        binding.favIcon.setBackgroundResource(R.drawable.favorite_border)
+                        Toast.makeText(requireContext(), "Removed car from favourite", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Log in to add cars to your favorites", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -93,5 +93,4 @@ class CarDetailsFragment : Fragment() {
             findNavController().popBackStack()
         }
     }
-
 }

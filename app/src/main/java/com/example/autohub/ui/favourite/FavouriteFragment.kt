@@ -8,11 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.databinding.FragmentFavouriteBinding
 import com.example.autohub.domain.model.CarVo
-import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavouriteFragment : Fragment(), ScreenSwitchable {
+class FavouriteFragment : Fragment() {
 
     private lateinit var binding: FragmentFavouriteBinding
 
@@ -42,46 +41,19 @@ class FavouriteFragment : Fragment(), ScreenSwitchable {
 
         binding.favouriteList.adapter = carAdapter
 
-        favouriteViewModel.carsLiveData.observe(viewLifecycleOwner) {
-            showProgressBar()
-            try {
-                carAdapter.carList = it
-                if (carAdapter.carList.isEmpty()) {
-                    showNoData()
-                } else {
-                    showData()
-                    hideError()
+        favouriteViewModel.getCurrentUser().observe(viewLifecycleOwner) { user ->
+            if (user != null) {
+                favouriteViewModel.carsLiveData.observe(viewLifecycleOwner) { favouriteList ->
+                    carAdapter.carList = favouriteList
+                    if (carAdapter.carList.isEmpty()) {
+                        binding.emptyFavouritePlaceHolder.root.visibility = View.VISIBLE
+                    } else {
+                        binding.emptyFavouritePlaceHolder.root.visibility = View.GONE
+                    }
                 }
-            } catch (e: Exception) {
-                showError()
-            } finally {
-                hideProgressBar()
+            } else {
+                binding.notAuthorizedUserPlaceHolder.root.visibility = View.VISIBLE
             }
         }
-    }
-
-    override fun showError() {
-        binding.noConnectionPlaceHolder.root.visibility = View.VISIBLE
-    }
-
-    override fun showNoData() {
-        binding.emptyFavouritePlaceHolder.root.visibility = View.VISIBLE
-    }
-
-    override fun hideError() {
-        binding.noConnectionPlaceHolder.root.visibility = View.GONE
-    }
-
-    override fun showData() {
-        binding.emptyFavouritePlaceHolder.root.visibility = View.GONE
-    }
-
-    override fun showProgressBar() {
-        binding.noConnectionPlaceHolder.root.visibility = View.GONE
-        binding.progressBarPlaceHolder.root.visibility = View.VISIBLE
-    }
-
-    override fun hideProgressBar() {
-        binding.progressBarPlaceHolder.root.visibility = View.GONE
     }
 }

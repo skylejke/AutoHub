@@ -4,7 +4,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -68,13 +68,12 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
 
     implementation("androidx.room:room-ktx:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
 
 
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("io.insert-koin:koin-android:$koinVersion")
     implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
-    //test
     testImplementation("io.insert-koin:koin-test:$koinVersion")
 
     implementation("androidx.core:core-ktx:1.13.1")

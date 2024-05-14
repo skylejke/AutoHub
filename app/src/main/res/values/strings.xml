@@ -48,6 +48,10 @@
     <string name="favourites_list_is_empty">Favourites list is empty</string>
     <string name="settings">Settings</string>
     <string name="sort_by">Sort by</string>
+    <string name="continue_as_a_guest">Continue as a guest</string>
+    <string name="login">Login</string>
+    <string name="log_in_to_get_additional_features">Log in to get additional features</string>
+    <string name="log_in_to_add_cars_to_your_favorites">Log in to add cars to your favorites</string>
 
     <string-array name="makes">
         <item>Acura</item>

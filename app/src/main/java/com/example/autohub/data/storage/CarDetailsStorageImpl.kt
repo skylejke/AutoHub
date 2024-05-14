@@ -12,8 +12,15 @@ class CarDetailsStorageImpl : CarDetailsStorage {
 
     override fun checkIfCarIsFavoutrite(carDto: CarDto): LiveData<Boolean> {
         val isFavouriteLiveData = MutableLiveData<Boolean>()
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if (currentUser == null) {
+            isFavouriteLiveData.value = false
+            return isFavouriteLiveData
+        }
+
         dataBase.collection("users")
-            .document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .document(currentUser.uid)
             .collection("favourite")
             .addSnapshotListener { value, error ->
                 if (error != null) {
@@ -21,18 +28,28 @@ class CarDetailsStorageImpl : CarDetailsStorage {
                 }
                 value?.documents?.map { it.toObject(CarDto::class.java)!! }?.let {
                     isFavouriteLiveData.value = it.contains(carDto)
+                } ?: run {
+                    isFavouriteLiveData.value = false
                 }
             }
         return isFavouriteLiveData
     }
 
     override fun addToFavourite(id: String, carMap: HashMap<String, Any>) {
-        dataBase.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid)
-            .collection("favourite").document(id).set(carMap)
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if (currentUser != null) {
+            dataBase.collection("users").document(currentUser.uid)
+                .collection("favourite").document(id).set(carMap)
+        }
     }
 
     override fun deleteFromFavourite(id: String) {
-        dataBase.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid)
-            .collection("favourite").document(id).delete()
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if (currentUser != null) {
+            dataBase.collection("users").document(currentUser.uid)
+                .collection("favourite").document(id).delete()
+        }
     }
 }

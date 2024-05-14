@@ -35,6 +35,11 @@
         android:visibility="gone" />
 
     <include
+        android:id="@+id/not_authorized_user_place_holder"
+        layout="@layout/not_authorized_user"
+        android:visibility="gone" />
+
+    <include
         android:id="@+id/no_connection_place_holder"
         layout="@layout/no_connection"
         android:visibility="gone" />

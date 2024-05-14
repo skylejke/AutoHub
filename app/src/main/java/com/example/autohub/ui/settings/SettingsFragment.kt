@@ -38,8 +38,15 @@ class SettingsFragment : Fragment() {
 
         binding.darkThemeSwitch.isChecked = isDarkThemeEnabled
 
-        settingsViewModel.getCurrentUser().observe(viewLifecycleOwner) {
-            binding.username.text = it.email
+        settingsViewModel.getCurrentUser().observe(viewLifecycleOwner) { user ->
+            if (user != null) {
+                binding.username.text = user.email
+                binding.logoutButton.visibility = View.VISIBLE
+                binding.logInButton.visibility = View.GONE
+            } else {
+                binding.logoutButton.visibility = View.GONE
+                binding.logInButton.visibility = View.VISIBLE
+            }
         }
 
         binding.darkThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -54,6 +61,10 @@ class SettingsFragment : Fragment() {
 
         binding.backIcon.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.logInButton.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_signUpFragment)
         }
     }
 }

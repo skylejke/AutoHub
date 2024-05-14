@@ -34,12 +34,13 @@ val appModule = module {
         CarDetailsViewModel(
             checkIfCarIsFavoutriteUseCase = get(),
             addToFavouriteUseCase = get(),
-            deleteFromFavouriteUseCase = get()
+            deleteFromFavouriteUseCase = get(),
+            getCurrentUserUseCase = get()
         )
     }
 
     viewModel<FavouriteViewModel> {
-        FavouriteViewModel(getFavouritesUseCase = get())
+        FavouriteViewModel(getFavouritesUseCase = get(), getCurrentUserUseCase = get())
     }
 
     viewModel<SearchViewModel> {
