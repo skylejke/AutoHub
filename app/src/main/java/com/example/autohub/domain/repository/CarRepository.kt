@@ -10,4 +10,6 @@ interface CarRepository {
     suspend fun searchCarsByMake(make: String): RecordsVo
 
     fun getFavourites(): LiveData<List<CarVo>>
+
+    suspend fun sortCars(sortFilter: String): RecordsVo
 }

@@ -12,18 +12,19 @@ import com.example.autohub.domain.repository.CarRepository
 class CarRepositoryImpl(private val carStorage: CarStorage) : CarRepository {
 
     override suspend fun getCars(): RecordsVo {
-        val cars = carStorage.getCars()
-        return mapToDomain(cars)
+        return mapToDomain(carStorage.getCars())
     }
 
     override suspend fun searchCarsByMake(make: String): RecordsVo {
-        val cars = carStorage.searchCarsByMake(make)
-        return mapToDomain(cars)
+        return mapToDomain(carStorage.searchCarsByMake(make))
     }
 
     override fun getFavourites(): LiveData<List<CarVo>> {
-        val cars = carStorage.getFavourites()
-        return cars.map { mapToDomainFavourites(it) }
+        return carStorage.getFavourites().map { mapToDomainFavourites(it) }
+    }
+
+    override suspend fun sortCars(sortFilter: String): RecordsVo {
+        return mapToDomain(carStorage.sortCars(sortFilter))
     }
 
     private fun mapToDomain(recordsDto: RecordsDto): RecordsVo {

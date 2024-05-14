@@ -10,4 +10,6 @@ interface CarStorage {
     suspend fun searchCarsByMake(make: String): RecordsDto
 
     fun getFavourites(): LiveData<List<CarDto>>
+
+    suspend fun sortCars(sortFilter: String): RecordsDto
 }

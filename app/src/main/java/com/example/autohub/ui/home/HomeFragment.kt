@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -36,6 +38,53 @@ class HomeFragment : Fragment(), ScreenSwitchable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sortAdapter = ArrayAdapter(
+            requireContext(),
+            R.layout.sort_spinner_item,
+            resources.getStringArray(R.array.sort_array)
+        )
+
+        sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        binding.sortSpinner.adapter = sortAdapter
+
+
+        binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (view != null) {
+                    val selectedSortFilter =
+                        when (parent.getItemAtPosition(position).toString()) {
+                            "By mileage min" -> "mileage:asc"
+                            "By price min" -> "price:asc"
+                            "By price max" -> "price:desc"
+                            else -> "-"
+                        }
+
+                    if (selectedSortFilter == "-") {
+                        lifecycleScope.launch {
+                            homeViewModel.get()
+                        }
+                    } else {
+                        lifecycleScope.launch {
+                            homeViewModel.sort(selectedSortFilter)
+                        }
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                lifecycleScope.launch {
+                    homeViewModel.get()
+                }
+            }
+        }
+
 
         carAdapter = CarAdapter(object : CarAdapter.CarClickbale {
             override fun onCarClick(carVo: CarVo) {

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.autohub.data.repository.CarRepositoryImpl
 import com.example.autohub.data.storage.CarStorageImpl
 import com.example.autohub.domain.usecase.GetCarsUseCase
+import com.example.autohub.domain.usecase.SortCarsUseCase
 import com.example.autohub.ui.ScreenSwitchable
 
 @Suppress("UNCHECKED_CAST")
@@ -17,7 +18,13 @@ class HomeViewModelFactory(private val screenSwitchable: ScreenSwitchable) :
 
     private val getCarsUseCase by lazy { GetCarsUseCase(carRepository) }
 
+    private val sortCarsUseCase by lazy { SortCarsUseCase(carRepository) }
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return HomeViewModel(getCarsUseCase = getCarsUseCase, screenSwitchable) as T
+        return HomeViewModel(
+            getCarsUseCase = getCarsUseCase,
+            sortCarsUseCase = sortCarsUseCase,
+            screenSwitchable = screenSwitchable
+        ) as T
     }
 }

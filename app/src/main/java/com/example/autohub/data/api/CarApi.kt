@@ -12,4 +12,7 @@ interface CarApi {
 
     @GET("listings")
     suspend fun getCars(): Response<RecordsDto>
+
+    @GET("listings")
+    suspend fun sortCars(@Query("sort_filter") sortFilter: String): Response<RecordsDto>
 }

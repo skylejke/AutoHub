@@ -34,4 +34,9 @@ class CarStorageImpl : CarStorage {
             }
         return favouritesListLiveData
     }
+
+    override suspend fun sortCars(sortFilter: String): RecordsDto {
+        return RetrofitCarInstance.api.sortCars(sortFilter).body()
+            ?: RecordsDto(list = emptyList())
+    }
 }
