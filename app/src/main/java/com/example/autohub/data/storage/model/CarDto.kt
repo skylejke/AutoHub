@@ -15,16 +15,12 @@ data class CarDto(
     val make: String = "",
     @SerializedName("mileage")
     val mileage: String = "",
-    @SerializedName("mileageUnformatted")
-    val mileageUnformatted: Int = -1,
     @SerializedName("model")
     val model: String = "",
     @SerializedName("photoUrls")
     val photoUrls: List<String> = emptyList(),
     @SerializedName("price")
     val price: String = "",
-    @SerializedName("priceUnformatted")
-    val priceUnformatted: Int = -1,
     @SerializedName("primaryPhotoUrl")
     val primaryPhotoUrl: String = "",
     @SerializedName("vin")

@@ -47,9 +47,11 @@ android {
 
 dependencies {
 
+    implementation("androidx.test:monitor:1.6.1")
+    androidTestImplementation("org.testng:testng:6.9.6")
     val navVersion = "2.7.7"
     val retrofitVersion = "2.9.0"
-    val lifecycleVersion = "2.7.0"
+    val lifecycleVersion = "2.8.0"
     val roomVersion = "2.6.1"
     val koinVersion = "3.5.3"
 
@@ -75,6 +77,24 @@ dependencies {
     implementation("io.insert-koin:koin-android:$koinVersion")
     implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
     testImplementation("io.insert-koin:koin-test:$koinVersion")
+
+    //JUnit dependency for unit tests
+    testImplementation("junit:junit:4.13.2")
+
+    // Mockito dependency for unit tests
+    testImplementation("org.mockito:mockito-core:4.0.0")
+
+    // Optional: Mockito Kotlin extension if you use Kotlin
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+
+    // AndroidX Test - Core library
+    testImplementation("androidx.test:core:1.5.0")
+
+    // AndroidX Test - JUnit support
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+
+    // Optional: AndroidX Test - Mockito Android support (for instrumented tests)
+    androidTestImplementation("org.mockito:mockito-android:4.0.0")
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.6.1")

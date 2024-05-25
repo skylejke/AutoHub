@@ -29,11 +29,9 @@ class CarDetailsRepositoryImpl(private val carDetailsStorage: CarDetailsStorage)
             id = carVo.id,
             make = carVo.make,
             mileage = carVo.mileage,
-            mileageUnformatted = carVo.mileageUnformatted,
             model = carVo.model,
             photoUrls = carVo.photoUrls,
             price = carVo.price,
-            priceUnformatted = carVo.priceUnformatted,
             primaryPhotoUrl = carVo.primaryPhotoUrl,
             vin = carVo.vin,
             year = carVo.year

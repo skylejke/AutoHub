@@ -36,11 +36,9 @@ class CarRepositoryImpl(private val carStorage: CarStorage) : CarRepository {
                 id = car.id,
                 make = car.make,
                 mileage = car.mileage,
-                mileageUnformatted = car.mileageUnformatted,
                 model = car.model,
                 photoUrls = car.photoUrls,
                 price = car.price,
-                priceUnformatted = car.priceUnformatted,
                 primaryPhotoUrl = car.primaryPhotoUrl,
                 vin = car.vin,
                 year = car.year
@@ -58,11 +56,9 @@ class CarRepositoryImpl(private val carStorage: CarStorage) : CarRepository {
                 id = car.id,
                 make = car.make,
                 mileage = car.mileage,
-                mileageUnformatted = car.mileageUnformatted,
                 model = car.model,
                 photoUrls = car.photoUrls,
                 price = car.price,
-                priceUnformatted = car.priceUnformatted,
                 primaryPhotoUrl = car.primaryPhotoUrl,
                 vin = car.vin,
                 year = car.year

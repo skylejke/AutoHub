@@ -50,11 +50,9 @@ class CarDetailsFragment : Fragment() {
             "id" to args.car.id,
             "make" to args.car.make,
             "mileage" to args.car.mileage,
-            "mileageUnformatted" to args.car.mileageUnformatted,
             "model" to args.car.model,
             "photoUrls" to args.car.photoUrls,
             "price" to args.car.price,
-            "priceUnformatted" to args.car.priceUnformatted,
             "primaryPhotoUrl" to args.car.primaryPhotoUrl,
             "vin" to args.car.vin,
             "year" to args.car.year

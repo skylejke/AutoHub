@@ -11,11 +11,9 @@ data class CarVo(
     val id: Int = -1,
     val make: String = "",
     val mileage: String = "",
-    val mileageUnformatted: Int = -1,
     val model: String = "",
     val photoUrls: List<String> = emptyList(),
     val price: String = "",
-    val priceUnformatted: Int = -1,
     val primaryPhotoUrl: String = "",
     val vin: String = "",
     val year: Int = -1
