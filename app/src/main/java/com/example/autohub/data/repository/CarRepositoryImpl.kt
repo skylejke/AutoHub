@@ -9,21 +9,20 @@ import com.example.autohub.domain.repository.CarRepository
 class CarRepositoryImpl(private val carStorage: CarStorage) : CarRepository {
 
     override suspend fun getCars(): RecordsVo {
-        return RecordsVo(mapToDomain(carStorage.getCars()))
+        return mapToDomain(carStorage.getCars())
     }
 
     override suspend fun searchCarsByMake(make: String): RecordsVo {
-        return RecordsVo(mapToDomain(carStorage.searchCarsByMake(make)))
+        return mapToDomain(carStorage.searchCarsByMake(make))
     }
 
     override suspend fun sortCars(sortFilter: String): RecordsVo {
-        return RecordsVo(mapToDomain(carStorage.sortCars(sortFilter)))
+        return mapToDomain(carStorage.sortCars(sortFilter))
     }
 
-    private fun mapToDomain(recordsDto: RecordsDto): List<CarVo> {
-        val asd = mutableListOf<CarVo>()
-        recordsDto.list.forEach { car ->
-            val a = CarVo(
+    private fun mapToDomain(recordsDto: RecordsDto): RecordsVo {
+        return RecordsVo(recordsDto.list.map { car ->
+            CarVo(
                 bodyType = car.bodyType,
                 condition = car.condition,
                 displayColor = car.displayColor ?: "",
@@ -37,8 +36,6 @@ class CarRepositoryImpl(private val carStorage: CarStorage) : CarRepository {
                 vin = car.vin,
                 year = car.year
             )
-            asd.add(a)
-        }
-        return asd
+        })
     }
 }
