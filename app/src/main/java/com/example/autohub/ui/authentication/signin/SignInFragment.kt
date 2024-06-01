@@ -1,7 +1,6 @@
 package com.example.autohub.ui.authentication.signin
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,16 +15,24 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignInFragment : Fragment() {
 
-
     private lateinit var binding: FragmentSignInBinding
 
     private val signInViewModel by viewModel<SignInViewModel>()
+
+    override fun onStart() {
+        super.onStart()
+        signInViewModel.getCurrentUser().observe(viewLifecycleOwner) { user ->
+            if (user != null) {
+                findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as MainActivity).hideBottomNavigation()
+        lifecycle.addObserver((activity as MainActivity).BottomNavManager())
         binding = FragmentSignInBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -49,7 +56,6 @@ class SignInFragment : Fragment() {
             }
 
             signInViewModel.signInUser(email, password).observe(viewLifecycleOwner) { success ->
-                Log.e("JOPA", success.toString())
                 if (success) {
                     Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT)
                         .show()
@@ -69,5 +75,4 @@ class SignInFragment : Fragment() {
             findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
         }
     }
-
 }

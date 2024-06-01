@@ -10,10 +10,11 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.databinding.FragmentSearchBinding
-import com.example.autohub.domain.model.SearchHistoryVo
 import com.example.autohub.ui.adapters.SearchHistoryAdapter
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
@@ -36,14 +37,13 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        searchHistoryAdapter = SearchHistoryAdapter(object : SearchHistoryAdapter.Clickable {
-            override fun onItemClick(searchHistoryVo: SearchHistoryVo) {
-                val args = SearchFragmentDirections.actionSearchFragmentToSearchResultsFragment(
-                    searchHistoryVo.query
+        searchHistoryAdapter = SearchHistoryAdapter { item ->
+            val args =
+                SearchFragmentDirections.actionSearchFragmentToSearchResultsFragment(
+                    item.query
                 )
-                findNavController().navigate(args)
-            }
-        })
+            findNavController().navigate(args)
+        }
 
         binding.searchHistoryList.adapter = searchHistoryAdapter
 
@@ -51,7 +51,10 @@ class SearchFragment : Fragment() {
             searchHistoryAdapter.searchHistoryList = history
         }
 
-        viewModel.loadSearchHistory()
+        lifecycleScope.launch {
+            viewModel.loadSearchHistory()
+        }
+
 
         searchEditText = binding.searchEt
 
@@ -75,9 +78,9 @@ class SearchFragment : Fragment() {
             override fun afterTextChanged(text: Editable?) {
                 binding.searchButton.setOnClickListener {
                     val query = text.toString()
-
-                    viewModel.updateSearchHistory(query)
-
+                    lifecycleScope.launch {
+                        viewModel.updateSearchHistory(query)
+                    }
                     val args =
                         SearchFragmentDirections.actionSearchFragmentToSearchResultsFragment(query)
                     findNavController().navigate(args)
@@ -96,7 +99,9 @@ class SearchFragment : Fragment() {
         }
 
         binding.clearSearchHistoryButton.setOnClickListener {
-            viewModel.clearSearchHistory()
+            lifecycleScope.launch {
+                viewModel.clearSearchHistory()
+            }
         }
     }
 }

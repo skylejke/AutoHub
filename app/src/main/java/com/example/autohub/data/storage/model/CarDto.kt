@@ -4,27 +4,27 @@ import com.google.gson.annotations.SerializedName
 
 data class CarDto(
     @SerializedName("bodyType")
-    val bodyType: String = "",
+    val bodyType: String,
     @SerializedName("condition")
-    val condition: String = "",
+    val condition: String,
     @SerializedName("displayColor")
-    val displayColor: String = "",
+    val displayColor: String?,
     @SerializedName("id")
-    val id: Int = -1,
+    val id: Int,
     @SerializedName("make")
-    val make: String = "",
+    val make: String,
     @SerializedName("mileage")
-    val mileage: String = "",
+    val mileage: String,
     @SerializedName("model")
-    val model: String = "",
+    val model: String,
     @SerializedName("photoUrls")
-    val photoUrls: List<String> = emptyList(),
+    val photoUrls: List<String>,
     @SerializedName("price")
-    val price: String = "",
+    val price: String,
     @SerializedName("primaryPhotoUrl")
-    val primaryPhotoUrl: String = "",
+    val primaryPhotoUrl: String,
     @SerializedName("vin")
-    val vin: String = "",
+    val vin: String,
     @SerializedName("year")
-    val year: Int = -1
+    val year: Int
 )

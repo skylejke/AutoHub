@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.databinding.FragmentFavouriteBinding
-import com.example.autohub.domain.model.CarVo
 import com.example.autohub.ui.adapters.CarAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,13 +30,11 @@ class FavouriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        carAdapter = CarAdapter(object : CarAdapter.CarClickbale {
-            override fun onCarClick(carVo: CarVo) {
-                val args =
-                    FavouriteFragmentDirections.actionFavouriteFragmentToCarDetailsFragment(carVo)
-                findNavController().navigate(args)
-            }
-        })
+        carAdapter = CarAdapter { item ->
+            val args =
+                FavouriteFragmentDirections.actionFavouriteFragmentToCarDetailsFragment(item)
+            findNavController().navigate(args)
+        }
 
         binding.favouriteList.adapter = carAdapter
 

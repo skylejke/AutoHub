@@ -11,8 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentHomeBinding
-import com.example.autohub.domain.model.CarVo
-import com.example.autohub.ui.MainActivity
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
 import kotlinx.coroutines.launch
@@ -32,7 +30,6 @@ class HomeFragment : Fragment(), ScreenSwitchable {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as MainActivity).showBottomNavigation()
         binding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -57,41 +54,29 @@ class HomeFragment : Fragment(), ScreenSwitchable {
                 position: Int,
                 id: Long
             ) {
-                if (view != null) {
+                view?.let {
                     val selectedSortFilter =
                         when (parent.getItemAtPosition(position).toString()) {
                             "mileage min" -> "mileage:asc"
                             "price min" -> "price:asc"
                             "price max" -> "price:desc"
-                            else -> "-"
+                            else -> ""
                         }
-                    showNoData()
-                    if (selectedSortFilter == "-") {
-                        lifecycleScope.launch {
-                            homeViewModel.get()
-                        }
-                    } else {
-                        lifecycleScope.launch {
-                            homeViewModel.sort(selectedSortFilter)
-                        }
+
+                    lifecycleScope.launch {
+                        if (selectedSortFilter.isEmpty()) homeViewModel.get()
+                        else homeViewModel.sort(selectedSortFilter)
                     }
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                lifecycleScope.launch {
-                    homeViewModel.get()
-                }
-            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-
-        carAdapter = CarAdapter(object : CarAdapter.CarClickbale {
-            override fun onCarClick(carVo: CarVo) {
-                val args = HomeFragmentDirections.actionHomeFragmentToCarDetailsFragment(carVo)
-                findNavController().navigate(args)
-            }
-        })
+        carAdapter = CarAdapter { item ->
+            val args = HomeFragmentDirections.actionHomeFragmentToCarDetailsFragment(item)
+            findNavController().navigate(args)
+        }
 
         binding.carList.adapter = carAdapter
 
@@ -100,13 +85,8 @@ class HomeFragment : Fragment(), ScreenSwitchable {
             binding.carCounter.text = if (records.list.isEmpty()) {
                 "0 offers"
             } else {
-                hideProgressBar()
                 "${records.list.size} offers"
             }
-        }
-
-        lifecycleScope.launch {
-            homeViewModel.get()
         }
 
         binding.noConnectionPlaceHolder.retryButton.setOnClickListener {

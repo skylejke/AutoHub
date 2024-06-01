@@ -17,5 +17,4 @@ abstract class DataBase : RoomDatabase() {
             return Room.databaseBuilder(context, DataBase::class.java, DATABASE_NAME).build()
         }
     }
-
 }

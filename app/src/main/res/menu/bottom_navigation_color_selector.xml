@@ -5,6 +5,6 @@
     <item android:color="@color/activeIconColor" android:state_checked="true"
         tools:ignore="MenuTitle" />
     <!-- Color for unselected items -->
-    <item android:color="@color/darkGrey"
+    <item android:color="@color/grey"
         tools:ignore="MenuTitle" />
 </selector>

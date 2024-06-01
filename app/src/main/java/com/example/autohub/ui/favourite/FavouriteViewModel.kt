@@ -9,7 +9,7 @@ import com.example.autohub.domain.usecase.GetFavouritesUseCase
 import com.google.firebase.auth.FirebaseUser
 
 class FavouriteViewModel(
-    private val getFavouritesUseCase: GetFavouritesUseCase,
+    getFavouritesUseCase: GetFavouritesUseCase,
     private val getCurrentUserUseCase: GetCurrentUserUseCase
 ) : ViewModel() {
 

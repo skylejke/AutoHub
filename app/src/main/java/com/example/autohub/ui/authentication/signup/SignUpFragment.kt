@@ -19,27 +19,17 @@ class SignUpFragment : Fragment() {
 
     private val signUpViewModel by viewModel<SignUpViewModel>()
 
-    override fun onStart() {
-        super.onStart()
-        signUpViewModel.getCurrentUser().observe(viewLifecycleOwner) { user ->
-            if (user != null) {
-                findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
-            }
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as MainActivity).hideBottomNavigation()
+        lifecycle.addObserver((activity as MainActivity).BottomNavManager())
         binding = FragmentSignUpBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         binding.signUpBtn.setOnClickListener {
 
@@ -76,5 +66,4 @@ class SignUpFragment : Fragment() {
             findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
         }
     }
-
 }

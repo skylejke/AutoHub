@@ -10,7 +10,7 @@ import com.example.autohub.databinding.CarListItemBinding
 import com.example.autohub.domain.model.CarVo
 
 
-class CarAdapter(private val carClickbale: CarClickbale) : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
+class CarAdapter(private val onAdapterItemClick: OnAdapterItemClick<CarVo>) : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
 
     var carList = emptyList<CarVo>()
         set(value) {
@@ -39,17 +39,15 @@ class CarAdapter(private val carClickbale: CarClickbale) : RecyclerView.Adapter<
             field = value
         }
 
-    interface CarClickbale {
-        fun onCarClick(carVo: CarVo)
-    }
-
     class CarViewHolder(
         private val binding: CarListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(car: CarVo) = with(binding) {
             carTitle.text = root.context.getString(R.string.car_info, car.make, car.model, car.year)
             carPrice.text = car.price
-            carPhoto.load(car.primaryPhotoUrl)
+            carPhoto.load(car.primaryPhotoUrl){
+                error(R.drawable.error)
+            }
         }
     }
 
@@ -65,7 +63,7 @@ class CarAdapter(private val carClickbale: CarClickbale) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
         holder.bind(carList[position])
         holder.itemView.setOnClickListener {
-            carClickbale.onCarClick(carList[position])
+            onAdapterItemClick.onClick(carList[position])
         }
     }
 

@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentSearchResultsBinding
-import com.example.autohub.domain.model.CarVo
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
 import kotlinx.coroutines.launch
@@ -39,15 +38,11 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        carAdapter = CarAdapter(object : CarAdapter.CarClickbale {
-            override fun onCarClick(carVo: CarVo) {
-                val args =
-                    SearchResultsFragmentDirections.actionSearchResultsFragmentToCarDetailsFragment(
-                        carVo
-                    )
-                findNavController().navigate(args)
-            }
-        })
+        carAdapter = CarAdapter { item ->
+            val args =
+                SearchResultsFragmentDirections.actionSearchResultsFragmentToCarDetailsFragment(item)
+            findNavController().navigate(args)
+        }
 
         binding.searchResultsList.adapter = carAdapter
 

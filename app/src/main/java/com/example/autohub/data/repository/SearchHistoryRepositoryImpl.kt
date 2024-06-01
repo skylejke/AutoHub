@@ -8,16 +8,16 @@ import com.example.autohub.domain.repository.SearchHistoryRepository
 class SearchHistoryRepositoryImpl(private val searchHistoryStorage: SearchHistoryStorage) :
     SearchHistoryRepository {
 
-    override fun loadSearchHistory(): List<SearchHistoryVo> {
+    override suspend fun loadSearchHistory(): List<SearchHistoryVo> {
         val searchHistory = searchHistoryStorage.loadSearchHistory()
         return mapToDomain(searchHistory)
     }
 
-    override fun updateSearchHistory(query: String) {
+    override suspend fun updateSearchHistory(query: String) {
         searchHistoryStorage.updateSearchHistory(query)
     }
 
-    override fun clearSearchHistory() {
+    override suspend fun clearSearchHistory() {
         searchHistoryStorage.clearSearchHistory()
     }
 
@@ -29,5 +29,4 @@ class SearchHistoryRepositoryImpl(private val searchHistoryStorage: SearchHistor
         }
         return searchHistoryList
     }
-
 }

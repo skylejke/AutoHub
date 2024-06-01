@@ -4,9 +4,14 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.autohub.domain.usecase.GetCurrentUserUseCase
 import com.example.autohub.domain.usecase.SignInUseCase
+import com.google.firebase.auth.FirebaseUser
 
-class SignInViewModel(private val signInUseCase: SignInUseCase) : ViewModel() {
+class SignInViewModel(
+    private val signInUseCase: SignInUseCase,
+    private val getCurrentUserUseCase: GetCurrentUserUseCase
+) : ViewModel() {
 
     fun signInUser(userEmail: String, userPassword: String): LiveData<Boolean> {
         val result = MutableLiveData<Boolean>()
@@ -16,6 +21,12 @@ class SignInViewModel(private val signInUseCase: SignInUseCase) : ViewModel() {
             }
         }
         return result
+    }
+
+    fun getCurrentUser(): LiveData<FirebaseUser> {
+        val user = MutableLiveData<FirebaseUser>()
+        user.value = getCurrentUserUseCase.execute()
+        return user
     }
 
     private fun validateData(email: String, password: String): Boolean {

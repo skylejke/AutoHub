@@ -9,7 +9,7 @@ import com.example.autohub.R
 import com.example.autohub.databinding.SearchHistoryListItemBinding
 import com.example.autohub.domain.model.SearchHistoryVo
 
-class SearchHistoryAdapter(private val clickable: Clickable) : RecyclerView.Adapter<SearchHistoryAdapter.SearchHistoryViewHolder>() {
+class SearchHistoryAdapter(private val onAdapterItemClick: OnAdapterItemClick<SearchHistoryVo>) : RecyclerView.Adapter<SearchHistoryAdapter.SearchHistoryViewHolder>() {
 
     var searchHistoryList = emptyList<SearchHistoryVo>()
         set(value) {
@@ -38,7 +38,7 @@ class SearchHistoryAdapter(private val clickable: Clickable) : RecyclerView.Adap
             field = value
         }
 
-    interface Clickable {
+    fun interface Clickable {
         fun onItemClick(searchHistoryVo: SearchHistoryVo)
     }
 
@@ -63,7 +63,7 @@ class SearchHistoryAdapter(private val clickable: Clickable) : RecyclerView.Adap
     override fun onBindViewHolder(holder: SearchHistoryViewHolder, position: Int) {
         holder.bind(searchHistoryList[position])
         holder.itemView.setOnClickListener {
-            clickable.onItemClick(searchHistoryList[position])
+            onAdapterItemClick.onClick(searchHistoryList[position])
         }
     }
 }

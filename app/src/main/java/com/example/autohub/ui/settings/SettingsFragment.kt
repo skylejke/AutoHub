@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
-import com.example.autohub.app.App
 import com.example.autohub.databinding.FragmentSettingsBinding
 import com.example.autohub.ui.MainActivity.Companion.DARK_THEME_ENABLED_KEY
 import com.example.autohub.ui.MainActivity.Companion.THEME_PREFERENCES
+import com.example.autohub.ui.MainActivity.Companion.applyTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : Fragment() {
@@ -51,7 +51,7 @@ class SettingsFragment : Fragment() {
 
         binding.darkThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean(DARK_THEME_ENABLED_KEY, isChecked).apply()
-            (binding.root.context.applicationContext as App).applyTheme(isChecked)
+            applyTheme(isChecked)
         }
 
         binding.logoutButton.setOnClickListener {

@@ -17,17 +17,17 @@ class SearchViewModel(
     private val _searchHistory = MutableLiveData<List<SearchHistoryVo>>()
     val searchHistory: LiveData<List<SearchHistoryVo>> = _searchHistory
 
-    fun loadSearchHistory() {
+    suspend fun loadSearchHistory() {
         _searchHistory.value = loadSearchHistoryUseCase.execute()
     }
 
-    fun updateSearchHistory(query: String) {
+    suspend fun updateSearchHistory(query: String) {
         updateSearchHistoryUseCase.execute(query)
-        loadSearchHistory() // Reload search history after update
+        loadSearchHistory()
     }
 
-    fun clearSearchHistory() {
+    suspend fun clearSearchHistory() {
         clearSearchHistoryUseCase.execute()
-        _searchHistory.value = emptyList() // Clear LiveData
+        _searchHistory.value = emptyList()
     }
 }

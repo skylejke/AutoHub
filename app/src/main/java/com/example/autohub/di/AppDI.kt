@@ -23,11 +23,11 @@ val appModule = module {
     }
 
     viewModel<SignInViewModel> {
-        SignInViewModel(signInUseCase = get())
+        SignInViewModel(signInUseCase = get(), getCurrentUserUseCase = get())
     }
 
     viewModel<SignUpViewModel> {
-        SignUpViewModel(signUpUseCase = get(), getCurrentUserUseCase = get())
+        SignUpViewModel(signUpUseCase = get())
     }
 
     viewModel<CarDetailsViewModel> {

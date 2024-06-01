@@ -1,5 +1,6 @@
 package com.example.autohub.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,28 +23,22 @@ class HomeViewModel(
     suspend fun get() {
         withContext(Dispatchers.Main) {
             screenSwitchable.showProgressBar()
-        }
-        try {
-            val records: RecordsVo = getCarsUseCase.execute()
-            _carsLiveData.value = records
-            if (records.list.isEmpty()) {
-                withContext(Dispatchers.Main) {
+            try {
+                val records: RecordsVo = getCarsUseCase.execute()
+                _carsLiveData.value = records
+                if (records.list.isEmpty()) {
                     screenSwitchable.hideError()
                     screenSwitchable.showNoData()
-                }
-            } else {
-                withContext(Dispatchers.Main) {
+                } else {
                     screenSwitchable.hideError()
                     screenSwitchable.showData()
+
                 }
-            }
-        } catch (e: Exception) {
-            withContext(Dispatchers.Main) {
+            } catch (e: Exception) {
+                Log.e("ApiError", e.message.toString())
                 _carsLiveData.value = RecordsVo(emptyList())
                 screenSwitchable.showError()
-            }
-        } finally {
-            withContext(Dispatchers.Main) {
+            } finally {
                 screenSwitchable.hideProgressBar()
             }
         }
@@ -69,6 +64,7 @@ class HomeViewModel(
             }
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
+                Log.e("ApiError", e.message.toString())
                 _carsLiveData.value = RecordsVo(emptyList())
                 screenSwitchable.showError()
             }

@@ -4,52 +4,45 @@ import android.content.Context
 import com.example.autohub.data.database.DataBase
 import com.example.autohub.data.storage.model.SearchHistoryDto
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class SearchHistoryStorageImpl(context: Context) : SearchHistoryStorage {
 
     private val database = DataBase.getDataBase(context)
 
-    override fun loadSearchHistory(): List<SearchHistoryDto> {
-        return runBlocking {
-            withContext(Dispatchers.IO) {
-                database.getDao().getSearchHistory()
-            }
+    override suspend fun loadSearchHistory(): List<SearchHistoryDto> {
+        return withContext(Dispatchers.IO) {
+            database.getDao().getSearchHistory()
         }
     }
 
-    override fun updateSearchHistory(query: String) {
-        runBlocking {
-            withContext(Dispatchers.IO) {
-                val searchHistoryDto = SearchHistoryDto(null, query)
+    override suspend fun updateSearchHistory(query: String) {
+        withContext(Dispatchers.IO) {
+            val searchHistoryDto = SearchHistoryDto(null, query)
 
-                val searchHistory = loadSearchHistory()
-                val updatedList = mutableListOf<SearchHistoryDto>()
+            val searchHistory = loadSearchHistory()
+            val updatedList = mutableListOf<SearchHistoryDto>()
 
-                updatedList.add(0, searchHistoryDto)
+            updatedList.add(0, searchHistoryDto)
 
-                updatedList.addAll(searchHistory)
+            updatedList.addAll(searchHistory)
 
-                if (updatedList.size > 10) {
-                    updatedList.subList(10, updatedList.size).clear()
-                }
+            if (updatedList.size > 10) {
+                updatedList.subList(10, updatedList.size).clear()
+            }
 
-                database.getDao().clearSearchHistory()
+            database.getDao().clearSearchHistory()
 
-                updatedList.forEach { item ->
-                    database.getDao().insertSearchHistoryItem(item)
-                }
+            updatedList.forEach { item ->
+                database.getDao().insertSearchHistoryItem(item)
             }
         }
     }
 
 
-    override fun clearSearchHistory() {
-        runBlocking {
-            withContext(Dispatchers.IO) {
-                database.getDao().clearSearchHistory()
-            }
+    override suspend fun clearSearchHistory() {
+        withContext(Dispatchers.IO) {
+            database.getDao().clearSearchHistory()
         }
     }
 

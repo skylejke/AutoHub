@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.autohub.data.storage.model.CarDto
 
 interface CarDetailsStorage {
+    fun getFavourites(): LiveData<List<CarDto>>
     fun checkIfCarIsFavoutrite(carDto: CarDto): LiveData<Boolean>
     fun addToFavourite(id: String, carMap: HashMap<String, Any>)
     fun deleteFromFavourite(id: String)

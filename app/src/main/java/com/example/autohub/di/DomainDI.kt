@@ -31,7 +31,7 @@ val domainModule = module {
     }
 
     factory<GetFavouritesUseCase> {
-        GetFavouritesUseCase(carRepository = get())
+        GetFavouritesUseCase(carDetailsRepository = get())
     }
 
     factory<AddToFavouriteUseCase> {

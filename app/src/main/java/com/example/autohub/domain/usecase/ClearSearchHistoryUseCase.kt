@@ -3,7 +3,7 @@ package com.example.autohub.domain.usecase
 import com.example.autohub.domain.repository.SearchHistoryRepository
 
 class ClearSearchHistoryUseCase(private val searchHistoryRepository: SearchHistoryRepository) {
-    fun execute() {
+    suspend fun execute() {
         searchHistoryRepository.clearSearchHistory()
     }
 }
