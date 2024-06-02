@@ -54,9 +54,13 @@ class SettingsFragment : Fragment() {
             applyTheme(isChecked)
         }
 
+        binding.aboutApp.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
+        }
+
         binding.logoutButton.setOnClickListener {
             settingsViewModel.signOut()
-            findNavController().navigate(R.id.action_settingsFragment_to_signUpFragment)
+            findNavController().navigate(R.id.action_settingsFragment_to_signInFragment)
         }
 
         binding.backIcon.setOnClickListener {
@@ -64,7 +68,7 @@ class SettingsFragment : Fragment() {
         }
 
         binding.logInButton.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_signUpFragment)
+            findNavController().navigate(R.id.action_settingsFragment_to_signInFragment)
         }
     }
 }

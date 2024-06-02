@@ -32,7 +32,7 @@ class SignInFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        lifecycle.addObserver((activity as MainActivity).BottomNavManager())
+        lifecycle.addObserver((activity as MainActivity).AuthBottomNavManager())
         binding = FragmentSignInBinding.inflate(layoutInflater)
         return binding.root
     }

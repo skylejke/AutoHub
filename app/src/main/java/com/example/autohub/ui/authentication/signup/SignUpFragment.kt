@@ -23,7 +23,7 @@ class SignUpFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        lifecycle.addObserver((activity as MainActivity).BottomNavManager())
+        lifecycle.addObserver((activity as MainActivity).AuthBottomNavManager())
         binding = FragmentSignUpBinding.inflate(layoutInflater)
         return binding.root
     }

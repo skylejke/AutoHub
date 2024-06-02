@@ -115,5 +115,6 @@
         <item>price min</item>
         <item>price max</item>
     </string-array>
+    <string name="about_app">\tAutoHUB is an intuitive and powerful Android application designed for car enthusiasts who are looking for the best deals in car dealerships.\n\n\tWith the AutoHUB app, you can easily and conveniently browse a wide range of cars from leading automakers.\n\n\tDetailed descriptions of each model, photos, technical specifications, as well as price information are available to you.\n\n\tWhether you are looking for a new car, want to learn about the latest innovations in the world of cars, or just looking for inspiration, the AutoHUB app is your reliable and convenient partner who will help you make an informed choice and ensure the satisfaction of driving your dreams.</string>
 
 </resources>

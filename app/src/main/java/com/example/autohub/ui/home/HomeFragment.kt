@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentHomeBinding
+import com.example.autohub.ui.MainActivity
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
 import kotlinx.coroutines.launch
@@ -30,6 +31,7 @@ class HomeFragment : Fragment(), ScreenSwitchable {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        lifecycle.addObserver((activity as MainActivity).MainBottomNavManager())
         binding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
     }

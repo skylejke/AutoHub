@@ -38,8 +38,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    inner class BottomNavManager() : LifecycleEventObserver {
-
+    inner class AuthBottomNavManager : LifecycleEventObserver {
         private fun hide() {
             binding.bottomNavigation.visibility = View.GONE
         }
@@ -52,6 +51,18 @@ class MainActivity : AppCompatActivity() {
             if (event == Lifecycle.Event.ON_CREATE) {
                 hide()
             } else if (event == Lifecycle.Event.ON_PAUSE) {
+                show()
+            }
+        }
+    }
+
+    inner class MainBottomNavManager : LifecycleEventObserver {
+        private fun show() {
+            binding.bottomNavigation.visibility = View.VISIBLE
+        }
+
+        override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+            if (event == Lifecycle.Event.ON_CREATE) {
                 show()
             }
         }
