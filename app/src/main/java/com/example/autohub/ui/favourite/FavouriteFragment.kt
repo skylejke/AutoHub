@@ -38,7 +38,7 @@ class FavouriteFragment : Fragment() {
 
         binding.favouriteList.adapter = carAdapter
 
-        favouriteViewModel.getCurrentUser().observe(viewLifecycleOwner) { user ->
+        favouriteViewModel.currentUser.observe(viewLifecycleOwner) { user ->
             if (user != null) {
                 favouriteViewModel.carsLiveData.observe(viewLifecycleOwner) { favouriteList ->
                     carAdapter.carList = favouriteList
@@ -52,5 +52,6 @@ class FavouriteFragment : Fragment() {
                 binding.notAuthorizedUserPlaceHolder.root.visibility = View.VISIBLE
             }
         }
+        favouriteViewModel.refreshCurrentUser()
     }
 }
