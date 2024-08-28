@@ -70,7 +70,7 @@ class SearchResultsFragment : Fragment(), ScreenSwitchable {
             }
         }
 
-        binding.backIcon.setOnClickListener {
+        binding.fragmentSearchResultsToolbar.backIcon.setOnClickListener {
             Navigation.findNavController(view).popBackStack()
         }
     }

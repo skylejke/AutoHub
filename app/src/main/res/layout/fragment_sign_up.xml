@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
         android:id="@+id/app_name"
         style="@style/LogoTextViewStyle"
-        android:text="@string/app_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center_horizontal"
+        android:text="@string/app_name" />
 
     <TextView
         android:id="@+id/sign_in"
         style="@style/BigTextViewStyle"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="30sp"
         android:text="@string/sign_up"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_name" />
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/email_et"
@@ -29,10 +25,7 @@
         android:layout_marginTop="50sp"
         android:hint="@string/email"
         android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_in" />
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/password_et"
@@ -40,10 +33,7 @@
         android:layout_marginTop="30sp"
         android:hint="@string/password"
         android:importantForAutofill="no"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_et" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/sign_up_btn"
@@ -51,58 +41,9 @@
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/pink"
         android:text="@string/sign_up"
-        android:textColor="@color/darkBlue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_et" />
+        android:textColor="@color/darkBlue" />
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/or_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_up_btn">
-
-
-        <TextView
-            android:id="@+id/or"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_mono_medium"
-            android:text="@string/or"
-            android:textColor="@color/grey"
-            android:textSize="@dimen/medium_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <View
-            android:id="@+id/horizontalLineLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_marginEnd="10dp"
-            android:background="@color/grey"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/or"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/horizontalLineRight"
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_marginStart="10dp"
-            android:background="@color/grey"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/or"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <include layout="@layout/fragment_sign_in_or_up" />
 
     <Button
         android:id="@+id/sign_in_btn"
@@ -110,20 +51,16 @@
         android:layout_marginTop="30sp"
         android:backgroundTint="@color/darkBlue"
         android:text="@string/sign_in"
-        android:textColor="@color/pink"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/or_container" />
+        android:textColor="@color/pink" />
 
     <TextView
         android:id="@+id/continue_as_a_guest_btn"
         style="@style/BigTextViewStyle"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="40dp"
         android:text="@string/continue_as_a_guest"
-        android:textColor="@color/grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@color/grey" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

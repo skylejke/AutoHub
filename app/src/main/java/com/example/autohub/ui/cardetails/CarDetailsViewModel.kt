@@ -15,8 +15,7 @@ class CarDetailsViewModel(
     private val addToFavouriteUseCase: AddToFavouriteUseCase,
     private val deleteFromFavouriteUseCase: DeleteFromFavouriteUseCase,
     private val getCurrentUserUseCase: GetCurrentUserUseCase
-) :
-    ViewModel() {
+) : ViewModel() {
 
     fun checkIfCarIsFavoutrite(carVo: CarVo): LiveData<Boolean> {
         return checkIfCarIsFavoutriteUseCase.execute(carVo)

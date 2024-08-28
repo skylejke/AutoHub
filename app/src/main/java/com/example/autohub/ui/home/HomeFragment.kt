@@ -97,7 +97,7 @@ class HomeFragment : Fragment(), ScreenSwitchable {
             }
         }
 
-        binding.settingsButton.setOnClickListener {
+        binding.fragmentHomeToolbar.settingsButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
         }
     }

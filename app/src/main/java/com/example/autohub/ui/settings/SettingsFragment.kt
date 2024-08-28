@@ -36,7 +36,7 @@ class SettingsFragment : Fragment() {
             requireActivity().getSharedPreferences(THEME_PREFERENCES, Context.MODE_PRIVATE)
         val isDarkThemeEnabled = sharedPreferences.getBoolean(DARK_THEME_ENABLED_KEY, false)
 
-        binding.darkThemeSwitch.isChecked = isDarkThemeEnabled
+        binding.settingsContainer.darkThemeSwitch.isChecked = isDarkThemeEnabled
 
         settingsViewModel.getCurrentUser().observe(viewLifecycleOwner) { user ->
             if (user != null) {
@@ -49,12 +49,12 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        binding.darkThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
+        binding.settingsContainer.darkThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean(DARK_THEME_ENABLED_KEY, isChecked).apply()
             applyTheme(isChecked)
         }
 
-        binding.aboutApp.setOnClickListener {
+        binding.settingsContainer.aboutApp.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
         }
 
@@ -63,7 +63,7 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(R.id.action_settingsFragment_to_signInFragment)
         }
 
-        binding.backIcon.setOnClickListener {
+        binding.fragmentSettingsToolbar.backIcon.setOnClickListener {
             findNavController().popBackStack()
         }
 
