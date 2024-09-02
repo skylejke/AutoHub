@@ -27,17 +27,15 @@
         app:layout_constraintTop_toBottomOf="@id/car_info"
         tools:text="22 000 000 ₽" />
 
-    <ImageView
-        android:id="@+id/car_photo"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/car_photos"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/price"
-        tools:ignore="ContentDescription"
-        tools:src="@drawable/e63s" />
+        app:layout_constraintTop_toBottomOf="@id/price" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,12 +47,13 @@ android {
 
 dependencies {
 
-
     val navVersion = "2.7.7"
     val retrofitVersion = "2.9.0"
     val lifecycleVersion = "2.8.4"
     val roomVersion = "2.6.1"
     val koinVersion = "3.5.3"
+
+    implementation ("androidx.viewpager2:viewpager2:1.1.0")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
@@ -70,7 +71,6 @@ dependencies {
 
     implementation("androidx.room:room-ktx:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
-
 
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("io.insert-koin:koin-android:$koinVersion")

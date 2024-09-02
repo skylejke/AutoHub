@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import coil.load
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentCarBinding
+import com.example.autohub.ui.adapters.CarPhotosAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CarDetailsFragment : Fragment() {
@@ -20,6 +20,8 @@ class CarDetailsFragment : Fragment() {
     private val args: CarDetailsFragmentArgs by navArgs()
 
     private val carDetailsViewModel by viewModel<CarDetailsViewModel>()
+
+    private lateinit var carPhotosAdapter: CarPhotosAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +33,12 @@ class CarDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        carPhotosAdapter = CarPhotosAdapter()
+
+        carPhotosAdapter.carPhotoList = args.car.photoUrls
+
+        binding.carTitleContainer.carPhotos.adapter = carPhotosAdapter
 
         with(binding.carCharacteristicsContainer) {
             year.text = args.car.year.toString()
@@ -44,7 +52,6 @@ class CarDetailsFragment : Fragment() {
             carInfo.text =
                 getString(R.string.car_info, args.car.make, args.car.model, args.car.year)
             price.text = args.car.price
-            carPhoto.load(args.car.primaryPhotoUrl)
         }
 
         val carMap = hashMapOf(

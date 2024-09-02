@@ -22,6 +22,8 @@ class HomeFragment : Fragment(), ScreenSwitchable {
 
     private lateinit var binding: FragmentHomeBinding
 
+    private lateinit var sortAdapter: ArrayAdapter<String>
+
     private lateinit var carAdapter: CarAdapter
 
     private val homeViewModel by viewModel<HomeViewModel> { parametersOf(this) }
@@ -39,7 +41,7 @@ class HomeFragment : Fragment(), ScreenSwitchable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sortAdapter = ArrayAdapter(
+        sortAdapter = ArrayAdapter(
             requireContext(),
             R.layout.sort_spinner_item,
             resources.getStringArray(R.array.sort_array)

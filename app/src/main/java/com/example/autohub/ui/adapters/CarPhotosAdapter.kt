@@ -6,14 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.autohub.R
-import com.example.autohub.databinding.CarListItemBinding
-import com.example.autohub.domain.model.CarVo
+import com.example.autohub.databinding.FragmentCarPhotoItemBinding
 
+class CarPhotosAdapter : RecyclerView.Adapter<CarPhotosAdapter.PhotoViewHolder>() {
 
-class CarAdapter(private val onAdapterItemClick: OnAdapterItemClick<CarVo>) :
-    RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
-
-    var carList = emptyList<CarVo>()
+    var carPhotoList = emptyList<String>()
         set(value) {
             val callback = object : DiffUtil.Callback() {
                 override fun getOldListSize(): Int {
@@ -40,35 +37,31 @@ class CarAdapter(private val onAdapterItemClick: OnAdapterItemClick<CarVo>) :
             field = value
         }
 
-    class CarViewHolder(
-        private val binding: CarListItemBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(car: CarVo) = with(binding) {
-            carTitle.text = root.context.getString(R.string.car_info, car.make, car.model, car.year)
-            carPrice.text = car.price
-            carPhoto.load(car.primaryPhotoUrl) {
+    class PhotoViewHolder(private val binding: FragmentCarPhotoItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(photoUrl: String) {
+            binding.carPhoto.load(photoUrl) {
                 error(R.drawable.error)
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
-        val binding = CarListItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder =
+        PhotoViewHolder(
+            FragmentCarPhotoItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
-        return CarViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-        holder.bind(carList[position])
-        holder.itemView.setOnClickListener {
-            onAdapterItemClick.onClick(carList[position])
-        }
-    }
 
     override fun getItemCount(): Int {
-        return carList.size
+        return carPhotoList.size
     }
+
+    override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
+        holder.bind(carPhotoList[position])
+    }
+
 }
+
