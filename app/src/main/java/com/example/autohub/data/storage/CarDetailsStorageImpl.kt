@@ -1,21 +1,21 @@
 package com.example.autohub.data.storage
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.autohub.data.storage.model.CarDto
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class CarDetailsStorageImpl : CarDetailsStorage {
 
     private val dataBase = FirebaseFirestore.getInstance()
-    override fun getFavourites(): LiveData<List<CarDto>> {
-        val favouritesListLiveData = MutableLiveData<List<CarDto>>()
+    override fun getFavourites(): StateFlow<List<CarDto>> {
+        val favouritesListStateFlow = MutableStateFlow<List<CarDto>>(emptyList())
         val currentUser = FirebaseAuth.getInstance().currentUser
 
         if (currentUser == null) {
-            favouritesListLiveData.value = emptyList()
-            return favouritesListLiveData
+            favouritesListStateFlow.value = emptyList()
+            return favouritesListStateFlow
         }
 
         dataBase.collection("users")
@@ -27,21 +27,21 @@ class CarDetailsStorageImpl : CarDetailsStorage {
                 }
                 if (value != null) {
                     val favouriteList = value.documents.mapNotNull { it.toObject(CarDto::class.java) }
-                    favouritesListLiveData.value = favouriteList
+                    favouritesListStateFlow.value = favouriteList
                 } else {
-                    favouritesListLiveData.value = emptyList()
+                    favouritesListStateFlow.value = emptyList()
                 }
             }
-        return favouritesListLiveData
+        return favouritesListStateFlow
     }
 
-    override fun checkIfCarIsFavoutrite(carDto: CarDto): LiveData<Boolean> {
-        val isFavouriteLiveData = MutableLiveData<Boolean>()
+    override fun checkIfCarIsFavoutrite(carDto: CarDto): StateFlow<Boolean> {
+        val isFavouriteStateFlow = MutableStateFlow(false)
         val currentUser = FirebaseAuth.getInstance().currentUser
 
         if (currentUser == null) {
-            isFavouriteLiveData.value = false
-            return isFavouriteLiveData
+            isFavouriteStateFlow.value = false
+            return isFavouriteStateFlow
         }
 
         dataBase.collection("users")
@@ -52,12 +52,12 @@ class CarDetailsStorageImpl : CarDetailsStorage {
                     return@addSnapshotListener
                 }
                 value?.documents?.map { it.toObject(CarDto::class.java)!! }?.let {
-                    isFavouriteLiveData.value = it.contains(carDto)
+                    isFavouriteStateFlow.value = it.contains(carDto)
                 } ?: run {
-                    isFavouriteLiveData.value = false
+                    isFavouriteStateFlow.value = false
                 }
             }
-        return isFavouriteLiveData
+        return isFavouriteStateFlow
     }
 
     override fun addToFavourite(id: String, carMap: HashMap<String, Any>) {

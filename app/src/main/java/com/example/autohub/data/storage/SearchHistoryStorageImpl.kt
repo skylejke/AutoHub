@@ -8,7 +8,12 @@ import kotlinx.coroutines.withContext
 
 class SearchHistoryStorageImpl(context: Context) : SearchHistoryStorage {
 
-    private val database = DataBase.getDataBase(context)
+    private val database: DataBase
+
+    init {
+        database = DataBase.getDataBase(context)
+    }
+
 
     override suspend fun loadSearchHistory(): List<SearchHistoryDto> {
         return withContext(Dispatchers.IO) {

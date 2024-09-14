@@ -1,9 +1,11 @@
 package com.example.autohub.di
 
 import com.example.autohub.domain.usecase.AddToFavouriteUseCase
+import com.example.autohub.domain.usecase.ChangeAppThemeUseCase
 import com.example.autohub.domain.usecase.CheckIfCarIsFavoutriteUseCase
 import com.example.autohub.domain.usecase.ClearSearchHistoryUseCase
 import com.example.autohub.domain.usecase.DeleteFromFavouriteUseCase
+import com.example.autohub.domain.usecase.GetAppThemeUseCase
 import com.example.autohub.domain.usecase.GetCarsUseCase
 import com.example.autohub.domain.usecase.GetCurrentUserUseCase
 import com.example.autohub.domain.usecase.GetFavouritesUseCase
@@ -72,5 +74,13 @@ val domainModule = module {
 
     factory<UpdateSearchHistoryUseCase> {
         UpdateSearchHistoryUseCase(searchHistoryRepository = get())
+    }
+
+    factory<GetAppThemeUseCase> {
+        GetAppThemeUseCase(settingsRepository = get())
+    }
+
+    factory<ChangeAppThemeUseCase> {
+        ChangeAppThemeUseCase(settingsRepository = get())
     }
 }

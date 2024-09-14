@@ -47,16 +47,19 @@ android {
 
 dependencies {
 
-    val navVersion = "2.7.7"
-    val retrofitVersion = "2.9.0"
-    val lifecycleVersion = "2.8.4"
+    val navVersion = "2.8.0"
+    val retrofitVersion = "2.11.0"
+    val lifecycleVersion = "2.8.5"
     val roomVersion = "2.6.1"
-    val koinVersion = "3.5.3"
+    val koinVersion = "3.5.6"
+    val dataStoreVersion = "1.1.1"
 
-    implementation ("androidx.viewpager2:viewpager2:1.1.0")
+    implementation("androidx.datastore:datastore:$dataStoreVersion")
+    implementation("androidx.datastore:datastore-preferences:$dataStoreVersion")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
 
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
@@ -64,7 +67,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 
-    implementation("io.coil-kt:coil:1.4.0")
+    implementation("io.coil-kt:coil:2.7.0")
 
     implementation("com.google.firebase:firebase-auth:23.0.0")
     implementation("com.google.firebase:firebase-firestore-ktx:25.1.0")
@@ -74,17 +77,17 @@ dependencies {
 
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("io.insert-koin:koin-android:$koinVersion")
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.2")
     testImplementation("io.insert-koin:koin-test:$koinVersion")
 
     //JUnit dependency for unit tests
     testImplementation("junit:junit:4.13.2")
 
     // Mockito dependency for unit tests
-    testImplementation("org.mockito:mockito-core:4.0.0")
+    testImplementation("org.mockito:mockito-core:5.13.0")
 
     // Optional: Mockito Kotlin extension if you use Kotlin
-    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
 
     // AndroidX Test - Core library
     testImplementation("androidx.test:core:1.6.1")
@@ -93,10 +96,10 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
 
     // Optional: AndroidX Test - Mockito Android support (for instrumented tests)
-    androidTestImplementation("org.mockito:mockito-android:4.0.0")
+    androidTestImplementation("org.mockito:mockito-android:5.13.0")
 
     implementation("androidx.test:monitor:1.7.2")
-    androidTestImplementation("org.testng:testng:6.9.6")
+    androidTestImplementation("org.testng:testng:7.10.2")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")

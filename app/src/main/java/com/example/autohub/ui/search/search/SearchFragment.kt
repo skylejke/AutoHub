@@ -19,42 +19,50 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
 
-    private lateinit var binding: FragmentSearchBinding
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = requireNotNull(_binding)
+
+    private var _searchHistoryAdapter: SearchHistoryAdapter? = null
+    private val searchHistoryAdapter get() = requireNotNull(_searchHistoryAdapter)
+
     private lateinit var searchEditText: EditText
-    private lateinit var searchHistoryAdapter: SearchHistoryAdapter
 
     private val viewModel by viewModel<SearchViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentSearchBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        searchHistoryAdapter = SearchHistoryAdapter { item ->
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        _searchHistoryAdapter = SearchHistoryAdapter { item ->
             val args =
                 SearchFragmentDirections.actionSearchFragmentToSearchResultsFragment(
                     item.query
                 )
             findNavController().navigate(args)
         }
+    }
 
-        binding.searchHistoryList.adapter = searchHistoryAdapter
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSearchBinding.inflate(layoutInflater).also {
+            _binding = it
+        }
+        return binding.root
+    }
 
-        viewModel.searchHistory.observe(viewLifecycleOwner) { history ->
-            searchHistoryAdapter.searchHistoryList = history
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            viewModel.searchHistory.collect { history ->
+                searchHistoryAdapter.submitList(history)
+            }
         }
 
         lifecycleScope.launch {
             viewModel.loadSearchHistory()
         }
-
 
         searchEditText = binding.searchEt
 
@@ -103,5 +111,15 @@ class SearchFragment : Fragment() {
                 viewModel.clearSearchHistory()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _searchHistoryAdapter = null
     }
 }

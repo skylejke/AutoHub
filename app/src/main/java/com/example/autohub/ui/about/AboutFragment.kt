@@ -1,4 +1,4 @@
-package com.example.autohub.ui
+package com.example.autohub.ui.about
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,20 +11,23 @@ import com.example.autohub.databinding.FragmentAboutBinding
 
 class AboutFragment : Fragment() {
 
-    private lateinit var binding: FragmentAboutBinding
+    private var _binding: FragmentAboutBinding? = null
+    private val binding get() = requireNotNull(_binding)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentAboutBinding.inflate(layoutInflater)
-        return binding.root
+    ): View = FragmentAboutBinding.inflate(layoutInflater).also {
+        _binding = it
+        setListeners()
+    }.root
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    private fun setListeners() {
         binding.fragmentAboutToolbar.backIcon.setOnClickListener {
             findNavController().popBackStack()
         }

@@ -3,42 +3,15 @@ package com.example.autohub.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.autohub.R
 import com.example.autohub.databinding.CarListItemBinding
 import com.example.autohub.domain.model.CarVo
 
-
 class CarAdapter(private val onAdapterItemClick: OnAdapterItemClick<CarVo>) :
-    RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
-
-    var carList = emptyList<CarVo>()
-        set(value) {
-            val callback = object : DiffUtil.Callback() {
-                override fun getOldListSize(): Int {
-                    return field.size
-                }
-
-                override fun getNewListSize(): Int {
-                    return value.size
-                }
-
-                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                    return field[oldItemPosition] == value[newItemPosition]
-                }
-
-                override fun areContentsTheSame(
-                    oldItemPosition: Int,
-                    newItemPosition: Int
-                ): Boolean {
-                    return field[oldItemPosition] == value[newItemPosition]
-                }
-            }
-            val difResult = DiffUtil.calculateDiff(callback)
-            difResult.dispatchUpdatesTo(this)
-            field = value
-        }
+    ListAdapter<CarVo, CarAdapter.CarViewHolder>(DiffUtilCarCallback()) {
 
     class CarViewHolder(
         private val binding: CarListItemBinding
@@ -62,13 +35,14 @@ class CarAdapter(private val onAdapterItemClick: OnAdapterItemClick<CarVo>) :
     }
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-        holder.bind(carList[position])
+        holder.bind(getItem(position))
         holder.itemView.setOnClickListener {
-            onAdapterItemClick.onClick(carList[position])
+            onAdapterItemClick.onClick(getItem(position))
         }
     }
+}
 
-    override fun getItemCount(): Int {
-        return carList.size
-    }
+class DiffUtilCarCallback : DiffUtil.ItemCallback<CarVo>() {
+    override fun areItemsTheSame(oldItem: CarVo, newItem: CarVo) = oldItem == newItem
+    override fun areContentsTheSame(oldItem: CarVo, newItem: CarVo) = oldItem == newItem
 }

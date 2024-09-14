@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentHomeBinding
-import com.example.autohub.ui.MainActivity
+import com.example.autohub.ui.activity.MainActivity
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.adapters.CarAdapter
 import kotlinx.coroutines.launch
@@ -20,37 +22,65 @@ import org.koin.core.parameter.parametersOf
 
 class HomeFragment : Fragment(), ScreenSwitchable {
 
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = requireNotNull(_binding)
 
-    private lateinit var sortAdapter: ArrayAdapter<String>
+    private var _sortAdapter: ArrayAdapter<String>? = null
+    private val sortAdapter get() = requireNotNull(_sortAdapter)
 
-    private lateinit var carAdapter: CarAdapter
+    private var _carAdapter: CarAdapter? = null
+    private val carAdapter get() = requireNotNull(_carAdapter)
 
     private val homeViewModel by viewModel<HomeViewModel> { parametersOf(this) }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        lifecycle.addObserver((activity as MainActivity).MainBottomNavManager())
-        binding = FragmentHomeBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        sortAdapter = ArrayAdapter(
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        _sortAdapter = ArrayAdapter(
             requireContext(),
             R.layout.sort_spinner_item,
             resources.getStringArray(R.array.sort_array)
         )
 
+        _carAdapter = CarAdapter { item ->
+            val args = HomeFragmentDirections.actionHomeFragmentToCarDetailsFragment(item)
+            findNavController().navigate(args)
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = FragmentHomeBinding.inflate(layoutInflater).also {
+        lifecycle.addObserver((activity as MainActivity).MainBottomNavManager())
+        _binding = it
+        setViews()
+        setListeners()
+    }.root
+
+    private fun setViews() {
+        binding.sortSpinner.adapter = sortAdapter
+        binding.carList.adapter = carAdapter
+
         sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        binding.sortSpinner.adapter = sortAdapter
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                homeViewModel.carsStateFlow.collect { records ->
+                    binding.let {
+                        carAdapter.submitList(records.list)
+                        it.carCounter.text = if (records.list.isEmpty()) {
+                            "0 offers"
+                        } else {
+                            "${records.list.size} offers"
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    private fun setListeners() {
         binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -58,7 +88,7 @@ class HomeFragment : Fragment(), ScreenSwitchable {
                 position: Int,
                 id: Long
             ) {
-                view?.let {
+                binding.let {
                     val selectedSortFilter =
                         when (parent.getItemAtPosition(position).toString()) {
                             "mileage min" -> "mileage:asc"
@@ -66,37 +96,16 @@ class HomeFragment : Fragment(), ScreenSwitchable {
                             "price max" -> "price:desc"
                             else -> ""
                         }
-
-                    lifecycleScope.launch {
-                        if (selectedSortFilter.isEmpty()) homeViewModel.get()
-                        else homeViewModel.sort(selectedSortFilter)
-                    }
+                    if (selectedSortFilter.isEmpty()) homeViewModel.get()
+                    else homeViewModel.sort(selectedSortFilter)
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        carAdapter = CarAdapter { item ->
-            val args = HomeFragmentDirections.actionHomeFragmentToCarDetailsFragment(item)
-            findNavController().navigate(args)
-        }
-
-        binding.carList.adapter = carAdapter
-
-        homeViewModel.carsLiveData.observe(viewLifecycleOwner) { records ->
-            carAdapter.carList = records.list
-            binding.carCounter.text = if (records.list.isEmpty()) {
-                "0 offers"
-            } else {
-                "${records.list.size} offers"
-            }
-        }
-
         binding.noConnectionPlaceHolder.retryButton.setOnClickListener {
-            lifecycleScope.launch {
-                homeViewModel.get()
-            }
+            homeViewModel.get()
         }
 
         binding.fragmentHomeToolbar.settingsButton.setOnClickListener {
@@ -121,11 +130,25 @@ class HomeFragment : Fragment(), ScreenSwitchable {
     }
 
     override fun showProgressBar() {
-        binding.noConnectionPlaceHolder.root.visibility = View.GONE
-        binding.progressBarPlaceHolder.root.visibility = View.VISIBLE
+        with(binding) {
+            noConnectionPlaceHolder.root.visibility = View.GONE
+            progressBarPlaceHolder.root.visibility = View.VISIBLE
+        }
     }
+
 
     override fun hideProgressBar() {
         binding.progressBarPlaceHolder.root.visibility = View.GONE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _sortAdapter = null
+        _carAdapter = null
     }
 }

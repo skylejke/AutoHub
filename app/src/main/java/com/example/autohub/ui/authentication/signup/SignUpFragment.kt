@@ -6,30 +6,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentSignUpBinding
-import com.example.autohub.ui.MainActivity
+import com.example.autohub.ui.activity.MainActivity
+import com.example.autohub.ui.authentication.AuthState
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class SignUpFragment : Fragment() {
 
-    private lateinit var binding: FragmentSignUpBinding
+    private var _binding: FragmentSignUpBinding? = null
+    private val binding get() = requireNotNull(_binding)
 
     private val signUpViewModel by viewModel<SignUpViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        lifecycle.addObserver((activity as MainActivity).AuthBottomNavManager())
-        binding = FragmentSignUpBinding.inflate(layoutInflater)
-        return binding.root
-    }
+    ): View = FragmentSignUpBinding.inflate(layoutInflater)
+        .also {
+            lifecycle.addObserver((activity as MainActivity).AuthBottomNavManager())
+            _binding = it
+            setListeners()
+        }.root
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun setListeners() {
 
         binding.signUpBtn.setOnClickListener {
 
@@ -46,18 +50,31 @@ class SignUpFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            signUpViewModel.signUpUser(email, password).observe(viewLifecycleOwner) { success ->
-                if (success) {
-                    Toast.makeText(requireContext(), "Account created", Toast.LENGTH_SHORT)
-                        .show()
-                    findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
-                } else {
-                    Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT)
-                        .show()
+            lifecycleScope.launch {
+                signUpViewModel.signUpUser(email, password).collect { state ->
+                    when (state) {
+                        is AuthState.Loading -> {
+                            // "Сделать индикатор загрузки или что-то подобное"
+                        }
+
+                        is AuthState.Success -> {
+                            Toast.makeText(requireContext(), "Account created", Toast.LENGTH_SHORT)
+                                .show()
+                            findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
+                        }
+
+                        is AuthState.Error -> {
+                            Toast.makeText(
+                                requireContext(),
+                                "Authentication failed",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }
+                    }
                 }
             }
         }
-
         binding.signInBtn.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
         }
@@ -65,5 +82,10 @@ class SignUpFragment : Fragment() {
         binding.continueAsAGuestBtn.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

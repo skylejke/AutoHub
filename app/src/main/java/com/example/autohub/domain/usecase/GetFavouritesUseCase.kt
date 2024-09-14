@@ -1,11 +1,11 @@
 package com.example.autohub.domain.usecase
 
-import androidx.lifecycle.LiveData
 import com.example.autohub.domain.model.CarVo
 import com.example.autohub.domain.repository.CarDetailsRepository
+import kotlinx.coroutines.flow.StateFlow
 
 class GetFavouritesUseCase(private val carDetailsRepository: CarDetailsRepository) {
-    fun execute(): LiveData<List<CarVo>> {
+    fun execute(): StateFlow<List<CarVo>> {
         return carDetailsRepository.getFavourites()
     }
 }

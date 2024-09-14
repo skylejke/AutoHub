@@ -1,5 +1,6 @@
 package com.example.autohub.di
 
+import com.example.autohub.ui.activity.MainActivityViewModel
 import com.example.autohub.ui.ScreenSwitchable
 import com.example.autohub.ui.authentication.signin.SignInViewModel
 import com.example.autohub.ui.authentication.signup.SignUpViewModel
@@ -14,11 +15,10 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    viewModel { (screenSwitchable: ScreenSwitchable) ->
+    viewModel<HomeViewModel> {
         HomeViewModel(
             getCarsUseCase = get(),
-            sortCarsUseCase = get(),
-            screenSwitchable = screenSwitchable
+            sortCarsUseCase = get()
         )
     }
 
@@ -56,6 +56,15 @@ val appModule = module {
     }
 
     viewModel<SettingsViewModel> {
-        SettingsViewModel(signOutUseCase = get(), getCurrentUserUseCase = get())
+        SettingsViewModel(
+            signOutUseCase = get(),
+            getCurrentUserUseCase = get(),
+            getAppThemeUseCase = get(),
+            changeAppThemeUseCase = get()
+        )
+    }
+
+    viewModel<MainActivityViewModel> {
+        MainActivityViewModel(getAppThemeUseCase = get())
     }
 }

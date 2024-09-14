@@ -1,20 +1,29 @@
 package com.example.autohub.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.example.autohub.data.storage.CarDetailsStorage
 import com.example.autohub.data.storage.model.CarDto
 import com.example.autohub.domain.model.CarVo
 import com.example.autohub.domain.repository.CarDetailsRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
 class CarDetailsRepositoryImpl(private val carDetailsStorage: CarDetailsStorage) :
     CarDetailsRepository {
 
-    override fun getFavourites(): LiveData<List<CarVo>> {
+    override fun getFavourites(): StateFlow<List<CarVo>> {
         return carDetailsStorage.getFavourites().map { mapToDomainFavourites(it) }
+            .stateIn(
+                scope = CoroutineScope(Dispatchers.IO),
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = emptyList()
+            )
     }
 
-    override fun checkIfCarIsFavoutrite(carVo: CarVo): LiveData<Boolean> {
+    override fun checkIfCarIsFavoutrite(carVo: CarVo): StateFlow<Boolean> {
         return carDetailsStorage.checkIfCarIsFavoutrite(mapToStorage(carVo))
     }
 

@@ -1,22 +1,22 @@
 package com.example.autohub.ui.settings
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentSettingsBinding
-import com.example.autohub.ui.MainActivity.Companion.DARK_THEME_ENABLED_KEY
-import com.example.autohub.ui.MainActivity.Companion.THEME_PREFERENCES
-import com.example.autohub.ui.MainActivity.Companion.applyTheme
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : Fragment() {
 
-    private lateinit var binding: FragmentSettingsBinding
+    private var _binding: FragmentSettingsBinding? = null
+    private val binding get() = requireNotNull(_binding)
 
     private val settingsViewModel by viewModel<SettingsViewModel>()
 
@@ -24,34 +24,38 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentSettingsBinding.inflate(layoutInflater)
-        return binding.root
+    ): View = FragmentSettingsBinding.inflate(layoutInflater).also {
+        _binding = it
+        setViews()
+        setListeners()
+    }.root
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val sharedPreferences =
-            requireActivity().getSharedPreferences(THEME_PREFERENCES, Context.MODE_PRIVATE)
-        val isDarkThemeEnabled = sharedPreferences.getBoolean(DARK_THEME_ENABLED_KEY, false)
-
-        binding.settingsContainer.darkThemeSwitch.isChecked = isDarkThemeEnabled
-
-        settingsViewModel.getCurrentUser().observe(viewLifecycleOwner) { user ->
-            if (user != null) {
-                binding.username.text = user.email
-                binding.logoutButton.visibility = View.VISIBLE
-                binding.logInButton.visibility = View.GONE
-            } else {
-                binding.logoutButton.visibility = View.GONE
-                binding.logInButton.visibility = View.VISIBLE
+    private fun setViews() {
+        lifecycleScope.launch {
+            launch {
+                settingsViewModel.getAppTheme().collect { isDarkThemeEnabled ->
+                    binding.settingsContainer.darkThemeSwitch.isChecked = isDarkThemeEnabled
+                }
+            }
+            launch {
+                settingsViewModel.getCurrentUser().collect { user ->
+                    binding.username.text =
+                        user?.email ?: getString(R.string.log_in_to_get_additional_features)
+                    binding.logoutButton.isVisible = user != null
+                    binding.logInButton.isVisible = user == null
+                }
             }
         }
+    }
 
-        binding.settingsContainer.darkThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            sharedPreferences.edit().putBoolean(DARK_THEME_ENABLED_KEY, isChecked).apply()
-            applyTheme(isChecked)
+    private fun setListeners() {
+        binding.settingsContainer.darkThemeSwitch.setOnClickListener {
+            settingsViewModel.changeAppTheme(binding.settingsContainer.darkThemeSwitch.isChecked)
         }
 
         binding.settingsContainer.aboutApp.setOnClickListener {

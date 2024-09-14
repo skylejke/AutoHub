@@ -6,38 +6,42 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentCarBinding
 import com.example.autohub.ui.adapters.CarPhotosAdapter
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CarDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentCarBinding
+    private var _binding: FragmentCarBinding? = null
+    private val binding get() = requireNotNull(_binding)
+
+    private var _carPhotosAdapter: CarPhotosAdapter? = null
+    private val carPhotosAdapter get() = requireNotNull(_carPhotosAdapter)
 
     private val args: CarDetailsFragmentArgs by navArgs()
 
     private val carDetailsViewModel by viewModel<CarDetailsViewModel>()
 
-    private lateinit var carPhotosAdapter: CarPhotosAdapter
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        _carPhotosAdapter = CarPhotosAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentCarBinding.inflate(layoutInflater)
-        return binding.root
-    }
+    ): View = FragmentCarBinding.inflate(layoutInflater).also {
+        _binding = it
+        setViews()
+        setListeners()
+    }.root
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        carPhotosAdapter = CarPhotosAdapter()
-
-        carPhotosAdapter.carPhotoList = args.car.photoUrls
-
+    private fun setViews() {
         binding.carTitleContainer.carPhotos.adapter = carPhotosAdapter
 
         with(binding.carCharacteristicsContainer) {
@@ -54,7 +58,50 @@ class CarDetailsFragment : Fragment() {
             price.text = args.car.price
         }
 
-        val carMap = hashMapOf(
+        carPhotosAdapter.submitList(args.car.photoUrls)
+
+        var isFavorite = false
+
+        lifecycleScope.launch {
+            carDetailsViewModel.checkIfCarIsFavoutrite(args.car)
+                .collect { isInFavouriteList ->
+                    isFavorite = isInFavouriteList
+                    binding.fragmentCarToolbar.favIcon.setBackgroundResource(if (isFavorite) R.drawable.favorite else R.drawable.favorite_border)
+                }
+        }
+
+        binding.fragmentCarToolbar.favIcon.setOnClickListener {
+            lifecycleScope.launch {
+                carDetailsViewModel.getCurrentUser().collect { user ->
+                    if (user == null) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Log in to add cars to your favorites",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return@collect
+                    }
+                    isFavorite = !isFavorite
+                    if (!isFavorite) {
+                        carDetailsViewModel.deleteFromFavourite(args.car.id.toString())
+                        binding.fragmentCarToolbar.favIcon.setBackgroundResource(R.drawable.favorite_border)
+                        return@collect
+                    }
+                    carDetailsViewModel.addToFavourite(args.car.id.toString(), getCarMap())
+                    binding.fragmentCarToolbar.favIcon.setBackgroundResource(R.drawable.favorite)
+                }
+            }
+        }
+    }
+
+    private fun setListeners() {
+        binding.fragmentCarToolbar.backIcon.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun getCarMap(): HashMap<String, Any> {
+        return hashMapOf(
             "bodyType" to args.car.bodyType,
             "condition" to args.car.condition,
             "displayColor" to args.car.displayColor,
@@ -68,51 +115,15 @@ class CarDetailsFragment : Fragment() {
             "vin" to args.car.vin,
             "year" to args.car.year
         )
+    }
 
-        var isFavorite = false
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
-
-        carDetailsViewModel.checkIfCarIsFavoutrite(args.car)
-            .observe(viewLifecycleOwner) { isInFavouriteList ->
-                isFavorite = isInFavouriteList ?: false
-                binding.fragmentCarToolbar.favIcon.setBackgroundResource(if (isFavorite) R.drawable.favorite else R.drawable.favorite_border)
-            }
-
-        binding.fragmentCarToolbar.favIcon.setOnClickListener {
-            carDetailsViewModel.getCurrentUser().observe(viewLifecycleOwner) { user ->
-                if (user != null) {
-                    isFavorite = !isFavorite
-                    if (isFavorite) {
-                        carDetailsViewModel.addToFavourite(args.car.id.toString(), carMap)
-                        binding.fragmentCarToolbar.favIcon.setBackgroundResource(R.drawable.favorite)
-                        Toast.makeText(
-                            requireContext(),
-                            "Added car to favourite",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    } else {
-                        carDetailsViewModel.deleteFromFavourite(args.car.id.toString())
-                        binding.fragmentCarToolbar.favIcon.setBackgroundResource(R.drawable.favorite_border)
-                        Toast.makeText(
-                            requireContext(),
-                            "Removed car from favourite",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    }
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Log in to add cars to your favorites",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
-
-        binding.fragmentCarToolbar.backIcon.setOnClickListener {
-            findNavController().popBackStack()
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        _carPhotosAdapter = null
     }
 }

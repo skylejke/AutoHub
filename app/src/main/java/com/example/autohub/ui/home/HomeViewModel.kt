@@ -1,76 +1,43 @@
 package com.example.autohub.ui.home
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.autohub.domain.model.RecordsVo
 import com.example.autohub.domain.usecase.GetCarsUseCase
 import com.example.autohub.domain.usecase.SortCarsUseCase
-import com.example.autohub.ui.ScreenSwitchable
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getCarsUseCase: GetCarsUseCase,
     private val sortCarsUseCase: SortCarsUseCase,
-    private val screenSwitchable: ScreenSwitchable
 ) : ViewModel() {
 
-    private val _carsLiveData = MutableLiveData<RecordsVo>()
-    val carsLiveData: LiveData<RecordsVo> = _carsLiveData
+    private val _carsStateFlow = MutableStateFlow(RecordsVo(emptyList()))
+    val carsStateFlow: StateFlow<RecordsVo> = _carsStateFlow
 
-    suspend fun get() {
-        withContext(Dispatchers.Main) {
-            screenSwitchable.showProgressBar()
+    fun get() {
+        viewModelScope.launch {
             try {
                 val records: RecordsVo = getCarsUseCase.execute()
-                _carsLiveData.value = records
-                if (records.list.isEmpty()) {
-                    screenSwitchable.hideError()
-                    screenSwitchable.showNoData()
-                } else {
-                    screenSwitchable.hideError()
-                    screenSwitchable.showData()
-
-                }
+                _carsStateFlow.value = records
             } catch (e: Exception) {
                 Log.e("ApiError", e.message.toString())
-                _carsLiveData.value = RecordsVo(emptyList())
-                screenSwitchable.showError()
-            } finally {
-                screenSwitchable.hideProgressBar()
+                _carsStateFlow.value = RecordsVo(emptyList())
             }
         }
     }
 
-    suspend fun sort(sortFilter: String) {
-        withContext(Dispatchers.Main) {
-            screenSwitchable.showProgressBar()
-        }
-        try {
-            val records: RecordsVo = sortCarsUseCase.execute(sortFilter)
-            _carsLiveData.value = records
-            if (records.list.isEmpty()) {
-                withContext(Dispatchers.Main) {
-                    screenSwitchable.hideError()
-                    screenSwitchable.showNoData()
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-                    screenSwitchable.hideError()
-                    screenSwitchable.showData()
-                }
-            }
-        } catch (e: Exception) {
-            withContext(Dispatchers.Main) {
+    fun sort(sortFilter: String) {
+        viewModelScope.launch {
+            try {
+                val records: RecordsVo = sortCarsUseCase.execute(sortFilter)
+                _carsStateFlow.value = records
+            } catch (e: Exception) {
                 Log.e("ApiError", e.message.toString())
-                _carsLiveData.value = RecordsVo(emptyList())
-                screenSwitchable.showError()
-            }
-        } finally {
-            withContext(Dispatchers.Main) {
-                screenSwitchable.hideProgressBar()
+                _carsStateFlow.value = RecordsVo(emptyList())
             }
         }
     }

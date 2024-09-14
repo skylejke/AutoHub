@@ -6,24 +6,30 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.R
 import com.example.autohub.databinding.FragmentSignInBinding
-import com.example.autohub.ui.MainActivity
+import com.example.autohub.ui.activity.MainActivity
+import com.example.autohub.ui.authentication.AuthState
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class SignInFragment : Fragment() {
 
-    private lateinit var binding: FragmentSignInBinding
+    private var _binding: FragmentSignInBinding? = null
+    private val binding get() = requireNotNull(_binding)
 
     private val signInViewModel by viewModel<SignInViewModel>()
 
     override fun onStart() {
         super.onStart()
-        signInViewModel.getCurrentUser().observe(viewLifecycleOwner) { user ->
-            if (user != null) {
-                findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+        lifecycleScope.launch {
+            signInViewModel.getCurrentUser().collect { user ->
+                if (user != null) {
+                    findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+                }
             }
         }
     }
@@ -31,15 +37,13 @@ class SignInFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View = FragmentSignInBinding.inflate(layoutInflater).also {
         lifecycle.addObserver((activity as MainActivity).AuthBottomNavManager())
-        binding = FragmentSignInBinding.inflate(layoutInflater)
-        return binding.root
-    }
+        _binding = it
+        setListeners()
+    }.root
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    private fun setListeners() {
         binding.signInBtn.setOnClickListener {
 
             val email = binding.emailEt.text.toString()
@@ -55,24 +59,43 @@ class SignInFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            signInViewModel.signInUser(email, password).observe(viewLifecycleOwner) { success ->
-                if (success) {
-                    Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT)
-                        .show()
-                    findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
-                } else {
-                    Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT)
-                        .show()
+            lifecycleScope.launch {
+                signInViewModel.signInUser(email, password).collect { state ->
+                    when (state) {
+                        is AuthState.Loading -> {
+                            // "Сделать индикатор загрузки или сделайте что-то подобное"
+                        }
+
+                        is AuthState.Success -> {
+                            Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT)
+                                .show()
+                            findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+                        }
+
+                        is AuthState.Error -> {
+                            Toast.makeText(
+                                requireContext(),
+                                "Authentication failed",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
                 }
             }
+
         }
 
         binding.signUpBtn.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
         }
 
-        binding.continueAsAGuestBtn.setOnClickListener{
+        binding.continueAsAGuestBtn.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

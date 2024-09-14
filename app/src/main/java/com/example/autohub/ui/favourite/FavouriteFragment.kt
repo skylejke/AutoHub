@@ -4,54 +4,67 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.autohub.databinding.FragmentFavouriteBinding
 import com.example.autohub.ui.adapters.CarAdapter
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavouriteFragment : Fragment() {
 
-    private lateinit var binding: FragmentFavouriteBinding
+    private var _binding: FragmentFavouriteBinding? = null
+    private val binding get() = requireNotNull(_binding)
 
-    private lateinit var carAdapter: CarAdapter
+    private var _carAdapter: CarAdapter? = null
+    private val carAdapter get() = requireNotNull(_carAdapter)
 
     private val favouriteViewModel by viewModel<FavouriteViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        _carAdapter = CarAdapter { item ->
+            val args = FavouriteFragmentDirections.actionFavouriteFragmentToCarDetailsFragment(item)
+            findNavController().navigate(args)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentFavouriteBinding.inflate(layoutInflater)
-        return binding.root
-    }
+    ): View = FragmentFavouriteBinding.inflate(layoutInflater).also {
+        _binding = it
+        setViews()
+    }.root
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        carAdapter = CarAdapter { item ->
-            val args =
-                FavouriteFragmentDirections.actionFavouriteFragmentToCarDetailsFragment(item)
-            findNavController().navigate(args)
-        }
-
+    private fun setViews() {
         binding.favouriteList.adapter = carAdapter
+        favouriteViewModel.refreshCurrentUser()
 
-        favouriteViewModel.currentUser.observe(viewLifecycleOwner) { user ->
-            if (user != null) {
-                favouriteViewModel.carsLiveData.observe(viewLifecycleOwner) { favouriteList ->
-                    carAdapter.carList = favouriteList
-                    if (carAdapter.carList.isEmpty()) {
-                        binding.emptyFavouritePlaceHolder.root.visibility = View.VISIBLE
-                    } else {
-                        binding.emptyFavouritePlaceHolder.root.visibility = View.GONE
-                    }
-                }
-            } else {
-                binding.notAuthorizedUserPlaceHolder.root.visibility = View.VISIBLE
+        viewLifecycleOwner.lifecycleScope.launch {
+            favouriteViewModel.currentUser.collect { user ->
+                binding.notAuthorizedUserPlaceHolder.root.isVisible = user == null
             }
         }
-        favouriteViewModel.refreshCurrentUser()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            favouriteViewModel.carsStateFlow.collect { favouriteList ->
+                carAdapter.submitList(favouriteList)
+                binding.emptyFavouritePlaceHolder.root.isVisible = carAdapter.itemCount == 0
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _carAdapter = null
     }
 }

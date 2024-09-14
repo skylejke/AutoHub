@@ -1,11 +1,11 @@
 package com.example.autohub.domain.repository
 
-import androidx.lifecycle.LiveData
 import com.example.autohub.domain.model.CarVo
+import kotlinx.coroutines.flow.StateFlow
 
 interface CarDetailsRepository {
-    fun getFavourites(): LiveData<List<CarVo>>
-    fun checkIfCarIsFavoutrite(carVo: CarVo):LiveData<Boolean>
+    fun getFavourites(): StateFlow<List<CarVo>>
+    fun checkIfCarIsFavoutrite(carVo: CarVo): StateFlow<Boolean>
     fun addToFavourite(id: String, carMap: HashMap<String, Any>)
     fun deleteFromFavourite(id: String)
 }

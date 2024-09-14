@@ -1,31 +1,37 @@
-package com.example.autohub.ui
+package com.example.autohub.ui.activity
 
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.autohub.R
 import com.example.autohub.databinding.ActivityMainBinding
-import com.google.firebase.database.collection.LLRBNode.Color
-
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val mainActivityViewModel by viewModel<MainActivityViewModel>()
+
+    private fun applyTheme(isDarkThemeEnabled: Boolean) {
+        if (isDarkThemeEnabled) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
@@ -48,11 +54,11 @@ class MainActivity : AppCompatActivity() {
             WindowInsetsCompat.CONSUMED
         }
 
-
-        val sharedPreferences = getSharedPreferences(THEME_PREFERENCES, Context.MODE_PRIVATE)
-        val isDarkThemeEnabled = sharedPreferences.getBoolean(DARK_THEME_ENABLED_KEY, false)
-
-        applyTheme(isDarkThemeEnabled)
+        lifecycleScope.launch {
+            mainActivityViewModel.getAppTheme().collect { isDarkThemeEnabled ->
+                applyTheme(isDarkThemeEnabled)
+            }
+        }
     }
 
     override fun onStart() {
@@ -90,21 +96,6 @@ class MainActivity : AppCompatActivity() {
             if (event == Lifecycle.Event.ON_CREATE) {
                 show()
             }
-        }
-    }
-
-    companion object {
-        const val THEME_PREFERENCES = "ThemePrefs"
-
-        const val DARK_THEME_ENABLED_KEY = "isDarkThemeEnabled"
-
-        fun applyTheme(isDarkThemeEnabled: Boolean) {
-            val mode = if (isDarkThemeEnabled) {
-                AppCompatDelegate.MODE_NIGHT_YES
-            } else {
-                AppCompatDelegate.MODE_NIGHT_NO
-            }
-            AppCompatDelegate.setDefaultNightMode(mode)
         }
     }
 }
