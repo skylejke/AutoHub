@@ -1,21 +1,14 @@
 package com.example.autohub.di
 
-import com.example.autohub.domain.usecase.AddToFavouriteUseCase
-import com.example.autohub.domain.usecase.ChangeAppThemeUseCase
-import com.example.autohub.domain.usecase.CheckIfCarIsFavoutriteUseCase
-import com.example.autohub.domain.usecase.ClearSearchHistoryUseCase
-import com.example.autohub.domain.usecase.DeleteFromFavouriteUseCase
-import com.example.autohub.domain.usecase.GetAppThemeUseCase
-import com.example.autohub.domain.usecase.GetCarsUseCase
-import com.example.autohub.domain.usecase.GetCurrentUserUseCase
-import com.example.autohub.domain.usecase.GetFavouritesUseCase
-import com.example.autohub.domain.usecase.LoadSearchHistoryUseCase
-import com.example.autohub.domain.usecase.SearchCarsByMakeUseCase
-import com.example.autohub.domain.usecase.SignInUseCase
-import com.example.autohub.domain.usecase.SignOutUseCase
-import com.example.autohub.domain.usecase.SignUpUseCase
-import com.example.autohub.domain.usecase.SortCarsUseCase
-import com.example.autohub.domain.usecase.UpdateSearchHistoryUseCase
+import ru.autohub.feature.car_offers.usecase.AddToFavouriteUseCase
+import ru.autohub.feature.car_offers.usecase.CheckIfCarIsFavoutriteUseCase
+import ru.autohub.feature.car_offers.usecase.DeleteFromFavouriteUseCase
+import ru.autohub.feature.car_offers.usecase.GetCarsUseCase
+import ru.autohub.feature.common.usecase.GetCurrentUserUseCase
+import ru.autohub.feature.car_offers.usecase.GetFavouritesUseCase
+import ru.autohub.feature.authentication.usecase.SignInUseCase
+import ru.autohub.feature.authentication.usecase.SignUpUseCase
+import ru.autohub.feature.car_offers.usecase.SortCarsUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
@@ -28,8 +21,8 @@ val domainModule = module {
         SortCarsUseCase(carRepository = get())
     }
 
-    factory<SearchCarsByMakeUseCase> {
-        SearchCarsByMakeUseCase(carRepository = get())
+    factory<ru.autohub.feature.search.usecase.SearchCarsByMakeUseCase> {
+        ru.autohub.feature.search.usecase.SearchCarsByMakeUseCase(carRepository = get())
     }
 
     factory<GetFavouritesUseCase> {
@@ -44,8 +37,8 @@ val domainModule = module {
         CheckIfCarIsFavoutriteUseCase(carDetailsRepository = get())
     }
 
-    factory<ClearSearchHistoryUseCase> {
-        ClearSearchHistoryUseCase(searchHistoryRepository = get())
+    factory<ru.autohub.feature.search.usecase.ClearSearchHistoryUseCase> {
+        ru.autohub.feature.search.usecase.ClearSearchHistoryUseCase(searchHistoryRepository = get())
     }
 
     factory<DeleteFromFavouriteUseCase> {
@@ -56,31 +49,31 @@ val domainModule = module {
         GetCurrentUserUseCase(authReposotory = get())
     }
 
-    factory<LoadSearchHistoryUseCase> {
-        LoadSearchHistoryUseCase(searchHistoryRepository = get())
+    factory<ru.autohub.feature.search.usecase.LoadSearchHistoryUseCase> {
+        ru.autohub.feature.search.usecase.LoadSearchHistoryUseCase(searchHistoryRepository = get())
     }
 
     factory<SignInUseCase> {
         SignInUseCase(authReposotory = get())
     }
 
-    factory<SignOutUseCase> {
-        SignOutUseCase(authReposotory = get())
+    factory<ru.autohub.feature.settings.usecase.SignOutUseCase> {
+        ru.autohub.feature.settings.usecase.SignOutUseCase(authReposotory = get())
     }
 
     factory<SignUpUseCase> {
         SignUpUseCase(authReposotory = get())
     }
 
-    factory<UpdateSearchHistoryUseCase> {
-        UpdateSearchHistoryUseCase(searchHistoryRepository = get())
+    factory<ru.autohub.feature.search.usecase.UpdateSearchHistoryUseCase> {
+        ru.autohub.feature.search.usecase.UpdateSearchHistoryUseCase(searchHistoryRepository = get())
     }
 
-    factory<GetAppThemeUseCase> {
-        GetAppThemeUseCase(settingsRepository = get())
+    factory<ru.autohub.feature.settings.usecase.GetAppThemeUseCase> {
+        ru.autohub.feature.settings.usecase.GetAppThemeUseCase(settingsRepository = get())
     }
 
-    factory<ChangeAppThemeUseCase> {
-        ChangeAppThemeUseCase(settingsRepository = get())
+    factory<ru.autohub.feature.settings.usecase.ChangeAppThemeUseCase> {
+        ru.autohub.feature.settings.usecase.ChangeAppThemeUseCase(settingsRepository = get())
     }
 }

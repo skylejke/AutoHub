@@ -1,0 +1,76 @@
+[versions]
+agpVersion = "8.5.2"
+
+appcompatVersion = "1.7.0"
+coilVersion = "2.7.0"
+constraintlayoutVersion = "2.1.4"
+coreKtxVersion = "1.13.1"
+coreVersion = "1.6.1"
+dataStoreVersion = "1.1.1"
+espressoCoreVersion = "3.6.1"
+firebaseAuthVersion = "23.0.0"
+firebaseFirestoreKtxVersion = "25.1.0"
+junit = "1.2.1"
+junitVersion = "4.13.2"
+koinVersion = "4.0.0"
+jetbrainsKotlinJvmVersion = "1.9.0"
+kotlinxSerializationJsonVersion = "1.7.3"
+lifecycleVersion = "2.8.6"
+materialVersion = "1.12.0"
+mockitoAndroidVersion = "5.14.1"
+mockitoCoreVersion = "5.14.1"
+mockitoKotlinVersion = "5.4.0"
+monitorVersion = "1.7.2"
+navVersion = "2.8.2"
+retrofitVersion = "2.11.0"
+roomVersion = "2.6.1"
+testngVersion = "7.10.2"
+kotlinVersion = "1.9.0"
+
+[libraries]
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayoutVersion" }
+androidx-core = { module = "androidx.test:core", version.ref = "coreVersion" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "dataStoreVersion" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStoreVersion" }
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCoreVersion" }
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junit" }
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleVersion" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleVersion" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleVersion" }
+androidx-monitor = { module = "androidx.test:monitor", version.ref = "monitorVersion" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navVersion" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navVersion" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
+coil = { module = "io.coil-kt:coil", version.ref = "coilVersion" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitVersion" }
+firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuthVersion" }
+firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestoreKtxVersion" }
+junit = { module = "junit:junit", version.ref = "junitVersion" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinVersion" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinVersion" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinVersion" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJsonVersion" }
+material = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCoreVersion" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlinVersion" }
+mockito-mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockitoAndroidVersion" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
+testng = { module = "org.testng:testng", version.ref = "testngVersion" }
+
+[plugins]
+android-library = { id = "com.android.library", version.ref = "agpVersion" }
+android-application = { id = "com.android.application", version.ref = "agpVersion" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvmVersion" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }
+android-dynamic-feature = { id = "com.android.dynamic-feature", version.ref = "agpVersion" }
+
+
+[bundles]
+koin = ["koin-android", "koin-core", "koin-test"]
+retrofit = ["retrofit", "converter-gson"]
+navigation = ["androidx-navigation-fragment-ktx", "androidx-navigation-ui-ktx"]
+lifecycle = ["androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewmodel-ktx", "androidx-lifecycle-livedata-ktx"]
+dataStore = ["androidx-datastore", "androidx-datastore-preferences"]

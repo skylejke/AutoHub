@@ -1,16 +1,14 @@
 package com.example.autohub.di
 
 import com.example.autohub.ui.activity.MainActivityViewModel
-import com.example.autohub.ui.ScreenSwitchable
-import com.example.autohub.ui.authentication.signin.SignInViewModel
-import com.example.autohub.ui.authentication.signup.SignUpViewModel
-import com.example.autohub.ui.cardetails.CarDetailsViewModel
-import com.example.autohub.ui.favourite.FavouriteViewModel
-import com.example.autohub.ui.home.HomeViewModel
-import com.example.autohub.ui.search.search.SearchViewModel
-import com.example.autohub.ui.search.searchresults.SearchResultsViewModel
-import com.example.autohub.ui.settings.SettingsViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
+import ru.autohub.feature.common.utils.ScreenSwitchable
+import ru.autohub.feature.authentication.ui.signin.SignInViewModel
+import ru.autohub.feature.authentication.ui.signup.SignUpViewModel
+import ru.autohub.feature.car_offers.ui.cardetails.CarDetailsViewModel
+import ru.autohub.feature.car_offers.ui.favourite.FavouriteViewModel
+import ru.autohub.feature.car_offers.ui.home.HomeViewModel
+import ru.autohub.feature.settings.ui.settings.SettingsViewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
@@ -43,16 +41,19 @@ val appModule = module {
         FavouriteViewModel(getFavouritesUseCase = get(), getCurrentUserUseCase = get())
     }
 
-    viewModel<SearchViewModel> {
-        SearchViewModel(
+    viewModel<ru.autohub.feature.search.ui.search.SearchViewModel> {
+        ru.autohub.feature.search.ui.search.SearchViewModel(
             loadSearchHistoryUseCase = get(),
             updateSearchHistoryUseCase = get(),
             clearSearchHistoryUseCase = get()
         )
     }
 
-    viewModel<SearchResultsViewModel> { (screenSwitchable: ScreenSwitchable) ->
-        SearchResultsViewModel(searchCarsByMakeUseCase = get(), screenSwitchable = screenSwitchable)
+    viewModel<ru.autohub.feature.search.ui.searchresults.SearchResultsViewModel> { (screenSwitchable: ScreenSwitchable) ->
+        ru.autohub.feature.search.ui.searchresults.SearchResultsViewModel(
+            searchCarsByMakeUseCase = get(),
+            screenSwitchable = screenSwitchable
+        )
     }
 
     viewModel<SettingsViewModel> {

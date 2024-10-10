@@ -1,66 +1,57 @@
 package com.example.autohub.di
 
-import com.example.autohub.data.repository.AuthRepositoryImpl
-import com.example.autohub.data.repository.CarDetailsRepositoryImpl
-import com.example.autohub.data.repository.CarRepositoryImpl
-import com.example.autohub.data.repository.SearchHistoryRepositoryImpl
-import com.example.autohub.data.repository.SettingsRepositoryImpl
-import com.example.autohub.data.storage.AuthStorage
-import com.example.autohub.data.storage.AuthStorageImpl
-import com.example.autohub.data.storage.CarDetailsStorage
-import com.example.autohub.data.storage.CarDetailsStorageImpl
-import com.example.autohub.data.storage.CarStorage
-import com.example.autohub.data.storage.CarStorageImpl
-import com.example.autohub.data.storage.SearchHistoryStorage
-import com.example.autohub.data.storage.SearchHistoryStorageImpl
-import com.example.autohub.data.storage.SettingsStorageImpl
-import com.example.autohub.data.storage.SettingsStorage
-import com.example.autohub.domain.repository.AuthReposotory
-import com.example.autohub.domain.repository.CarDetailsRepository
-import com.example.autohub.domain.repository.CarRepository
-import com.example.autohub.domain.repository.SearchHistoryRepository
-import com.example.autohub.domain.repository.SettingsRepository
 import org.koin.dsl.module
+import ru.autohub.core.storage.AuthStorage
+import ru.autohub.core.storage.CarDetailsStorage
+import ru.autohub.core.storage.CarStorage
+import ru.autohub.core.storage.SearchHistoryStorage
+import ru.autohub.core.storage.SettingsStorage
+import ru.autohub.core.storage.di.StorageProvider
+import ru.autohub.core.storage.repository.AuthReposotory
+import ru.autohub.core.storage.repository.CarDetailsRepository
+import ru.autohub.core.storage.repository.CarRepository
+import ru.autohub.core.storage.repository.SearchHistoryRepository
+import ru.autohub.core.storage.repository.SettingsRepository
 
 val dataModule = module {
 
     single<CarStorage> {
-        CarStorageImpl()
+        StorageProvider.provideCarStorage()
     }
 
     single<CarRepository> {
-        CarRepositoryImpl(carStorage = get())
+        StorageProvider.provideCarRepository(carStorage = get())
     }
 
     single<AuthStorage> {
-        AuthStorageImpl()
+        StorageProvider.provideAuthStorage()
     }
 
     single<AuthReposotory> {
-        AuthRepositoryImpl(authStorage = get())
+        StorageProvider.provideAuthRepository(authStorage = get())
     }
 
     single<CarDetailsStorage> {
-        CarDetailsStorageImpl()
+        StorageProvider.provideCarDetailsStorage()
     }
 
     single<CarDetailsRepository> {
-        CarDetailsRepositoryImpl(carDetailsStorage = get())
+        StorageProvider.provideCarDetailsRepository(carDetailsStorage = get())
     }
 
     single<SearchHistoryStorage> {
-        SearchHistoryStorageImpl(context = get())
+        StorageProvider.provideSearchHistoryStorage(context = get())
     }
 
     single<SearchHistoryRepository> {
-        SearchHistoryRepositoryImpl(searchHistoryStorage = get())
+        StorageProvider.provideSearchHistoryRepository(searchHistoryStorage = get())
     }
 
     single<SettingsStorage> {
-        SettingsStorageImpl(context = get())
+        StorageProvider.provideSettingsStorage(context = get())
     }
 
     single<SettingsRepository> {
-        SettingsRepositoryImpl(settingsStorage = get())
+        StorageProvider.provideSettingsRepository(settingsStorage = get())
     }
 }

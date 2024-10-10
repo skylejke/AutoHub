@@ -4,9 +4,9 @@ package com.example.autohub
 
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.autohub.data.database.Dao
-import com.example.autohub.data.database.DataBase
-import com.example.autohub.data.storage.model.SearchHistoryDto
+import ru.autohub.core.storage.database.Dao
+import ru.autohub.core.storage.database.DataBase
+import ru.autohub.core.storage.model.SearchHistoryDto
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert

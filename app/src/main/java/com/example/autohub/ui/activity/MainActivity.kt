@@ -2,12 +2,14 @@ package com.example.autohub.ui.activity
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -19,8 +21,10 @@ import com.example.autohub.R
 import com.example.autohub.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import ru.autohub.feature.authentication.AuthBottomNavManager
+import ru.autohub.feature.car_offers.HomeBottomNavManager
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AuthBottomNavManager, HomeBottomNavManager {
 
     private lateinit var binding: ActivityMainBinding
     private val mainActivityViewModel by viewModel<MainActivityViewModel>()
@@ -69,33 +73,19 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    inner class AuthBottomNavManager : LifecycleEventObserver {
-        private fun hide() {
-            binding.bottomNavigation.visibility = View.GONE
-        }
-
-        private fun show() {
-            binding.bottomNavigation.visibility = View.VISIBLE
-        }
-
-        override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-            if (event == Lifecycle.Event.ON_CREATE) {
-                hide()
-            } else if (event == Lifecycle.Event.ON_PAUSE) {
-                show()
-            }
-        }
+    override fun onAuthBottomNavStateChanged() {
+        hide()
     }
 
-    inner class MainBottomNavManager : LifecycleEventObserver {
-        private fun show() {
-            binding.bottomNavigation.visibility = View.VISIBLE
-        }
+    override fun onHomeBottomNavStateChanged() {
+        show()
+    }
 
-        override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-            if (event == Lifecycle.Event.ON_CREATE) {
-                show()
-            }
-        }
+    private fun hide() {
+        binding.bottomNavigation.isVisible = false
+    }
+
+    private fun show() {
+        binding.bottomNavigation.isVisible = true
     }
 }

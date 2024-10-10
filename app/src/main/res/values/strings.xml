@@ -50,8 +50,7 @@
     <string name="sort_by">Sort by</string>
     <string name="continue_as_a_guest">Continue as a guest</string>
     <string name="login">Login</string>
-    <string name="log_in_to_get_additional_features">Log in to get additional features</string>
-    <string name="log_in_to_add_cars_to_your_favorites">Log in to add cars to your favorites</string>
+
 
     <string-array name="makes">
         <item>Acura</item>
@@ -119,5 +118,6 @@
     <string name="back_button">Back button</string>
     <string name="add_to_favourite_button">Add to favourite button</string>
     <string name="settings_button">Settings button</string>
+    <string name="title_dynamicfeature">Module Title</string>
 
 </resources>
