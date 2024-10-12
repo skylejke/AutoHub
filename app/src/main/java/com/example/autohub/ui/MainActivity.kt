@@ -1,9 +1,7 @@
-package com.example.autohub.ui.activity
+package com.example.autohub.ui
 
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -11,9 +9,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -21,7 +16,7 @@ import com.example.autohub.R
 import com.example.autohub.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import ru.autohub.feature.authentication.AuthBottomNavManager
+import ru.autohub.feature.authentication.utils.AuthBottomNavManager
 import ru.autohub.feature.car_offers.HomeBottomNavManager
 
 class MainActivity : AppCompatActivity(), AuthBottomNavManager, HomeBottomNavManager {

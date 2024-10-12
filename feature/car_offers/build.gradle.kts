@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "ru.autohub.feature.car_offers"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 26

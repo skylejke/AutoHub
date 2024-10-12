@@ -1,13 +1,7 @@
-package com.example.autohub
+package com.example.autohub.utils
 
 import androidx.navigation.NavController
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
-import ru.autohub.feature.authentication.ui.signin.SignInFragment
-import ru.autohub.feature.common.utils.NavigableFragment
+import com.example.autohub.R
 import ru.autohub.navigation.Navigator
 
 class NavigatorImpl(private val navController: NavController) : Navigator {

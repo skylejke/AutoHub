@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import ru.autohub.feature.authentication.AuthBottomNavManager
+import ru.autohub.feature.authentication.utils.AuthBottomNavManager
 import ru.autohub.feature.authentication.databinding.FragmentSignInBinding
 import ru.autohub.feature.authentication.ui.AuthState
 import ru.autohub.feature.common.utils.NavigableFragment

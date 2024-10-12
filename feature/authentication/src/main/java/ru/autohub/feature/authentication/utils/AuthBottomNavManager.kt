@@ -1,8 +1,6 @@
-package ru.autohub.feature.authentication
+package ru.autohub.feature.authentication.utils
 
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 
 interface AuthBottomNavManager : LifecycleObserver {
     fun onAuthBottomNavStateChanged(

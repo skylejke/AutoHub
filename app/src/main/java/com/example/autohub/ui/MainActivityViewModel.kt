@@ -1,4 +1,4 @@
-package com.example.autohub.ui.activity
+package com.example.autohub.ui
 
 import androidx.lifecycle.ViewModel
 import ru.autohub.feature.settings.usecase.GetAppThemeUseCase

@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "ru.autohub.feature.common"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 26

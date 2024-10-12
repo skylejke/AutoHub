@@ -1,6 +1,6 @@
 package com.example.autohub.di
 
-import com.example.autohub.ui.activity.MainActivityViewModel
+import com.example.autohub.ui.MainActivityViewModel
 import ru.autohub.feature.common.utils.ScreenSwitchable
 import ru.autohub.feature.authentication.ui.signin.SignInViewModel
 import ru.autohub.feature.authentication.ui.signup.SignUpViewModel
