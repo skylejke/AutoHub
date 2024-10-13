@@ -9,7 +9,7 @@ import ru.autohub.feature.search.usecase.ClearSearchHistoryUseCase
 import ru.autohub.feature.search.usecase.LoadSearchHistoryUseCase
 import ru.autohub.feature.search.usecase.UpdateSearchHistoryUseCase
 
-class SearchViewModel(
+internal class SearchViewModel(
     private val loadSearchHistoryUseCase: LoadSearchHistoryUseCase,
     private val updateSearchHistoryUseCase: UpdateSearchHistoryUseCase,
     private val clearSearchHistoryUseCase: ClearSearchHistoryUseCase

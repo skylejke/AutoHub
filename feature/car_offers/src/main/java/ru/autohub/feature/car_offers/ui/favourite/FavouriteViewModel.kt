@@ -11,7 +11,7 @@ import ru.autohub.feature.car_offers.usecase.GetFavouritesUseCase
 import ru.autohub.feature.common.model.CarVo
 import ru.autohub.feature.common.usecase.GetCurrentUserUseCase
 
-class FavouriteViewModel(
+internal class FavouriteViewModel(
     private val getFavouritesUseCase: GetFavouritesUseCase,
     private val getCurrentUserUseCase: GetCurrentUserUseCase
 ) : ViewModel() {

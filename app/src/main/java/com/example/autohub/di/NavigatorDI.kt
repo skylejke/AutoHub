@@ -6,5 +6,7 @@ import ru.autohub.navigation.Navigator
 import org.koin.dsl.module
 
 val navigationModule = module {
-    factory<Navigator> { (navController: NavController) -> NavigatorImpl(navController) }
+    factory<Navigator> {
+        (navController: NavController) -> NavigatorImpl(navController)
+    }
 }

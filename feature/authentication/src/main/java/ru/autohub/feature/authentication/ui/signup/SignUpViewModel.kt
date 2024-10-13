@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import ru.autohub.feature.authentication.ui.AuthState
 import ru.autohub.feature.authentication.usecase.SignUpUseCase
 
-class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : ViewModel() {
+internal class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : ViewModel() {
 
     fun signUpUser(userEmail: String, userPassword: String): StateFlow<AuthState> {
         val result = MutableStateFlow<AuthState>(AuthState.Loading)

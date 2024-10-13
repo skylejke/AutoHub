@@ -1,5 +1,5 @@
 [versions]
-agpVersion = "8.5.2"
+agpVersion = "8.7.0"
 
 appcompatVersion = "1.7.0"
 coilVersion = "2.7.0"
@@ -14,6 +14,7 @@ junit = "1.2.1"
 junitVersion = "4.13.2"
 koinVersion = "4.0.0"
 jetbrainsKotlinJvmVersion = "1.9.0"
+kotlinxCoroutinesAndroidVersion = "1.9.0"
 kotlinxSerializationJsonVersion = "1.7.3"
 lifecycleVersion = "2.8.6"
 materialVersion = "1.12.0"
@@ -41,6 +42,7 @@ androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtim
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleVersion" }
 androidx-monitor = { module = "androidx.test:monitor", version.ref = "monitorVersion" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navVersion" }
+androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navVersion" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navVersion" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
@@ -52,6 +54,7 @@ junit = { module = "junit:junit", version.ref = "junitVersion" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinVersion" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinVersion" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinVersion" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroidVersion" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJsonVersion" }
 material = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCoreVersion" }

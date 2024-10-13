@@ -9,7 +9,7 @@ import ru.autohub.feature.authentication.ui.AuthState
 import ru.autohub.feature.authentication.usecase.SignInUseCase
 import ru.autohub.feature.common.usecase.GetCurrentUserUseCase
 
-class SignInViewModel(
+internal class SignInViewModel(
     private val signInUseCase: SignInUseCase,
     private val getCurrentUserUseCase: GetCurrentUserUseCase
 ) : ViewModel() {

@@ -17,7 +17,7 @@ import com.example.autohub.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.autohub.feature.authentication.utils.AuthBottomNavManager
-import ru.autohub.feature.car_offers.HomeBottomNavManager
+import ru.autohub.feature.car_offers.utils.HomeBottomNavManager
 
 class MainActivity : AppCompatActivity(), AuthBottomNavManager, HomeBottomNavManager {
 

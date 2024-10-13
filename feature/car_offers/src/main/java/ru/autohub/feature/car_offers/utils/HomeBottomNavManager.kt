@@ -1,8 +1,6 @@
-package ru.autohub.feature.car_offers
+package ru.autohub.feature.car_offers.utils
 
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 
 interface HomeBottomNavManager : LifecycleObserver {
     fun onHomeBottomNavStateChanged(

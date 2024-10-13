@@ -10,7 +10,7 @@ import ru.autohub.feature.common.utils.ScreenSwitchable
 import ru.autohub.feature.common.utils.withMainContext
 import ru.autohub.feature.search.usecase.SearchCarsByMakeUseCase
 
-class SearchResultsViewModel(
+internal class SearchResultsViewModel(
     private val searchCarsByMakeUseCase: SearchCarsByMakeUseCase,
     private val screenSwitchable: ScreenSwitchable
 ) : ViewModel() {

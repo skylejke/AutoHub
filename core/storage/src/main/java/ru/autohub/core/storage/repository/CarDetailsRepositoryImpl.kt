@@ -21,8 +21,8 @@ internal class CarDetailsRepositoryImpl(private val carDetailsStorage: CarDetail
             )
     }
 
-    override fun checkIfCarIsFavoutrite(carVo: CarDto): StateFlow<Boolean> {
-        return carDetailsStorage.checkIfCarIsFavoutrite(carVo)
+    override fun checkIfCarIsFavoutrite(carDto: CarDto): StateFlow<Boolean> {
+        return carDetailsStorage.checkIfCarIsFavoutrite(carDto)
     }
 
     override fun addToFavourite(id: String, carMap: HashMap<String, Any>) {
@@ -31,23 +31,6 @@ internal class CarDetailsRepositoryImpl(private val carDetailsStorage: CarDetail
 
     override fun deleteFromFavourite(id: String) {
         carDetailsStorage.deleteFromFavourite(id)
-    }
-
-    private fun mapToStorage(carVo: CarDto): CarDto {
-        return CarDto(
-            bodyType = carVo.bodyType,
-            condition = carVo.condition,
-            displayColor = carVo.displayColor,
-            id = carVo.id,
-            make = carVo.make,
-            mileage = carVo.mileage,
-            model = carVo.model,
-            photoUrls = carVo.photoUrls,
-            price = carVo.price,
-            primaryPhotoUrl = carVo.primaryPhotoUrl,
-            vin = carVo.vin,
-            year = carVo.year
-        )
     }
 
     private fun mapToDomainFavourites(carsDto: List<CarDto>): List<CarDto> {

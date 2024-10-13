@@ -10,7 +10,7 @@ import ru.autohub.feature.car_offers.usecase.DeleteFromFavouriteUseCase
 import ru.autohub.feature.common.model.CarVo
 import ru.autohub.feature.common.usecase.GetCurrentUserUseCase
 
-class CarDetailsViewModel(
+internal class CarDetailsViewModel(
     private val checkIfCarIsFavoutriteUseCase: CheckIfCarIsFavoutriteUseCase,
     private val addToFavouriteUseCase: AddToFavouriteUseCase,
     private val deleteFromFavouriteUseCase: DeleteFromFavouriteUseCase,

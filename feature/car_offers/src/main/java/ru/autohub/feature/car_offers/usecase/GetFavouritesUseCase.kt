@@ -10,7 +10,7 @@ import ru.autohub.core.storage.repository.CarDetailsRepository
 import ru.autohub.feature.common.model.CarVo
 import ru.autohub.feature.common.utils.mapToCarVoList
 
-class GetFavouritesUseCase(private val carDetailsRepository: CarDetailsRepository) {
+internal class GetFavouritesUseCase(private val carDetailsRepository: CarDetailsRepository) {
     fun execute(): StateFlow<List<CarVo>> {
         return carDetailsRepository.getFavourites().map {
             it.mapToCarVoList()

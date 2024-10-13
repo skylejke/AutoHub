@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.autohub.feature.common.usecase.GetCurrentUserUseCase
 import ru.autohub.feature.settings.usecase.ChangeAppThemeUseCase
-import ru.autohub.feature.settings.usecase.GetAppThemeUseCase
+import ru.autohub.feature.common.usecase.GetAppThemeUseCase
 import ru.autohub.feature.settings.usecase.SignOutUseCase
 
-class SettingsViewModel(
+internal class SettingsViewModel(
     private val signOutUseCase: SignOutUseCase,
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val getAppThemeUseCase: GetAppThemeUseCase,

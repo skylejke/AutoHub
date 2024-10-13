@@ -24,7 +24,7 @@ fun List<CarDto>.mapToCarVoList(): List<CarVo> = map { car ->
 
 fun RecordsDto.mapToRecordsVo(): RecordsVo = RecordsVo(list = list.mapToCarVoList())
 
-fun CarVo.mapToCarVo(): CarDto =
+fun CarVo.mapToCarDto(): CarDto =
     CarDto(
         bodyType = bodyType,
         condition = condition,

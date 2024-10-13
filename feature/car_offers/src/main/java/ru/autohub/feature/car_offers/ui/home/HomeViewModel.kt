@@ -10,7 +10,7 @@ import ru.autohub.feature.car_offers.usecase.GetCarsUseCase
 import ru.autohub.feature.car_offers.usecase.SortCarsUseCase
 import ru.autohub.feature.common.model.RecordsVo
 
-class HomeViewModel(
+internal class HomeViewModel(
     private val getCarsUseCase: GetCarsUseCase,
     private val sortCarsUseCase: SortCarsUseCase,
 ) : ViewModel() {

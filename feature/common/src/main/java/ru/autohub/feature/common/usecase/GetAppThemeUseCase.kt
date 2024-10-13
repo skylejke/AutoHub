@@ -1,4 +1,4 @@
-package ru.autohub.feature.settings.usecase
+package ru.autohub.feature.common.usecase
 
 import kotlinx.coroutines.flow.Flow
 import ru.autohub.core.storage.repository.SettingsRepository

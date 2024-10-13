@@ -13,7 +13,7 @@ import ru.autohub.core.storage.repository.CarRepository
 import ru.autohub.core.storage.repository.SearchHistoryRepository
 import ru.autohub.core.storage.repository.SettingsRepository
 
-val dataModule = module {
+val coreModule = module {
 
     single<CarStorage> {
         StorageProvider.provideCarStorage()

@@ -10,10 +10,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import ru.autohub.feature.car_offers.HomeBottomNavManager
+import ru.autohub.feature.car_offers.utils.HomeBottomNavManager
 import ru.autohub.feature.car_offers.R
 import ru.autohub.feature.car_offers.databinding.FragmentHomeBinding
 import ru.autohub.feature.common.adapters.CarAdapter

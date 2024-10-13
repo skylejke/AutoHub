@@ -16,6 +16,4 @@ internal class CarRepositoryImpl(private val carStorage: CarStorage) : CarReposi
     override suspend fun sortCars(sortFilter: String): RecordsDto {
         return carStorage.sortCars(sortFilter)
     }
-
-
 }
