@@ -1,6 +1,6 @@
-package com.example.autohub.di
+package ru.autohub.di
 
-import com.example.autohub.ui.MainActivityViewModel
+import ru.autohub.ui.MainActivityViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 

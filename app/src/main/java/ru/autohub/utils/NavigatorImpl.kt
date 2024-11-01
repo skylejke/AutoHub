@@ -1,7 +1,7 @@
-package com.example.autohub.utils
+package ru.autohub.utils
 
 import androidx.navigation.NavController
-import com.example.autohub.R
+import ru.autohub.R
 import ru.autohub.navigation.Navigator
 
 class NavigatorImpl(private val navController: NavController) : Navigator {

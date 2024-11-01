@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.example.autohub
+package ru.autohub
 
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry

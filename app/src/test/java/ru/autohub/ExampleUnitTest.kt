@@ -1,4 +1,4 @@
-package com.example.autohub
+package ru.autohub
 
 import org.junit.Test
 

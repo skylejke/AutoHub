@@ -1,5 +1,4 @@
-package com.example.autohub.ui
-
+package ru.autohub.ui
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -12,10 +11,10 @@ import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.example.autohub.R
-import com.example.autohub.databinding.ActivityMainBinding
+import ru.autohub.R
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import ru.autohub.databinding.ActivityMainBinding
 import ru.autohub.feature.authentication.utils.AuthBottomNavManager
 import ru.autohub.feature.car_offers.utils.HomeBottomNavManager
 

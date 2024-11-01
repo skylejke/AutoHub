@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.autohub"
+    namespace = "ru.autohub"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.autohub"
+        applicationId = "ru.autohub"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -82,4 +82,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }

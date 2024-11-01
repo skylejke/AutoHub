@@ -1,4 +1,4 @@
-package com.example.autohub.di
+package ru.autohub.di
 
 import org.koin.dsl.module
 import ru.autohub.core.storage.AuthStorage

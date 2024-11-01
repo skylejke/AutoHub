@@ -13,22 +13,14 @@ internal class AuthStorageImpl : AuthStorage {
     override fun signUp(email: String, password: String, callback: (Boolean) -> Unit) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    callback(true)
-                } else{
-                    callback(false)
-                }
+                callback(task.isSuccessful)
             }
     }
 
     override fun signIn(email: String, password: String, callback: (Boolean) -> Unit) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    callback(true)
-                } else{
-                    callback(false)
-                }
+                callback(task.isSuccessful)
             }
     }
 

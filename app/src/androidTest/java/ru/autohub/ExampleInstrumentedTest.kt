@@ -1,4 +1,4 @@
-package com.example.autohub
+package ru.autohub
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.autohub", appContext.packageName)
+        assertEquals("ru.autohub", appContext.packageName)
     }
 }

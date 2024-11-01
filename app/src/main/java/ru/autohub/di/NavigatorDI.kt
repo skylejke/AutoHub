@@ -1,9 +1,9 @@
-package com.example.autohub.di
+package ru.autohub.di
 
 import androidx.navigation.NavController
-import com.example.autohub.utils.NavigatorImpl
-import ru.autohub.navigation.Navigator
 import org.koin.dsl.module
+import ru.autohub.navigation.Navigator
+import ru.autohub.utils.NavigatorImpl
 
 val navigationModule = module {
     factory<Navigator> {
